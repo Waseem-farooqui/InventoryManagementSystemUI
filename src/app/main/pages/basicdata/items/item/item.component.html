@@ -52,291 +52,440 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="supplierName">Supplier Name</label>
-                    <input type="text" formControlName="supplierName" id="supplierName" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.supplierName.errors) || ((itemsAddsFormControl.supplierName.dirty || itemsAddsFormControl.supplierName.touched) && itemsAddsFormControl.supplierName.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.supplierName.errors" class="invalid-feedback">
+                    <label for="itemName"> Item Name</label>
+                    <input type="text" formControlName="itemName" id="itemName" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.itemName.errors) || ((itemsAddsFormControl.itemName.dirty || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.itemName.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl.supplierName.dirty || itemsAddsFormControl.supplierName.touched) && itemsAddsFormControl.supplierName.errors?.pattern">
-                        Please enter a valid Supplier Name
+                        *ngIf="(itemsAddsFormControl.itemName.dirty || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors?.pattern">
+                        Please enter a valid Item Name
                       </div>
-                      <div *ngIf="((itemsAddsFormControl.supplierName.dirty || itemsAddsFormControl.supplierName.touched) && itemsAddsFormControl.supplierName.errors?.required && !itemsAddsFormControl.supplierName.errors?.pattern && !submitted)">
-                        Supplier Name No is required
+                      <div *ngIf="((itemsAddsFormControl.itemName.dirty || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors?.required && !itemsAddsFormControl.itemName.errors?.pattern && !submitted)">
+                        Item Name No is required
                       </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.supplierName.errors?.required && !itemsAddsFormControl.supplierName.errors?.pattern)">
-                        Supplier Name No is required
+                      <div *ngIf="((submitted) && itemsAddsFormControl.itemName.errors?.required && !itemsAddsFormControl.itemName.errors?.pattern)">
+                        Item Name No is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                 <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="pieceOfPacking">Piece Of Packing</label>
+                    <input type="text" formControlName="pieceOfPacking" id="pieceOfPacking" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.pieceOfPacking.errors) || ((itemsAddsFormControl.pieceOfPacking.dirty || itemsAddsFormControl.pieceOfPacking.touched) && itemsAddsFormControl.pieceOfPacking.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.pieceOfPacking.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.pieceOfPacking.dirty || itemsAddsFormControl.pieceOfPacking.touched) && itemsAddsFormControl.pieceOfPacking.errors?.pattern">
+                        Please enter a valid  Piece Of Packing
+                      </div>
+                      <div *ngIf="((itemsAddsFormControl.pieceOfPacking.dirty || itemsAddsFormControl.pieceOfPacking.touched) && itemsAddsFormControl.pieceOfPacking.errors?.required && !itemsAddsFormControl.pieceOfPacking.errors?.pattern && !submitted)">
+                        Piece Of Packing  is required
+                      </div>
+                      <div *ngIf="((submitted) && itemsAddsFormControl.pieceOfPacking.errors?.required && !itemsAddsFormControl.pieceOfPacking.errors?.pattern)">
+                        Piece Of Packing  is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="purchasePrice">Purchase Price</label>
+                    <input type="text" formControlName="purchasePrice" id="purchasePrice" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.purchasePrice.errors) || ((itemsAddsFormControl.purchasePrice.dirty || itemsAddsFormControl.purchasePrice.touched) && itemsAddsFormControl.purchasePrice.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.purchasePrice.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.purchasePrice.dirty || itemsAddsFormControl.purchasePrice.touched) && itemsAddsFormControl.purchasePrice.errors?.pattern">
+                        Please enter a valid purchasePrice
+                      </div>
+                      <div *ngIf="((itemsAddsFormControl.purchasePrice.dirty || itemsAddsFormControl.purchasePrice.touched) && itemsAddsFormControl.purchasePrice.errors?.required && !itemsAddsFormControl.purchasePrice.errors?.pattern && !submitted)">
+                        Purchase Price  is required
+                      </div>
+                      <div *ngIf="((submitted) && itemsAddsFormControl.purchasePrice.errors?.required && !itemsAddsFormControl.purchasePrice.errors?.pattern)">
+                        Purchase Price is required
+                      </div>
+                    </div>
+                  </div>
+                   <div class="form-group col-md-3">
+                    <label for="salesPrice">Sales Price</label>
+                    <input type="text" formControlName="salesPrice" id="salesPrice" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.salesPrice.errors) || ((itemsAddsFormControl.salesPrice.dirty || itemsAddsFormControl.salesPrice.touched) && itemsAddsFormControl.salesPrice.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.salesPrice.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.salesPrice.dirty || itemsAddsFormControl.salesPrice.touched) && itemsAddsFormControl.salesPrice.errors?.pattern">
+                        Please enter a valid Sales Price
+                      </div>
+                      <div *ngIf="((itemsAddsFormControl.salesPrice.dirty || itemsAddsFormControl.salesPrice.touched) && itemsAddsFormControl.salesPrice.errors?.required && !itemsAddsFormControl.salesPrice.errors?.pattern && !submitted)">
+                        Sales Price  is required
+                      </div>
+                      <div *ngIf="((submitted) && itemsAddsFormControl.salesPrice.errors?.required && !itemsAddsFormControl.salesPrice.errors?.pattern)">
+                        Sales Price is required
+                      </div>
+                    </div>
+                  </div>
+                   <div class="form-group col-md-3">
+                    <label for="allasName">Allas</label>
+                    <input type="text" formControlName="allasName" id="allasName" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.allasName.errors) || ((itemsAddsFormControl.allasName.dirty || itemsAddsFormControl.allasName.touched) && itemsAddsFormControl.allasName.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.allasName.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.allasName.dirty || itemsAddsFormControl.allasName.touched) && itemsAddsFormControl.allasName.errors?.pattern">
+                        Please enter a valid Allas
+                      </div>
+                      <div *ngIf="((itemsAddsFormControl.allasName.dirty || itemsAddsFormControl.allasName.touched) && itemsAddsFormControl.allasName.errors?.required && !itemsAddsFormControl.allasName.errors?.pattern && !submitted)">
+                        Allas  is required
+                      </div>
+                      <div *ngIf="((submitted) && itemsAddsFormControl.allasName.errors?.required && !itemsAddsFormControl.allasName.errors?.pattern)">
+                        Allas is required
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="manufacture">Manufacture</label>
+                    <input type="text" formControlName="manufacture" id="manufacture" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.manufacture.errors) || ((itemsAddsFormControl.manufacture.dirty || itemsAddsFormControl.manufacture.touched) && itemsAddsFormControl.manufacture.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.manufacture.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.manufacture.dirty || itemsAddsFormControl.manufacture.touched) && itemsAddsFormControl.manufacture.errors?.pattern">
+                        Please enter a valid Manufacture
+                      </div>
+                      <div *ngIf="((itemsAddsFormControl.manufacture.dirty || itemsAddsFormControl.manufacture.touched) && itemsAddsFormControl.manufacture.errors?.required && !itemsAddsFormControl.manufacture.errors?.pattern && !submitted)">
+                        Manufacture  is required
+                      </div>
+                      <div *ngIf="((submitted) && itemsAddsFormControl.manufacture.errors?.required && !itemsAddsFormControl.manufacture.errors?.pattern)">
+                        Manufacture  is required
                       </div>
                     </div>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="aliesName">Alies Name</label>
-                    <input type="text" formControlName="aliesName" id="aliesName" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.aliesName.errors) || ((itemsAddsFormControl.aliesName.dirty || itemsAddsFormControl.aliesName.touched) && itemsAddsFormControl.aliesName.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.aliesName.errors" class="invalid-feedback">
+                    <label for="packing">Packing</label>
+                    <input type="text" formControlName="packing" id="packing" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.packing.errors) || ((itemsAddsFormControl.packing.dirty || itemsAddsFormControl.packing.touched) && itemsAddsFormControl.packing.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.packing.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl.aliesName.dirty || itemsAddsFormControl.aliesName.touched) && itemsAddsFormControl.aliesName.errors?.pattern">
-                        Please enter a valid Last Name
+                        *ngIf="(itemsAddsFormControl.packing.dirty || itemsAddsFormControl.packing.touched) && itemsAddsFormControl.packing.errors?.pattern">
+                        Please enter a Packing
                       </div>
-                      <div *ngIf="((itemsAddsFormControl.aliesName.dirty || itemsAddsFormControl.aliesName.touched) && itemsAddsFormControl.aliesName.errors?.required && !itemsAddsFormControl.aliesName.errors?.pattern && !submitted)">
-                        Alies Name no is required
+                      <div *ngIf="((itemsAddsFormControl.packing.dirty || itemsAddsFormControl.packing.touched) && itemsAddsFormControl.packing.errors?.required && !itemsAddsFormControl.packing.errors?.pattern && !submitted)">
+                        Packing is required
                       </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.aliesName.errors?.required && !itemsAddsFormControl.aliesName.errors?.pattern)">
-                        Alies Name No is required
+                      <div *ngIf="((submitted) && itemsAddsFormControl.packing.errors?.required && !itemsAddsFormControl.packing.errors?.pattern)">
+                        Packing is required
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="contactPerson">Contact Person</label>
-                    <input type="text" formControlName="contactPerson" id="contactPerson" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.contactPerson.errors) || ((itemsAddsFormControl.contactPerson.dirty || itemsAddsFormControl.contactPerson.touched) && itemsAddsFormControl.contactPerson.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.contactPerson.errors" class="invalid-feedback">
+
+                    <label for="category">Category</label>
+                    <p-autoComplete id="category" formControlName="category"
+                                    [suggestions]="profileClassificationsResult"
+                                    [readonly]="true"
+                                    [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.category.errors) || ((itemsAddsFormControl.category.dirty
+                                          || itemsAddsFormControl.category.touched) && itemsAddsFormControl.category.errors) }"
+                                    (completeMethod)="searchClassifications($event)" [dropdown]="true">
+                      <ng-template let-profileClassification pTemplate="item">
+                        {{profileClassification }}
+                      </ng-template>
+                    </p-autoComplete>
+                    <div *ngIf="itemsAddsFormControl.category.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl.contactPerson.dirty || itemsAddsFormControl.contactPerson.touched) && itemsAddsFormControl.contactPerson.errors?.pattern">
-                        Please enter a valid contactPerson
+                        *ngIf="((itemsAddsFormControl.category.dirty || itemsAddsFormControl.category.touched) && itemsAddsFormControl.category.errors?.required && !itemsAddsFormControl.category.errors?.pattern && !submitted)">
+                        Category is required
                       </div>
-                      <div *ngIf="((itemsAddsFormControl.contactPerson.dirty || itemsAddsFormControl.contactPerson.touched) && itemsAddsFormControl.contactPerson.errors?.required && !itemsAddsFormControl.contactPerson.errors?.pattern && !submitted)">
-                        contactPerson no is required
+                      <div
+                        *ngIf="((submitted) && itemsAddsFormControl.category.errors?.required && !itemsAddsFormControl.category.errors?.pattern)">
+                        Category is required
                       </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.contactPerson.errors?.required && !itemsAddsFormControl.contactPerson.errors?.pattern)">
-                        contactPerson No is required
+                    </div>
+
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="classDefault">Class</label>
+                    <p-autoComplete id="classDefault" formControlName="classDefault"
+                                    [suggestions]="profileClassificationsResult"
+                                    [readonly]="true"
+                                    [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.classDefault.errors) || ((itemsAddsFormControl.classDefault.dirty || itemsAddsFormControl.classDefault.touched) && itemsAddsFormControl.classDefault.errors) }"
+                                    (completeMethod)="searchClassifications($event)" [dropdown]="true">
+                      <ng-template let-profileClassification pTemplate="item">
+                        {{profileClassification }}
+                      </ng-template>
+                    </p-autoComplete>
+                    <div *ngIf="itemsAddsFormControl.classDefault.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.classDefault.dirty || itemsAddsFormControl.classDefault.touched) && itemsAddsFormControl.classDefault.errors?.pattern">
+                        Please enter a valid class
+                      </div>
+                      <div *ngIf="((itemsAddsFormControl.classDefault.dirty || itemsAddsFormControl.classDefault.touched) && itemsAddsFormControl.classDefault.errors?.required && !itemsAddsFormControl.classDefault.errors?.pattern && !submitted)">
+                        Class is required
+                      </div>
+                      <div *ngIf="((submitted) && itemsAddsFormControl.classDefault.errors?.required && !itemsAddsFormControl.classDefault.errors?.pattern)">
+                        Class  is required
                       </div>
                     </div>
                   </div>
-                  <div class="form-group col-md-2">
-                    <label for="active">Active</label>
-                    <p-dropdown [options]="active" formControlName="active" id="active"
-                                optionLabel="name" [showClear]="true"></p-dropdown>
-                    <div *ngIf="itemsAddsFormControl.active.errors" class="invalid-feedback">
+                </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="printable">Printable</label>
+                      <input type="text" formControlName="printable" id="printable" class="form-control"
+                             [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.printable.errors) || ((itemsAddsFormControl.printable.dirty || itemsAddsFormControl.printable.touched) && itemsAddsFormControl.printable.errors) }"/>
+                      <div *ngIf="itemsAddsFormControl.printable.errors" class="invalid-feedback">
+                        <div
+                          *ngIf="(itemsAddsFormControl.printable.dirty || itemsAddsFormControl.printable.touched) && itemsAddsFormControl.printable.errors?.pattern">
+                          Please enter a valid Printable
+                        </div>
+                        <div *ngIf="((itemsAddsFormControl.printable.dirty || itemsAddsFormControl.printable.touched) && itemsAddsFormControl.printable.errors?.required && !itemsAddsFormControl.printable.errors?.pattern && !submitted)">
+                          Printable is required
+                        </div>
+                        <div *ngIf="((submitted) && itemsAddsFormControl.printable.errors?.required && !itemsAddsFormControl.printable.errors?.pattern)">
+                          Printable is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="active">Active</label>
+                      <p-dropdown [options]="active" formControlName="active" id="active"
+                                  optionLabel="name" [showClear]="true"></p-dropdown>
+                      <div *ngIf="itemsAddsFormControl.active.errors" class="invalid-feedback">
+                        <div
+                          *ngIf="(itemsAddsFormControl.active.dirty || itemsAddsFormControl.active.touched) && itemsAddsFormControl.active.errors?.pattern">
+                          Please Fill the field
+                        </div>
+                        <div *ngIf="((itemsAddsFormControl.active.dirty || itemsAddsFormControl.active.touched) && itemsAddsFormControl.active.errors?.required && !itemsAddsFormControl.active.errors?.pattern && !submitted)">
+                          Active  is required
+                        </div>
+                        <div *ngIf="((submitted) && itemsAddsFormControl.active.errors?.required && !itemsAddsFormControl.active.errors?.pattern)">
+                          Active  is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="location">Location </label>
+                      <input type="text" formControlName="location" id="location" class="form-control"
+                             [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.location.errors) || ((itemsAddsFormControl.location.dirty || itemsAddsFormControl.location.touched) && itemsAddsFormControl.location.errors) }"/>
+                      <div *ngIf="itemsAddsFormControl.location.errors" class="invalid-feedback">
+                        <div
+                          *ngIf="(itemsAddsFormControl.location.dirty || itemsAddsFormControl.location.touched) && itemsAddsFormControl.location.errors?.pattern">
+                          Please enter a valid location
+                        </div>
+                        <div *ngIf="((itemsAddsFormControl.location.dirty || itemsAddsFormControl.location.touched) && itemsAddsFormControl.location.errors?.required && !itemsAddsFormControl.location.errors?.pattern && !submitted)">
+                          Location is required
+                        </div>
+                        <div *ngIf="((submitted) && itemsAddsFormControl.location.errors?.required && !itemsAddsFormControl.location.errors?.pattern)">
+                          Location is required
+                        </div>
+                      </div>
+                    </div>
+
+
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="saleDisc">Sale Discount(%)</label>
+                    <input type="text" formControlName="saleDisc" id="saleDisc" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.saleDisc.errors) || ((itemsAddsFormControl.saleDisc.dirty || itemsAddsFormControl.saleDisc.touched) && itemsAddsFormControl.saleDisc.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.saleDisc.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl.active.dirty || itemsAddsFormControl.active.touched) && itemsAddsFormControl.active.errors?.pattern">
-                        Please Fill the field
+                        *ngIf="(itemsAddsFormControl.saleDisc.dirty || itemsAddsFormControl.saleDisc.touched) && itemsAddsFormControl.saleDisc.errors?.pattern">
+                        Please enter a valid Sale Discount
                       </div>
-                      <div *ngIf="((itemsAddsFormControl.active.dirty || itemsAddsFormControl.active.touched) && itemsAddsFormControl.active.errors?.required && !itemsAddsFormControl.active.errors?.pattern && !submitted)">
-                        Active  is required
+                      <div *ngIf="((itemsAddsFormControl.saleDisc.dirty || itemsAddsFormControl.saleDisc.touched) && itemsAddsFormControl.saleDisc.errors?.required && !itemsAddsFormControl.saleDisc.errors?.pattern && !submitted)">
+                        Sale Discount  is required
                       </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.active.errors?.required && !itemsAddsFormControl.active.errors?.pattern)">
-                        Active  is required
+                      <div *ngIf="((submitted) && itemsAddsFormControl.saleDisc.errors?.required && !itemsAddsFormControl.saleDisc.errors?.pattern)">
+                        Sale Discount is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="salesDiscount2">Sales Discount 2</label>
+                    <input placeholder=" salesDiscount2" type="number" formControlName="salesDiscount2" id="salesDiscount2"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.salesDiscount2.errors) || ((itemsAddsFormControl.salesDiscount2.dirty || itemsAddsFormControl.salesDiscount2.touched) && itemsAddsFormControl.salesDiscount2.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.salesDiscount2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.salesDiscount2.dirty || itemsAddsFormControl.salesDiscount2.touched) && itemsAddsFormControl.salesDiscount2.errors?.pattern">
+                        Please enter a
+                        valid Sales Discount
+                      </div>
+                      <div
+                        *ngIf="((itemsAddsFormControl.salesDiscount2.dirty || itemsAddsFormControl.salesDiscount2.touched) && itemsAddsFormControl.salesDiscount2.errors?.required && !itemsAddsFormControl.salesDiscount2.errors?.pattern && !submitted)">
+                        Sales Discount  is required
+                      </div>
+                      <div
+                        *ngIf="((submitted) && itemsAddsFormControl.salesDiscount2.errors?.required && !itemsAddsFormControl.salesDiscount2.errors?.pattern)">
+                        Sales Discount is
+                        required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="salesDiscount3">Sales Discount 3</label>
+                    <input placeholder=" salesDiscount3" type="number" formControlName="salesDiscount3" id="salesDiscount3"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.salesDiscount3.errors) || ((itemsAddsFormControl.salesDiscount3.dirty || itemsAddsFormControl.salesDiscount3.touched) && itemsAddsFormControl.salesDiscount3.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.salesDiscount3.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.salesDiscount3.dirty || itemsAddsFormControl.salesDiscount3.touched) && itemsAddsFormControl.salesDiscount3.errors?.pattern">
+                        Please enter a
+                        valid Sales Discount
+                      </div>
+                      <div
+                        *ngIf="((itemsAddsFormControl.salesDiscount3.dirty || itemsAddsFormControl.salesDiscount3.touched) && itemsAddsFormControl.salesDiscount3.errors?.required && !itemsAddsFormControl.salesDiscount3.errors?.pattern && !submitted)">
+                        Sales Discount  is required
+                      </div>
+                      <div
+                        *ngIf="((submitted) && itemsAddsFormControl.salesDiscount3.errors?.required && !itemsAddsFormControl.salesDiscount3.errors?.pattern)">
+                        Sales Discount is
+                        required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="salesDiscount4">Sales Discount 4</label>
+                    <input placeholder=" salesDiscount4" type="number" formControlName="salesDiscount4" id="salesDiscount4"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.salesDiscount4.errors) || ((itemsAddsFormControl.salesDiscount4.dirty || itemsAddsFormControl.salesDiscount4.touched) && itemsAddsFormControl.salesDiscount4.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.salesDiscount4.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.salesDiscount4.dirty || itemsAddsFormControl.salesDiscount4.touched) && itemsAddsFormControl.salesDiscount4.errors?.pattern">
+                        Please enter a
+                        valid Sales Discount
+                      </div>
+                      <div
+                        *ngIf="((itemsAddsFormControl.salesDiscount4.dirty || itemsAddsFormControl.salesDiscount4.touched) && itemsAddsFormControl.salesDiscount4.errors?.required && !itemsAddsFormControl.salesDiscount4.errors?.pattern && !submitted)">
+                        Sales Discount  is required
+                      </div>
+                      <div
+                        *ngIf="((submitted) && itemsAddsFormControl.salesDiscount4.errors?.required && !itemsAddsFormControl.salesDiscount4.errors?.pattern)">
+                        Sales Discount is
+                        required
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="narcotics">Narcotics</label>
+                    <input placeholder=" Narcotics" type="number" formControlName="narcotics" id="narcotics"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.narcotics.errors) || ((itemsAddsFormControl.narcotics.dirty || itemsAddsFormControl.narcotics.touched) && itemsAddsFormControl.narcotics.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.narcotics.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.narcotics.dirty || itemsAddsFormControl.narcotics.touched) && itemsAddsFormControl.narcotics.errors?.pattern">
+                        Please enter a
+                        valid Narcotics
+
+                      </div>
+                      <div
+                        *ngIf="((itemsAddsFormControl.narcotics.dirty || itemsAddsFormControl.narcotics.touched) && itemsAddsFormControl.narcotics.errors?.required && !itemsAddsFormControl.narcotics.errors?.pattern && !submitted)">
+                        Narcotics is required
+                      </div>
+                      <div
+                        *ngIf="((submitted) && itemsAddsFormControl.narcotics.errors?.required && !itemsAddsFormControl.narcotics.errors?.pattern)">
+                        Narcotics is
+                        required
                       </div>
                     </div>
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="defaultGst">Default Gst %</label>
-                    <input type="number" formControlName="defaultGst" id="defaultGst" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.defaultGst.errors) || ((itemsAddsFormControl.defaultGst.dirty || itemsAddsFormControl.defaultGst.touched) && itemsAddsFormControl.defaultGst.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.defaultGst.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.defaultGst.dirty || itemsAddsFormControl.defaultGst.touched) && itemsAddsFormControl.defaultGst.errors?.pattern">
-                        Please enter a valid defaultGst
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.defaultGst.dirty || itemsAddsFormControl.defaultGst.touched) && itemsAddsFormControl.defaultGst.errors?.required && !itemsAddsFormControl.defaultGst.errors?.pattern && !submitted)">
-                        DefaultGst no is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.defaultGst.errors?.required && !itemsAddsFormControl.defaultGst.errors?.pattern)">
-                        DefaultGst No is required
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="address1">Temporary Address</label>
-                    <input type="text" formControlName="address1" id="address1" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.address1.errors) || ((itemsAddsFormControl.address1.dirty || itemsAddsFormControl.address1.touched) && itemsAddsFormControl.address1.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.address1.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.address1.dirty || itemsAddsFormControl.address1.touched) && itemsAddsFormControl.address1.errors?.pattern">
-                        Please enter a valid Temporary Address
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.address1.dirty || itemsAddsFormControl.address1.touched) && itemsAddsFormControl.address1.errors?.required && !itemsAddsFormControl.address1.errors?.pattern && !submitted)">
-                        Temporary Address is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.address1.errors?.required && !itemsAddsFormControl.address1.errors?.pattern)">
-                        Temporary Address is required
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="address2">Permanent Address</label>
-                    <input type="text" formControlName="address2" id="address2" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.address2.errors) || ((itemsAddsFormControl.address2.dirty || itemsAddsFormControl.address2.touched) && itemsAddsFormControl.address2.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.address2.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.address2.dirty || itemsAddsFormControl.address2.touched) && itemsAddsFormControl.address2.errors?.pattern">
-                        Please enter a valid Permanent Address
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.address2.dirty || itemsAddsFormControl.address2.touched) && itemsAddsFormControl.address2.errors?.required && !itemsAddsFormControl.address2.errors?.pattern && !submitted)">
-                        Permanent Address is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.address2.errors?.required && !itemsAddsFormControl.address2.errors?.pattern)">
-                        Permanent Address is required
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-
-                    <label for="city">City</label>
-                    <p-autoComplete id="city" formControlName="city"
-                                    [suggestions]="profileClassificationsResult"
-                                    [readonly]="true"
-                                    [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.city.errors) || ((itemsAddsFormControl.city.dirty
-                                          || itemsAddsFormControl.city.touched) && itemsAddsFormControl.city.errors) }"
-                                    (completeMethod)="searchClassifications($event)" [dropdown]="true">
-                      <ng-template let-profileClassification pTemplate="item">
-                        {{profileClassification }}
-                      </ng-template>
-                    </p-autoComplete>
-                    <div *ngIf="itemsAddsFormControl.city.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="((itemsAddsFormControl.city.dirty || itemsAddsFormControl.city.touched) && itemsAddsFormControl.city.errors?.required && !itemsAddsFormControl.city.errors?.pattern && !submitted)">
-                        City is required
-                      </div>
-                      <div
-                        *ngIf="((submitted) && itemsAddsFormControl.city.errors?.required && !itemsAddsFormControl.city.errors?.pattern)">
-                        City is required
-                      </div>
-                    </div>
-
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="manufactureCity">Manufacture City</label>
-                    <p-autoComplete id="manufactureCity" formControlName="manufactureCity"
-                                    [suggestions]="profileClassificationsResult"
-                                    [readonly]="true"
-                                    [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.city.errors) || ((itemsAddsFormControl.city.dirty || itemsAddsFormControl.city.touched) && itemsAddsFormControl.city.errors) }"
-                                    (completeMethod)="searchClassifications($event)" [dropdown]="true">
-                      <ng-template let-profileClassification pTemplate="item">
-                        {{profileClassification }}
-                      </ng-template>
-                    </p-autoComplete>
-                    <div *ngIf="itemsAddsFormControl.manufactureCity.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.manufactureCity.dirty || itemsAddsFormControl.manufactureCity.touched) && itemsAddsFormControl.manufactureCity.errors?.pattern">
-                        Please enter a valid Manufacture City
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.manufactureCity.dirty || itemsAddsFormControl.manufactureCity.touched) && itemsAddsFormControl.manufactureCity.errors?.required && !itemsAddsFormControl.manufactureCity.errors?.pattern && !submitted)">
-                        Manufacture City is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.manufactureCity.errors?.required && !itemsAddsFormControl.manufactureCity.errors?.pattern)">
-                        Manufacture City  is required
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="postCode">Post Code</label>
-                    <input type="text" formControlName="postCode" id="postCode" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.postCode.errors) || ((itemsAddsFormControl.postCode.dirty || itemsAddsFormControl.postCode.touched) && itemsAddsFormControl.postCode.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.postCode.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.postCode.dirty || itemsAddsFormControl.postCode.touched) && itemsAddsFormControl.postCode.errors?.pattern">
-                        Please enter a valid PostCode
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.postCode.dirty || itemsAddsFormControl.postCode.touched) && itemsAddsFormControl.postCode.errors?.required && !itemsAddsFormControl.postCode.errors?.pattern && !submitted)">
-                        Post Code  is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.postCode.errors?.required && !itemsAddsFormControl.postCode.errors?.pattern)">
-                        Post Code is required
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="country">Country </label>
-                    <input type="text" formControlName="country" id="country" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.country.errors) || ((itemsAddsFormControl.country.dirty || itemsAddsFormControl.country.touched) && itemsAddsFormControl.country.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.country.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.country.dirty || itemsAddsFormControl.country.touched) && itemsAddsFormControl.country.errors?.pattern">
-                        Please enter a valid Country
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.country.dirty || itemsAddsFormControl.country.touched) && itemsAddsFormControl.country.errors?.required && !itemsAddsFormControl.country.errors?.pattern && !submitted)">
-                        Country is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.country.errors?.required && !itemsAddsFormControl.country.errors?.pattern)">
-                        Country is required
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="phone1">Phone</label>
-                    <p-inputMask mask="9999-9999999" formControlName="phone1" id="phone1" placeholder="9999-9999999"
-                                 [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.phone1.errors) || ((itemsAddsFormControl.phone1.dirty || itemsAddsFormControl.phone1.touched) && itemsAddsFormControl.phone1.errors) }"></p-inputMask>
-                    <div *ngIf="itemsAddsFormControl.phone1.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.phone1.dirty || itemsAddsFormControl.phone1.touched) && itemsAddsFormControl.phone1.errors?.pattern">
-                        Please enter a valid Number
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.phone1.dirty || itemsAddsFormControl.phone1.touched) && itemsAddsFormControl.phone1.errors?.required && !itemsAddsFormControl.phone1.errors?.pattern && !submitted)">
-                        Number is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.phone1.errors?.required && !itemsAddsFormControl.phone1.errors?.pattern)">
-                        Number is required
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="phone2">Phone# 2</label>
-                    <p-inputMask mask="9999-9999999" formControlName="phone2" id="phone2" placeholder="9999-9999999"
-                                 [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.phone2.errors) || ((itemsAddsFormControl.phone2.dirty || itemsAddsFormControl.phone2.touched) && itemsAddsFormControl.phone2.errors) }"></p-inputMask>
-                    <div *ngIf="itemsAddsFormControl.phone2.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.phone2.dirty || itemsAddsFormControl.phone2.touched) && itemsAddsFormControl.phone2.errors?.pattern">
-                        Please enter a valid Number
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.phone2.dirty || itemsAddsFormControl.phone2.touched) && itemsAddsFormControl.phone2.errors?.required && !itemsAddsFormControl.phone2.errors?.pattern && !submitted)">
-                        Number is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.phone2.errors?.required && !itemsAddsFormControl.phone2.errors?.pattern)">
-                        Number is required
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="mobile">Mobile #</label>
-                    <p-inputMask mask="9999-9999999" formControlName="mobile" id="mobile" placeholder="9999-9999999"
-                                 [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.mobile.errors) || ((itemsAddsFormControl.mobile.dirty || itemsAddsFormControl.mobile.touched) && itemsAddsFormControl.mobile.errors) }"></p-inputMask>
-                    <div *ngIf="itemsAddsFormControl.mobile.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.mobile.dirty || itemsAddsFormControl.mobile.touched) && itemsAddsFormControl.mobile.errors?.pattern">
-                        Please enter a valid Number
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.mobile.dirty || itemsAddsFormControl.mobile.touched) && itemsAddsFormControl.mobile.errors?.required && !itemsAddsFormControl.mobile.errors?.pattern && !submitted)">
-                        Number is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.mobile.errors?.required && !itemsAddsFormControl.mobile.errors?.pattern)">
-                        Number is required
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="fax">Fax</label>
-                    <input placeholder=" Fax" type="number" formControlName="fax" id="fax"
+                    <label for="lockSalesPrice">Lock Sales Price</label>
+                    <input placeholder=" NO" type="text" formControlName="lockSalesPrice" id="lockSalesPrice"
                            class="form-control"
-                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.fax.errors) || ((itemsAddsFormControl.fax.dirty || itemsAddsFormControl.fax.touched) && itemsAddsFormControl.fax.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.fax.errors" class="invalid-feedback">
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.lockSalesPrice.errors) || ((itemsAddsFormControl.lockSalesPrice.dirty || itemsAddsFormControl.lockSalesPrice.touched) && itemsAddsFormControl.lockSalesPrice.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.lockSalesPrice.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl.fax.dirty || itemsAddsFormControl.fax.touched) && itemsAddsFormControl.fax.errors?.pattern">
+                        *ngIf="(itemsAddsFormControl.lockSalesPrice.dirty || itemsAddsFormControl.lockSalesPrice.touched) && itemsAddsFormControl.lockSalesPrice.errors?.pattern">
                         Please enter a
-                        valid fax
+                        valid lock Sales Price
                         address
                       </div>
                       <div
-                        *ngIf="((itemsAddsFormControl.fax.dirty || itemsAddsFormControl.fax.touched) && itemsAddsFormControl.fax.errors?.required && !itemsAddsFormControl.fax.errors?.pattern && !submitted)">
-                        fax is required
+                        *ngIf="((itemsAddsFormControl.lockSalesPrice.dirty || itemsAddsFormControl.lockSalesPrice.touched) && itemsAddsFormControl.lockSalesPrice.errors?.required && !itemsAddsFormControl.lockSalesPrice.errors?.pattern && !submitted)">
+                        lock Sales Price is required
                       </div>
                       <div
-                        *ngIf="((submitted) && itemsAddsFormControl.fax.errors?.required && !itemsAddsFormControl.fax.errors?.pattern)">
-                        fax is
+                        *ngIf="((submitted) && itemsAddsFormControl.lockSalesPrice.errors?.required && !itemsAddsFormControl.lockSalesPrice.errors?.pattern)">
+                        local Sales Price is
+                        required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="lockDicountPerc">lock Dicount Perc</label>
+                    <input placeholder=" NO" type="number" formControlName="lockDicountPerc" id="lockDicountPerc"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.lockDicountPerc.errors) || ((itemsAddsFormControl.lockDicountPerc.dirty || itemsAddsFormControl.lockDicountPerc.touched) && itemsAddsFormControl.lockDicountPerc.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.lockDicountPerc.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.lockDicountPerc.dirty || itemsAddsFormControl.lockDicountPerc.touched) && itemsAddsFormControl.lockDicountPerc.errors?.pattern">
+                        Please enter a
+                        valid lock Dicount Perc
+                      </div>
+                      <div
+                        *ngIf="((itemsAddsFormControl.lockDicountPerc.dirty || itemsAddsFormControl.lockDicountPerc.touched) && itemsAddsFormControl.lockDicountPerc.errors?.required && !itemsAddsFormControl.lockDicountPerc.errors?.pattern && !submitted)">
+                        Lock Dicount Perc is required
+                      </div>
+                      <div
+                        *ngIf="((submitted) && itemsAddsFormControl.lockDicountPerc.errors?.required && !itemsAddsFormControl.lockDicountPerc.errors?.pattern)">
+                        Lock Dicount Perc is
+                        required
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="form-row">
+
+
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="reOrderQTY">Re Order QTY</label>
+                    <input placeholder="Re Order QTY" type="text" formControlName="reOrderQTY" id="reOrderQTY"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.reOrderQTY.errors) || ((itemsAddsFormControl.reOrderQTY.dirty || itemsAddsFormControl.reOrderQTY.touched) && itemsAddsFormControl.reOrderQTY.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.reOrderQTY.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.reOrderQTY.dirty || itemsAddsFormControl.reOrderQTY.touched) && itemsAddsFormControl.reOrderQTY.errors?.pattern">
+                        Please enter a
+                        valid Re Order QTY
+                      </div>
+                      <div
+                        *ngIf="((itemsAddsFormControl.reOrderQTY.dirty || itemsAddsFormControl.reOrderQTY.touched) && itemsAddsFormControl.reOrderQTY.errors?.required && !itemsAddsFormControl.reOrderQTY.errors?.pattern && !submitted)">
+                        Re Order QTY is required
+                      </div>
+                      <div
+                        *ngIf="((submitted) && itemsAddsFormControl.reOrderQTY.errors?.required && !itemsAddsFormControl.reOrderQTY.errors?.pattern)">
+                        Re Order QTY is
+                        required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="optimumQTY">Optimum QTY</label>
+                    <input placeholder="Optimum QTY" type="text" formControlName="optimumQTY" id="optimumQTY"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.optimumQTY.errors) || ((itemsAddsFormControl.optimumQTY.dirty || itemsAddsFormControl.optimumQTY.touched) && itemsAddsFormControl.optimumQTY.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.optimumQTY.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.optimumQTY.dirty || itemsAddsFormControl.optimumQTY.touched) && itemsAddsFormControl.optimumQTY.errors?.pattern">
+                        Please enter a
+                        valid Optimum QTY
+                      </div>
+                      <div
+                        *ngIf="((itemsAddsFormControl.optimumQTY.dirty || itemsAddsFormControl.optimumQTY.touched) && itemsAddsFormControl.optimumQTY.errors?.required && !itemsAddsFormControl.optimumQTY.errors?.pattern && !submitted)">
+                        Optimum QTY is required
+                      </div>
+                      <div
+                        *ngIf="((submitted) && itemsAddsFormControl.optimumQTY.errors?.required && !itemsAddsFormControl.optimumQTY.errors?.pattern)">
+                        Optimum QTY is
                         required
                       </div>
                     </div>
@@ -344,162 +493,46 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="email">Email</label>
-                    <input placeholder=" Email" type="text" formControlName="email" id="email"
-                           class="form-control" (focusout)="trimInputField(itemsAddsFormControl.email)"
-                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.email.errors) || ((itemsAddsFormControl.email.dirty || itemsAddsFormControl.email.touched) && itemsAddsFormControl.email.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.email.errors" class="invalid-feedback">
+                    <label for="saleDiscount">Sale Discount</label>
+                    <input placeholder="Sales Discount" type="text" formControlName="saleDiscount" id="saleDiscount"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.saleDiscount.errors) || ((itemsAddsFormControl.saleDiscount.dirty || itemsAddsFormControl.saleDiscount.touched) && itemsAddsFormControl.saleDiscount.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.saleDiscount.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl.email.dirty || itemsAddsFormControl.email.touched) && itemsAddsFormControl.email.errors?.pattern">
+                        *ngIf="(itemsAddsFormControl.saleDiscount.dirty || itemsAddsFormControl.saleDiscount.touched) && itemsAddsFormControl.saleDiscount.errors?.pattern">
                         Please enter a
-                        valid email
-                        address
+                        valid Sale Discount
                       </div>
                       <div
-                        *ngIf="((itemsAddsFormControl.email.dirty || itemsAddsFormControl.email.touched) && itemsAddsFormControl.email.errors?.required && !itemsAddsFormControl.email.errors?.pattern && !submitted)">
-                        Email is required
+                        *ngIf="((itemsAddsFormControl.saleDiscount.dirty || itemsAddsFormControl.saleDiscount.touched) && itemsAddsFormControl.saleDiscount.errors?.required && !itemsAddsFormControl.saleDiscount.errors?.pattern && !submitted)">
+                        Sale Discount is required
                       </div>
                       <div
-                        *ngIf="((submitted) && itemsAddsFormControl.email.errors?.required && !itemsAddsFormControl.email.errors?.pattern)">
-                        Email is
+                        *ngIf="((submitted) && itemsAddsFormControl.saleDiscount.errors?.required && !itemsAddsFormControl.saleDiscount.errors?.pattern)">
+                        Sale Discount is
                         required
                       </div>
                     </div>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="email2">Email 2</label>
-                    <input placeholder=" Email 2" type="text" formControlName="email2" id="email2"
-                           class="form-control" (focusout)="trimInputField(itemsAddsFormControl.email2)"
-                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.email2.errors) || ((itemsAddsFormControl.email2.dirty || itemsAddsFormControl.email2.touched) && itemsAddsFormControl.email2.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.email2.errors" class="invalid-feedback">
+                    <label for="minimumQty">Minimum QTY</label>
+                    <input placeholder="Re Order QTY" type="text" formControlName="minimumQty" id="minimumQty"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.minimumQty.errors) || ((itemsAddsFormControl.minimumQty.dirty || itemsAddsFormControl.minimumQty.touched) && itemsAddsFormControl.minimumQty.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.minimumQty.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl.email2.dirty || itemsAddsFormControl.email2.touched) && itemsAddsFormControl.email2.errors?.pattern">
+                        *ngIf="(itemsAddsFormControl.minimumQty.dirty || itemsAddsFormControl.minimumQty.touched) && itemsAddsFormControl.minimumQty.errors?.pattern">
                         Please enter a
-                        valid email
-                        address
+                        valid Minimum QTY
                       </div>
                       <div
-                        *ngIf="((itemsAddsFormControl.email2.dirty || itemsAddsFormControl.email2.touched) && itemsAddsFormControl.email2.errors?.required && !itemsAddsFormControl.email2.errors?.pattern && !submitted)">
-                        Email is required
+                        *ngIf="((itemsAddsFormControl.minimumQty.dirty || itemsAddsFormControl.minimumQty.touched) && itemsAddsFormControl.minimumQty.errors?.required && !itemsAddsFormControl.minimumQty.errors?.pattern && !submitted)">
+                        Minimum QTY is required
                       </div>
                       <div
-                        *ngIf="((submitted) && itemsAddsFormControl.email2.errors?.required && !itemsAddsFormControl.email2.errors?.pattern)">
-                        Email is
+                        *ngIf="((submitted) && itemsAddsFormControl.minimumQty.errors?.required && !itemsAddsFormControl.minimumQty.errors?.pattern)">
+                        Minimum QTY is
                         required
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="email3">Email 3</label>
-                    <input placeholder=" Email" type="text" formControlName="email3" id="email3"
-                           class="form-control" (focusout)="trimInputField(itemsAddsFormControl.email3)"
-                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.email3.errors) || ((itemsAddsFormControl.email3.dirty || itemsAddsFormControl.email3.touched) && itemsAddsFormControl.email3.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.email3.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.email3.dirty || itemsAddsFormControl.email3.touched) && itemsAddsFormControl.email3.errors?.pattern">
-                        Please enter a
-                        valid email
-                        address
-                      </div>
-                      <div
-                        *ngIf="((itemsAddsFormControl.email3.dirty || itemsAddsFormControl.email3.touched) && itemsAddsFormControl.email3.errors?.required && !itemsAddsFormControl.email3.errors?.pattern && !submitted)">
-                        Email is required
-                      </div>
-                      <div
-                        *ngIf="((submitted) && itemsAddsFormControl.email3.errors?.required && !itemsAddsFormControl.email3.errors?.pattern)">
-                        Email is
-                        required
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="website">Web Site</label>
-                    <input type="url" formControlName="website" id="website" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.website.errors) || ((itemsAddsFormControl.website.dirty || itemsAddsFormControl.website.touched) && itemsAddsFormControl.website.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.website.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.website.dirty || itemsAddsFormControl.website.touched) && itemsAddsFormControl.website.errors?.pattern">
-                        Please enter a valid web site Address
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.website.dirty || itemsAddsFormControl.website.touched) && itemsAddsFormControl.website.errors?.required && !itemsAddsFormControl.website.errors?.pattern && !submitted)">
-                        Web site Address is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.website.errors?.required && !itemsAddsFormControl.website.errors?.pattern)">
-                        Web site Address is required
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="cnic">CNIC #</label>
-                    <p-inputMask mask="99999-9999999-9" formControlName="cnic" id="cnic" placeholder="99999-9999999-9"
-                                 [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.cnic.errors) || ((itemsAddsFormControl.cnic.dirty || itemsAddsFormControl.cnic.touched) && itemsAddsFormControl.cnic.errors) }"></p-inputMask>
-                    <div *ngIf="itemsAddsFormControl.cnic.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.cnic.dirty || itemsAddsFormControl.cnic.touched) && itemsAddsFormControl.cnic.errors?.pattern">
-                        Please enter a valid CNIC
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.cnic.dirty || itemsAddsFormControl.cnic.touched) && itemsAddsFormControl.cnic.errors?.required && !itemsAddsFormControl.cnic.errors?.pattern && !submitted)">
-                        CNIC is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.cnic.errors?.required && !itemsAddsFormControl.cnic.errors?.pattern)">
-                        CNIC is required
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="bankAccount">Bank A/C</label>
-                    <input type="text" formControlName="bankAccount" id="bankAccount" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.bankAccount.errors) || ((itemsAddsFormControl.bankAccount.dirty || itemsAddsFormControl.bankAccount.touched) && itemsAddsFormControl.bankAccount.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.bankAccount.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.bankAccount.dirty || itemsAddsFormControl.bankAccount.touched) && itemsAddsFormControl.bankAccount.errors?.pattern">
-                        Please enter a valid Bank Account number
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.bankAccount.dirty || itemsAddsFormControl.bankAccount.touched) && itemsAddsFormControl.bankAccount.errors?.required && !itemsAddsFormControl.bankAccount.errors?.pattern && !submitted)">
-                        Bank Account number is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.bankAccount.errors?.required && !itemsAddsFormControl.bankAccount.errors?.pattern)">
-                        Bank Account number is required
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="category">Category</label>
-                    <input type="text" formControlName="category" id="category" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.category.errors) || ((itemsAddsFormControl.category.dirty || itemsAddsFormControl.category.touched) && itemsAddsFormControl.category.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.category.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.category.dirty || itemsAddsFormControl.category.touched) && itemsAddsFormControl.category.errors?.pattern">
-                        Please enter a valid Category
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.category.dirty || itemsAddsFormControl.category.touched) && itemsAddsFormControl.category.errors?.required && !itemsAddsFormControl.category.errors?.pattern && !submitted)">
-                        Category is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.category.errors?.required && !itemsAddsFormControl.category.errors?.pattern)">
-                        Category is required
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="wH">W/H (%)</label>
-                    <input type="number" formControlName="wH" id="wH" class="form-control" placeholder="0.00"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.wH.errors) || ((itemsAddsFormControl.wH.dirty || itemsAddsFormControl.wH.touched) && itemsAddsFormControl.wH.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.wH.errors" class="invalid-feedback">
-                      <div
-                        *ngIf="(itemsAddsFormControl.wH.dirty || itemsAddsFormControl.wH.touched) && itemsAddsFormControl.wH.errors?.pattern">
-                        Please enter a valid W/H
-                      </div>
-                      <div *ngIf="((itemsAddsFormControl.wH.dirty || itemsAddsFormControl.wH.touched) && itemsAddsFormControl.wH.errors?.required && !itemsAddsFormControl.wH.errors?.pattern && !submitted)">
-                        W/H  is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.wH.errors?.required && !itemsAddsFormControl.wH.errors?.pattern)">
-                        W/H is required
                       </div>
                     </div>
                   </div>
@@ -507,66 +540,72 @@
 
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="ntn"> NTN #</label>
-                    <input type="number" formControlName="ntn" id="ntn" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.ntn.errors) || ((itemsAddsFormControl.ntn.dirty || itemsAddsFormControl.ntn.touched) && itemsAddsFormControl.ntn.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.ntn.errors" class="invalid-feedback">
+                    <label for="avgPrice">Avg Price</label>
+                    <input placeholder="Avg Price" type="text" formControlName="avgPrice" id="avgPrice"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.avgPrice.errors) || ((itemsAddsFormControl.avgPrice.dirty || itemsAddsFormControl.avgPrice.touched) && itemsAddsFormControl.avgPrice.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.avgPrice.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl.ntn.dirty || itemsAddsFormControl.ntn.touched) && itemsAddsFormControl.ntn.errors?.pattern">
-                        Please enter a valid  NTN
+                        *ngIf="(itemsAddsFormControl.avgPrice.dirty || itemsAddsFormControl.avgPrice.touched) && itemsAddsFormControl.avgPrice.errors?.pattern">
+                        Please enter a
+                        valid Avg Price
                       </div>
-                      <div *ngIf="((itemsAddsFormControl.ntn.dirty || itemsAddsFormControl.ntn.touched) && itemsAddsFormControl.ntn.errors?.required && !itemsAddsFormControl.ntn.errors?.pattern && !submitted)">
-                        NTN is required
+                      <div
+                        *ngIf="((itemsAddsFormControl.avgPrice.dirty || itemsAddsFormControl.avgPrice.touched) && itemsAddsFormControl.avgPrice.errors?.required && !itemsAddsFormControl.avgPrice.errors?.pattern && !submitted)">
+                        Avg Price is required
                       </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.ntn.errors?.required && !itemsAddsFormControl.ntn.errors?.pattern)">
-                        NTN is required
+                      <div
+                        *ngIf="((submitted) && itemsAddsFormControl.avgPrice.errors?.required && !itemsAddsFormControl.avgPrice.errors?.pattern)">
+                        Avg Price is
+                        required
                       </div>
                     </div>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="taxReg">Tax Reg NO</label>
-                    <input type="number" formControlName="taxReg" id="taxReg" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.taxReg.errors) || ((itemsAddsFormControl.taxReg.dirty || itemsAddsFormControl.taxReg.touched) && itemsAddsFormControl.taxReg.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.taxReg.errors" class="invalid-feedback">
+                    <label for="itemAlert">Items Alert</label>
+                    <input placeholder="itemAlert" type="text" formControlName="itemAlert" id="itemAlert"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.itemAlert.errors) || ((itemsAddsFormControl.itemAlert.dirty || itemsAddsFormControl.itemAlert.touched) && itemsAddsFormControl.itemAlert.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.itemAlert.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl. taxReg.dirty || itemsAddsFormControl. taxReg.touched) && itemsAddsFormControl. taxReg.errors?.pattern">
-                        Please enter a valid Tax Reg NO
+                        *ngIf="(itemsAddsFormControl.itemAlert.dirty || itemsAddsFormControl.itemAlert.touched) && itemsAddsFormControl.itemAlert.errors?.pattern">
+                        Please enter a
+                        valid Items Alert
                       </div>
-                      <div *ngIf="((itemsAddsFormControl.taxReg.dirty || itemsAddsFormControl.taxReg.touched) && itemsAddsFormControl.taxReg.errors?.required && !itemsAddsFormControl.taxReg.errors?.pattern && !submitted)">
-                        Tax Reg NO is required
+                      <div
+                        *ngIf="((itemsAddsFormControl.itemAlert.dirty || itemsAddsFormControl.itemAlert.touched) && itemsAddsFormControl.itemAlert.errors?.required && !itemsAddsFormControl.itemAlert.errors?.pattern && !submitted)">
+                        Items Alert is required
                       </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.taxReg.errors?.required && !itemsAddsFormControl.taxReg.errors?.pattern)">
-                        Tax Reg NO is required
+                      <div
+                        *ngIf="((submitted) && itemsAddsFormControl.itemAlert.errors?.required && !itemsAddsFormControl.itemAlert.errors?.pattern)">
+                        Items Alert is
+                        required
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-2">
-                    <label for="ntn"> Days Limit </label>
-                    <input type="number" formControlName="dayLimit" id="dayLimit" class="form-control" placeholder="GENERAL"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.dayLimit.errors) || ((itemsAddsFormControl.dayLimit.dirty || itemsAddsFormControl.dayLimit.touched) && itemsAddsFormControl.dayLimit.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.dayLimit.errors" class="invalid-feedback">
+                  <div class="form-group col-md-6">
+                    <label for="allowDue">Allow Due</label>
+                    <input placeholder="Allow Due" type="text" formControlName="allowDue" id="allowDue"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': ((submitted) && itemsAddsFormControl.allowDue.errors) || ((itemsAddsFormControl.allowDue.dirty || itemsAddsFormControl.allowDue.touched) && itemsAddsFormControl.allowDue.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.allowDue.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl.dayLimit.dirty || itemsAddsFormControl.dayLimit.touched) && itemsAddsFormControl.dayLimit.errors?.pattern">
-                        Please enter a valid Days Limit
+                        *ngIf="(itemsAddsFormControl.allowDue.dirty || itemsAddsFormControl.allowDue.touched) && itemsAddsFormControl.allowDue.errors?.pattern">
+                        Please enter a
+                        valid Allow Due
                       </div>
-                      <div *ngIf="((itemsAddsFormControl.dayLimit.dirty || itemsAddsFormControl.dayLimit.touched) && itemsAddsFormControl.dayLimit.errors?.required && !itemsAddsFormControl.dayLimit.errors?.pattern && !submitted)">
-                        Days Limit is required
+                      <div
+                        *ngIf="((itemsAddsFormControl.allowDue.dirty || itemsAddsFormControl.allowDue.touched) && itemsAddsFormControl.allowDue.errors?.required && !itemsAddsFormControl.allowDue.errors?.pattern && !submitted)">
+                        Allow Due is required
                       </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.dayLimit.errors?.required && !itemsAddsFormControl.dayLimit.errors?.pattern)">
-                        Days Limit is required
+                      <div
+                        *ngIf="((submitted) && itemsAddsFormControl.allowDue.errors?.required && !itemsAddsFormControl.allowDue.errors?.pattern)">
+                        Allow Due is
+                        required
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="introduction">Instructions</label>
-                    <textarea [rows]="5" [cols]="30" pInputTextarea  placeholder="Enter Instructions"
-                              formControlName="introduction" id="introduction" class="form-control">
-
-                    </textarea>
                   </div>
                 </div>
                 <div class="form-row">
@@ -597,7 +636,7 @@
                          [paginator]="true"
                          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                          [filterDelay]="0"
-                         [globalFilterFields]="['supplierCode','allasName','supplierName','supplierCategory','city', 'address', 'phoneNumber']">
+                         [globalFilterFields]="['supplierCode','allasName','itemName','supplierCategory','city', 'address', 'phoneNumber']">
                   <ng-template pTemplate="caption">
 
                     <div class="table-header">
@@ -624,8 +663,8 @@
                       <th pSortableColumn="allasName">Allas Name
                         <p-sortIcon field="allasName"></p-sortIcon>
                       </th>
-                      <th pSortableColumn="supplierName">Supplier Name
-                        <p-sortIcon field="supplierName"></p-sortIcon>
+                      <th pSortableColumn="itemName">Item Name
+                        <p-sortIcon field="itemName"></p-sortIcon>
                       </th>
                       <th pSortableColumn="supplierCategory">Supplier Category
                         <p-sortIcon field="supplierCategory"></p-sortIcon>
@@ -655,7 +694,7 @@
                       </td>
                       <td>
                         <input pInputText type="text"
-                               (input)="dataTableShortListCandidate.filter($event.target.value, 'supplierName', 'contains')"
+                               (input)="dataTableShortListCandidate.filter($event.target.value, 'itemName', 'contains')"
                                placeholder="Search by Supplier Name" class="p-column-filter">
                       </td>
                       <td>

@@ -1,1 +1,65 @@
-<p>login works!</p>
+<section class="vh-100">
+  <div class="user-info-new">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+             class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <div class="km-logo">
+          <a href="#"><img src="../../../assets/images/clientLogo.jpeg" alt="Smart Aid" width="110"></a>
+
+        </div>
+        <div class="user-info-wrapper">
+          <div class="user-info-layout-content">
+            <h1>Sign in</h1>
+            <form class="needs-validation" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+              <div class="form-row">
+                <div class="col-md-12 mb-3">
+                  <input placeholder="Email" type="text" formControlName="userName" id="validationCustom01"
+                         class="form-control"
+                         [ngClass]="{ 'is-invalid': submitted && loginFormControl.userName.errors }"
+                         (focusout)="trimInputField(loginFormControl.userName)"/>
+                  <div *ngIf="submitted && loginFormControl.userName.errors" class="invalid-feedback">
+                    <div *ngIf="loginFormControl.userName.errors.required">Email is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-12 mb-3">
+                  <input placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="userPassword"
+                         id="validationCustom02"
+                         class="form-control"
+                         [ngClass]="{ 'is-invalid': submitted && loginFormControl.userPassword.errors }"/>
+                  <button type="button" class="eye-button" (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                          [attr.aria-pressed]="hide">
+                    <span *ngIf="hide=== true" class="material-icons">visibility</span>
+                    <span *ngIf="hide=== false" class="material-icons">visibility_off</span>
+                  </button>
+                  <div *ngIf="submitted && loginFormControl.userPassword.errors" class="invalid-feedback">
+                    <div *ngIf="loginFormControl.userPassword.errors.required">Password is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="login-btn-row">
+                  <button type="submit" class="login-but">Login
+                  </button>
+                <a routerLink="/forgot-password" class="login-link">Forgot Password?</a>
+              </div>
+
+              <div class="user-info-layout-bottom">
+                <button (click)="register()" class="login-but" type="button">Create New Account</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Copyright -->
+    <div class="user-info-footer">Copyright © {{footerYear}}. All rights reserved</div>
+    <!-- Copyright -->
+  </div>
+</section>

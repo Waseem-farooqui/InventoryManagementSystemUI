@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 
-export class AddingItemUserServise {
+export class AddingItemUserService {
   constructor(private configApiService: ConfigApiService, private httpClient: HttpClient) {
   }
 

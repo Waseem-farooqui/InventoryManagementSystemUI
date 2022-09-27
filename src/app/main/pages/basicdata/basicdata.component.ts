@@ -15,6 +15,11 @@ export class BasicdataComponent implements OnInit {
   suplier(){
     this.router.navigate(['supplierForm']);
   }
-
+  addItme(){
+    this.router.navigate(['addItems']);
+  }
+  addItmeCategory(){
+    this.router.navigate(['itemCategory']);
+  }
 
 }

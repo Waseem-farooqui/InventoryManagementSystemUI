@@ -1,1 +1,77 @@
-<p>pages works!</p>
+<div class="main-inner">
+  <div class="dash-left" [ngClass]="status ? 'active' : ''">
+    <div class="logo-section">
+      <a href="javascript:void(0)">"../../assets/images/clientLogo.jpeg"</a>
+    </div>
+
+    <div class="user-section user-sectionb">
+      <img (click)="profile()" src="../../assets/images/user-img.jpg" alt="">
+      <p (click)="profile()">{{name}} <span>{{designation}}</span></p>
+    </div>
+    <div class="menu-section">
+
+      <ul>
+        <li routerLinkActive="active"><a routerLink="dashboard" (click)="clickEvent()"><span
+          class="material-icons">home</span> Home</a></li>
+        <li routerLinkActive="active"><a routerLink="file" (click)="clickEvent()"><span
+          class="material-icons">query_stats</span> File</a></li>
+        <li routerLinkActive="active"><a routerLink="items" (click)="clickEvent()"><span
+          class="material-icons">work</span>Itmes</a></li>
+        <li routerLinkActive="active"><a routerLink="purchase" (click)="clickEvent()"><span class="material-icons">face_retouching_off</span>
+         Purchase</a></li>
+        <li routerLinkActive="active"><a routerLink="sales" (click)="clickEvent()"><span class="material-icons">domain_verification</span>
+          Sales</a></li>
+        <li routerLinkActive="active"><a routerLink="transection" (click)="clickEvent()"><span class="material-icons">work_off</span>
+          Transection</a></li>
+        <li routerLinkActive="active"><a routerLink="reports" (click)="clickEvent()"><span class="material-icons">perm_contact_calendar</span>
+          Reports</a></li>
+        <li routerLinkActive="active"><a routerLink="basicData" (click)="clickEvent()"><span class="material-icons">account_balance_wallet</span>BasicData</a>
+        </li>
+        <li routerLinkActive="active"><a routerLink="maintinance" (click)="clickEvent()"><span class="material-icons">person_search</span>Maintinance</a>
+        </li>
+        <li routerLinkActive="active"><a routerLink="manage" (click)="clickEvent()"><span class="material-icons">holiday_village</span>Manage</a>
+        </li>
+        <li routerLinkActive="active"><a routerLink="window" (click)="clickEvent()"><span
+          class="material-icons">account_circle</span>Window</a></li>
+        <li routerLinkActive="active"><a routerLink="help" (click)="clickEvent()"
+                                         icon="pi pi-external-link" label="Show">
+          <span class="material-icons">file_upload</span> Help </a></li>
+
+
+        <li routerLinkActive="active"><a (click)="logout()" routerLink="/login"><span class="material-icons">login</span>Logout</a>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+
+  <div class="dash-right">
+    <div class="dash-right-sub">
+      <div class="header-section">
+        <div class="mobile-logo position-relative">
+          <a routerLink="employer-dashboard">
+            <img src="../../assets/images/dash-borad-logo-mobile.jpg"/>
+          </a>
+
+          <a href="javascript:void(0);" class="hambuger-menu-icon" (click)="clickEvent()" [ngClass]="status ? 'active' : ''">
+            <span class="material-icons menu-icon">menu</span>
+            <span class="material-icons close-icon">close</span>
+          </a>
+
+        </div>
+
+      </div>
+      <div class="content-section">
+        <div class="container-fluid">
+          <router-outlet></router-outlet>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="footer">
+      <p>Copyright © {{footerYear}}. All rights reserved</p>
+    </div>
+  </div>
+</div>

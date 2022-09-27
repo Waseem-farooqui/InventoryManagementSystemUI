@@ -1,0 +1,251 @@
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+      <h4 class="mb-0 font-size-18">Items Form</h4>
+      <h4></h4>
+      <div class="page-title-right">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item"><a (click)="home()">Home</a></li>
+          <li class="breadcrumb-item active">Items Form</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+           aria-selected="false">Detail</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+           aria-selected="false">List</a>
+      </li>
+
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="job-form job-form-b">
+              <form class="needs-validation" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="code">Code</label>
+                    <input type="text" formControlName="code" id="code" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.code.errors) || ((itemsAddsFormControl.code.dirty || itemsAddsFormControl.code.touched) && itemsAddsFormControl.code.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.code.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.code.dirty || itemsAddsFormControl.code.touched) && itemsAddsFormControl.code.errors?.pattern">
+                        Please enter a valid Code
+                      </div>
+                      <div *ngIf="((itemsAddsFormControl.code.dirty || itemsAddsFormControl.code.touched) && itemsAddsFormControl.code.errors?.required && !itemsAddsFormControl.code.errors?.pattern && !submitted)">
+                        Code no is required
+                      </div>
+                      <div *ngIf="((submitted) && itemsAddsFormControl.code.errors?.required && !itemsAddsFormControl.code.errors?.pattern)">
+                        Code No is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="itemName"> Item Name</label>
+                    <input type="text" formControlName="itemName" id="itemName" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.itemName.errors) || ((itemsAddsFormControl.itemName.dirty || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.itemName.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.itemName.dirty || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors?.pattern">
+                        Please enter a valid Item Name
+                      </div>
+                      <div *ngIf="((itemsAddsFormControl.itemName.dirty || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors?.required && !itemsAddsFormControl.itemName.errors?.pattern && !submitted)">
+                        Item Name No is required
+                      </div>
+                      <div *ngIf="((submitted) && itemsAddsFormControl.itemName.errors?.required && !itemsAddsFormControl.itemName.errors?.pattern)">
+                        Item Name No is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="pieceOfPacking">Piece Of Packing</label>
+                    <input type="text" formControlName="pieceOfPacking" id="pieceOfPacking" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.pieceOfPacking.errors) || ((itemsAddsFormControl.pieceOfPacking.dirty || itemsAddsFormControl.pieceOfPacking.touched) && itemsAddsFormControl.pieceOfPacking.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.pieceOfPacking.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.pieceOfPacking.dirty || itemsAddsFormControl.pieceOfPacking.touched) && itemsAddsFormControl.pieceOfPacking.errors?.pattern">
+                        Please enter a valid  Piece Of Packing
+                      </div>
+                      <div *ngIf="((itemsAddsFormControl.pieceOfPacking.dirty || itemsAddsFormControl.pieceOfPacking.touched) && itemsAddsFormControl.pieceOfPacking.errors?.required && !itemsAddsFormControl.pieceOfPacking.errors?.pattern && !submitted)">
+                        Piece Of Packing  is required
+                      </div>
+                      <div *ngIf="((submitted) && itemsAddsFormControl.pieceOfPacking.errors?.required && !itemsAddsFormControl.pieceOfPacking.errors?.pattern)">
+                        Piece Of Packing  is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="purchasePrice">Purchase Price</label>
+                    <input type="text" formControlName="purchasePrice" id="purchasePrice" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.purchasePrice.errors) || ((itemsAddsFormControl.purchasePrice.dirty || itemsAddsFormControl.purchasePrice.touched) && itemsAddsFormControl.purchasePrice.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.purchasePrice.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(itemsAddsFormControl.purchasePrice.dirty || itemsAddsFormControl.purchasePrice.touched) && itemsAddsFormControl.purchasePrice.errors?.pattern">
+                        Please enter a valid purchasePrice
+                      </div>
+                      <div *ngIf="((itemsAddsFormControl.purchasePrice.dirty || itemsAddsFormControl.purchasePrice.touched) && itemsAddsFormControl.purchasePrice.errors?.required && !itemsAddsFormControl.purchasePrice.errors?.pattern && !submitted)">
+                        Purchase Price  is required
+                      </div>
+                      <div *ngIf="((submitted) && itemsAddsFormControl.purchasePrice.errors?.required && !itemsAddsFormControl.purchasePrice.errors?.pattern)">
+                        Purchase Price is required
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <!--      second tab Start from here in all  supplier data -->
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="job-form job-form-b">
+
+              <div class="table-responsive">
+                <p-table #dataTableShortListCandidate [value]="jobList" [(selection)]="selectedCustomers" dataKey="id"
+                         styleClass="p-datatable-sm"
+                         [rowHover]="true"
+                         [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                         [paginator]="true"
+                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                         [filterDelay]="0"
+                         [globalFilterFields]="['supplierCode','allasName','itemName','supplierCategory','city', 'address', 'phoneNumber']">
+                  <ng-template pTemplate="caption">
+
+                    <div class="table-header">
+                      <div class="row">
+                        <div class="col-6">
+                        <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                       (input)="dataTableShortListCandidate.filterGlobal($event.target.value, 'contains')"
+                                       placeholder="Global Search"/>
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </ng-template>
+                  <ng-template pTemplate="header">
+
+                    <tr>
+
+                      <th pSortableColumn="supplierCode">Code
+                        <p-sortIcon field="supplierCode"></p-sortIcon>
+                      </th>
+                      <th pSortableColumn="allasName">Allas Name
+                        <p-sortIcon field="allasName"></p-sortIcon>
+                      </th>
+                      <th pSortableColumn="itemName">Item Name
+                        <p-sortIcon field="itemName"></p-sortIcon>
+                      </th>
+                      <th pSortableColumn="supplierCategory">Supplier Category
+                        <p-sortIcon field="supplierCategory"></p-sortIcon>
+                      </th>
+                      <th pSortableColumn="city">City
+                        <p-sortIcon field="city"></p-sortIcon>
+                      </th>
+                      <th pSortableColumn="address">Address
+                        <p-sortIcon field="address"></p-sortIcon>
+                      </th>
+                      <th pSortableColumn="phoneNumber">Phone Number
+                        <p-sortIcon field="phoneNumber"></p-sortIcon>
+                      </th>
+                      <th></th>
+                    </tr>
+                    <tr>
+
+                      <td>
+                        <input pInputText type="number"
+                               (input)="dataTableShortListCandidate.filter($event.target.value, 'supplierCode', 'startsWith')"
+                               placeholder="Search by Supplier Code" class="p-column-filter">
+                      </td>
+                      <td>
+                        <input pInputText type="text"
+                               (input)="dataTableShortListCandidate.filter($event.target.value, 'allasName', 'startsWith')"
+                               placeholder="Search by Allas Name" class="p-column-filter">
+                      </td>
+                      <td>
+                        <input pInputText type="text"
+                               (input)="dataTableShortListCandidate.filter($event.target.value, 'itemName', 'contains')"
+                               placeholder="Search by Supplier Name" class="p-column-filter">
+                      </td>
+                      <td>
+                        <input pInputText type="text"
+                               (input)="dataTableShortListCandidate.filter($event.target.value, 'supplierCategory', 'contains')"
+                               placeholder="Search by Supplier Category" class="p-column-filter">
+                      </td>
+                      <td>
+                        <input pInputText type="text"
+                               (input)="dataTableShortListCandidate.filter($event.target.value, 'city', 'contains')"
+                               placeholder="Search by City" class="p-column-filter">
+                      </td>
+                      <td>
+                        <input pInputText type="text"
+                               (input)="dataTableShortListCandidate.filter($event.target.value, 'address', 'contains')"
+                               placeholder="Search by Address" class="p-column-filter">
+                      </td>
+                      <td>
+                        <input pInputText type="text"
+                               (input)="dataTableShortListCandidate.filter($event.target.value, 'phoneNumber', 'contains')"
+                               placeholder="Search by Phone Number" class="p-column-filter">
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-customer>
+                    <tr class="p-selectable-row">
+
+                      <td > {{'1'}}  </td>
+                      <!--                      <td *ngIf="customer.supplierCode === null">&#45;&#45;</td>-->
+                      <td *ngIf="customer.candidateName !== null"> {{customer.candidateName}}  </td>
+                      <td *ngIf="customer.candidateName === null">--</td>
+                      <td *ngIf="customer.jobtitle !== null">{{customer.jobtitle}}</td>
+                      <td *ngIf="customer.jobtitle === null">--</td>
+                      <td *ngIf="customer.skills !== null">{{customer.skills}}</td>
+                      <td *ngIf="customer.skills === null">--</td>
+                      <td *ngIf="customer.city !== null">{{customer.city}}</td>
+                      <td *ngIf="customer.city === null">--</td>
+                      <td *ngIf="customer.totalExperience !== null">{{customer.totalExperience}}</td>
+                      <td *ngIf="customer.totalExperience === null">--</td>
+                      <td *ngIf="customer.phoneNumber !== null">{{customer.phoneNumber}}</td>
+                      <td *ngIf="customer.phoneNumber === null">--</td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="7">No candidates found.</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

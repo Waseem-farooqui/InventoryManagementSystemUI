@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {Table} from "primeng/table";
 import {AddingItemUserService} from "../../../../../services/addingItemUser.service";
 import {Router} from "@angular/router";
@@ -7,11 +7,11 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {GetAllDataService} from "../../../../../services/getAllData.Service";
 
 @Component({
-  selector: 'app-item',
-  templateUrl: './item.component.html',
-  styleUrls: ['./item.component.css']
+  selector: 'app-item-category',
+  templateUrl: './item-category.component.html',
+  styleUrls: ['./item-category.component.css']
 })
-export class ItemComponent implements OnInit {
+export class ItemCategoryComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   active:any;
@@ -26,6 +26,7 @@ export class ItemComponent implements OnInit {
   @ViewChild('dataTableShortListCandidate') table: Table;
   constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService,
               private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService) { }
+
 
   ngOnInit(): void {
     this.formBuilderControlName();
@@ -42,29 +43,6 @@ export class ItemComponent implements OnInit {
       itemName: [''],
       pieceOfPacking: [''],
       purchasePrice: [''],
-      salesPrice: [''],
-      active: [''],
-      allasName: [''],
-      manufacture: [''],
-      packing: [''],
-      printable: [''],
-      category: [''],
-      classDefault: [''],
-      saleDisc: [''],
-      location: [''],
-      narcotics: [''],
-      lockSalesPrice: [''],
-      lockDicountPerc: [''],
-      salesDiscount2: [''],
-      salesDiscount3: [''],
-      salesDiscount4: [''],
-      reOrderQTY: [''],
-      optimumQTY: [''],
-      saleDiscount: [''],
-      minimumQty: [''],
-      avgPrice: [''],
-      itemAlert: [''],
-      allowDue:[''],
     });
   }
   home(){
@@ -101,17 +79,6 @@ export class ItemComponent implements OnInit {
 
       }
     );
-  }
-
-  // auto trim the input Name and email fields
-
-  trimInputField(val) {
-    const registerFirstName = this.registerForm.controls.supplierName.value.trimEnd(val).trimStart(val);
-    this.registerForm.controls.supplierName.patchValue(registerFirstName);
-    const registerLastName = this.registerForm.controls.aliesName.value.trimEnd(val).trimStart(val);
-    this.registerForm.controls.aliesName.patchValue(registerLastName);
-    const registerEmail = this.registerForm.controls.email.value.trimEnd(val).trimStart(val);
-    this.registerForm.controls.email.patchValue(registerEmail);
   }
 
   /*--------------Get Supplier All Data list------------------*/
@@ -151,32 +118,8 @@ export class ItemComponent implements OnInit {
       code: value.code,
       itemName: value.itemName,
       pieceOfPacking: value.pieceOfPacking,
-      purchasePrice: value.purchasePrice,
-      salesPrice: value.salesPrice,
-      allasName: value.allasName,
-      manufacture: value.manufacture,
-      packing: value.packing,
-      printable: value.printable,
-      category: value.category,
-      active: value.active,
-      classDefault: value.class,
-      saleDisc: value.saleDisc,
-      location: value.location,
-      narcotics: value.narcotics,
-      lockSalesPrice: value.localSalesPrice,
-      lockDicountPerc: value.localDicountPerc,
-      salesDiscount2: value.salesDiscount2,
-      salesDiscount3: value.salesDiscount3,
-      salesDiscount4: value.salesDiscount4,
-      reOrderQTY: value.reOrderQTY,
-      optimumQTY: value.optimumQTY,
-      saleDiscount: value.saleDiscount,
-      minimumQty: value.minimumQty,
-      avgPrice: value.avgPrice,
-      itemAlert: value.itemAlert,
-      allowDue:value.allowDue,
-    };
-    console.log(result);
+      purchasePrice: value.purchasePrice
+    }
+    console.log(result)
   }
-
 }
