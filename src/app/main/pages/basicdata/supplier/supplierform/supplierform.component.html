@@ -1,0 +1,492 @@
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+      <h4 class="mb-0 font-size-18">Supplier Form</h4>
+      <h4></h4>
+      <div class="page-title-right">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item"><a (click)="home()">Home</a></li>
+          <li class="breadcrumb-item active">Supplier Form</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+           aria-selected="false">Detail</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+           aria-selected="false">List</a>
+      </li>
+
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="job-form job-form-b">
+              <form class="needs-validation" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="code">Code</label>
+                    <input type="text" formControlName="code" id="code" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.code.errors) || ((supplierFormControl.code.dirty || supplierFormControl.code.touched) && supplierFormControl.code.errors) }"/>
+                    <div *ngIf="supplierFormControl.code.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.code.dirty || supplierFormControl.code.touched) && supplierFormControl.code.errors?.pattern">
+                        Please enter a valid Code
+                      </div>
+                      <div *ngIf="((supplierFormControl.code.dirty || supplierFormControl.code.touched) && supplierFormControl.code.errors?.required && !supplierFormControl.code.errors?.pattern && !submitted)">
+                        Code no is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.code.errors?.required && !supplierFormControl.code.errors?.pattern)">
+                        Code No is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="supplierName">Supplier Name</label>
+                    <input type="text" formControlName="supplierName" id="supplierName" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.supplierName.errors) || ((supplierFormControl.supplierName.dirty || supplierFormControl.supplierName.touched) && supplierFormControl.supplierName.errors) }"/>
+                    <div *ngIf="supplierFormControl.supplierName.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.supplierName.dirty || supplierFormControl.supplierName.touched) && supplierFormControl.supplierName.errors?.pattern">
+                        Please enter a valid Supplier Name
+                      </div>
+                      <div *ngIf="((supplierFormControl.supplierName.dirty || supplierFormControl.supplierName.touched) && supplierFormControl.supplierName.errors?.required && !supplierFormControl.supplierName.errors?.pattern && !submitted)">
+                        Supplier Name No is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.supplierName.errors?.required && !supplierFormControl.supplierName.errors?.pattern)">
+                        Supplier Name No is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="aliesName">Alies Name</label>
+                    <input type="text" formControlName="aliesName" id="aliesName" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.aliesName.errors) || ((supplierFormControl.aliesName.dirty || supplierFormControl.aliesName.touched) && supplierFormControl.aliesName.errors) }"/>
+                    <div *ngIf="supplierFormControl.aliesName.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.aliesName.dirty || supplierFormControl.aliesName.touched) && supplierFormControl.aliesName.errors?.pattern">
+                        Please enter a valid Last Name
+                      </div>
+                      <div *ngIf="((supplierFormControl.aliesName.dirty || supplierFormControl.aliesName.touched) && supplierFormControl.aliesName.errors?.required && !supplierFormControl.aliesName.errors?.pattern && !submitted)">
+                        Alies Name no is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.aliesName.errors?.required && !supplierFormControl.aliesName.errors?.pattern)">
+                        Alies Name No is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="contactPerson">Contact Person</label>
+                    <input type="text" formControlName="contactPerson" id="contactPerson" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.contactPerson.errors) || ((supplierFormControl.contactPerson.dirty || supplierFormControl.contactPerson.touched) && supplierFormControl.contactPerson.errors) }"/>
+                    <div *ngIf="supplierFormControl.contactPerson.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.contactPerson.dirty || supplierFormControl.contactPerson.touched) && supplierFormControl.contactPerson.errors?.pattern">
+                        Please enter a valid contactPerson
+                      </div>
+                      <div *ngIf="((supplierFormControl.contactPerson.dirty || supplierFormControl.contactPerson.touched) && supplierFormControl.contactPerson.errors?.required && !supplierFormControl.contactPerson.errors?.pattern && !submitted)">
+                        contactPerson no is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.contactPerson.errors?.required && !supplierFormControl.contactPerson.errors?.pattern)">
+                        contactPerson No is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="active">Active</label>
+                    <p-dropdown [options]="active" formControlName="active" id="active"
+                                class="form-control"
+                                optionLabel="name" [showClear]="true"></p-dropdown>
+                    <div *ngIf="supplierFormControl.active.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.active.dirty || supplierFormControl.active.touched) && supplierFormControl.active.errors?.pattern">
+                        Please enter a valid Active
+                      </div>
+                      <div *ngIf="((supplierFormControl.active.dirty || supplierFormControl.active.touched) && supplierFormControl.active.errors?.required && !supplierFormControl.active.errors?.pattern && !submitted)">
+                        Active no is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.active.errors?.required && !supplierFormControl.active.errors?.pattern)">
+                        Active No is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="defaultGst">Default Gst %</label>
+                    <input type="number" formControlName="defaultGst" id="defaultGst" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.defaultGst.errors) || ((supplierFormControl.defaultGst.dirty || supplierFormControl.defaultGst.touched) && supplierFormControl.defaultGst.errors) }"/>
+                    <div *ngIf="supplierFormControl.defaultGst.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.defaultGst.dirty || supplierFormControl.defaultGst.touched) && supplierFormControl.defaultGst.errors?.pattern">
+                        Please enter a valid defaultGst
+                      </div>
+                      <div *ngIf="((supplierFormControl.defaultGst.dirty || supplierFormControl.defaultGst.touched) && supplierFormControl.defaultGst.errors?.required && !supplierFormControl.defaultGst.errors?.pattern && !submitted)">
+                        DefaultGst no is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.defaultGst.errors?.required && !supplierFormControl.defaultGst.errors?.pattern)">
+                        DefaultGst No is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="address1">Temporary Address</label>
+                    <input type="text" formControlName="address1" id="address1" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address1.errors) || ((supplierFormControl.address1.dirty || supplierFormControl.address1.touched) && supplierFormControl.address1.errors) }"/>
+                    <div *ngIf="supplierFormControl.address1.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address1.dirty || supplierFormControl.address1.touched) && supplierFormControl.address1.errors?.pattern">
+                        Please enter a valid Temporary Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address1.dirty || supplierFormControl.address1.touched) && supplierFormControl.address1.errors?.required && !supplierFormControl.address1.errors?.pattern && !submitted)">
+                        Temporary Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address1.errors?.required && !supplierFormControl.address1.errors?.pattern)">
+                        Temporary Address is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="city">City</label>
+                    <input type="text" formControlName="city" id="city" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.city.errors) || ((supplierFormControl.city.dirty || supplierFormControl.city.touched) && supplierFormControl.city.errors) }"/>
+                    <div *ngIf="supplierFormControl.city.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.city.dirty || supplierFormControl.city.touched) && supplierFormControl.city.errors?.pattern">
+                        Please enter a valid City
+                      </div>
+                      <div *ngIf="((supplierFormControl.city.dirty || supplierFormControl.city.touched) && supplierFormControl.city.errors?.required && !supplierFormControl.city.errors?.pattern && !submitted)">
+                        City is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.city.errors?.required && !supplierFormControl.city.errors?.pattern)">
+                        City is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="address2">Permanent Address</label>
+                    <input type="text" formControlName="address2" id="address2" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.address2.errors) || ((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors) }"/>
+                    <div *ngIf="supplierFormControl.address2.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.pattern">
+                        Please enter a valid Permanent Address
+                      </div>
+                      <div *ngIf="((supplierFormControl.address2.dirty || supplierFormControl.address2.touched) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern && !submitted)">
+                        Permanent Address is required
+                      </div>
+                      <div *ngIf="((submitted) && supplierFormControl.address2.errors?.required && !supplierFormControl.address2.errors?.pattern)">
+                        Permanent Address is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="job-form job-form-b">
+              <h2 class="mb-3">tab 2
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
