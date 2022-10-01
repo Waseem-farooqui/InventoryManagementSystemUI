@@ -1,1 +1,208 @@
-<p>register works!</p>
+<section class="vh-100">
+  <div class="user-info-new">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+               class="img-fluid" alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <div class="km-logo">
+            <a href="#"><img src="../../../assets/images/clientLogo.jpeg" alt="Smart Aid" width="110"></a>
+
+          </div>
+          <div class="user-info-wrapper">
+            <div class="user-info-layout-content">
+              <h1>Sign in</h1>
+              <form class="needs-validation" [formGroup]="registerForm" (ngSubmit)="onSubmit()" role="form">
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <input placeholder="* Contact Person First  Name" type="text"
+                           formControlName="contactPersonFirstName"
+                           id="validationCustom01"
+                           class="form-control"
+                           (focusout)="trimInputField(employerRegisterFormControl.contactPersonFirstName)"
+                           [ngClass]="{ 'is-invalid': (submitted && employerRegisterFormControl.contactPersonFirstName.errors) || ((employerRegisterFormControl.contactPersonFirstName.dirty || employerRegisterFormControl.contactPersonFirstName.touched) && employerRegisterFormControl.contactPersonFirstName.errors) }"/>
+                    <div *ngIf="employerRegisterFormControl.contactPersonFirstName.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="((employerRegisterFormControl.contactPersonFirstName.dirty || employerRegisterFormControl.contactPersonFirstName.touched) && employerRegisterFormControl.contactPersonFirstName.errors?.required && !employerRegisterFormControl.contactPersonFirstName.errors?.pattern && !submitted)">
+                        First name is required
+                      </div>
+
+                      <div
+                        *ngIf="(employerRegisterFormControl.contactPersonFirstName.dirty || employerRegisterFormControl.contactPersonFirstName.touched) && employerRegisterFormControl.contactPersonFirstName.errors?.pattern">
+                        Name must have 2 charaters and no special characters are allowed
+                      </div>
+                      <div
+                        *ngIf="((submitted) && employerRegisterFormControl.contactPersonFirstName.errors?.required && !employerRegisterFormControl.contactPersonFirstName.errors?.pattern)">
+                        First name is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <input placeholder="* Contact Person Last Name" type="text" formControlName="contactPersonLastName"
+                           id="validationCustom01"
+                           class="form-control"
+                           (focusout)="trimInputField(employerRegisterFormControl.contactPersonLastName)"
+                           [ngClass]="{ 'is-invalid': (submitted && employerRegisterFormControl.contactPersonLastName.errors) || ((employerRegisterFormControl.contactPersonLastName.dirty || employerRegisterFormControl.contactPersonLastName.touched) && employerRegisterFormControl.contactPersonLastName.errors) }"/>
+                    <div *ngIf="employerRegisterFormControl.contactPersonLastName.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="((employerRegisterFormControl.contactPersonLastName.dirty || employerRegisterFormControl.contactPersonLastName.touched) && employerRegisterFormControl.contactPersonLastName.errors?.required && !employerRegisterFormControl.contactPersonLastName.errors?.pattern && !submitted)">
+                        Last name is required
+                      </div>
+                      <div
+                        *ngIf="(employerRegisterFormControl.contactPersonLastName.dirty || employerRegisterFormControl.contactPersonLastName.touched) && employerRegisterFormControl.contactPersonLastName.errors?.pattern">
+                        Name must have 2 charaters and no special characters are allowed
+                      </div>
+                      <div
+                        *ngIf="((submitted) && employerRegisterFormControl.contactPersonLastName.errors?.required && !employerRegisterFormControl.contactPersonLastName.errors?.pattern)">
+                        Last name is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <p-dropdown [options]="cities" formControlName="companyName" placeholder="Select a City"
+                                optionLabel="name" [showClear]="true"
+                                inputStyleClass="form-control"></p-dropdown>
+                    <div *ngIf="employerRegisterFormControl.companyName.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="((employerRegisterFormControl.companyName.dirty || employerRegisterFormControl.companyName.touched) && employerRegisterFormControl.companyName.errors?.required && !employerRegisterFormControl.companyName.errors?.pattern && (!submitted))">
+                        Name is required
+                      </div>
+                      <div
+                        *ngIf="((submitted) && employerRegisterFormControl.companyName.errors?.required && !employerRegisterFormControl.companyName.errors?.pattern)">
+                        Company
+                        Name is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <input placeholder="* Contact Person Email" type="text" formControlName="email"
+                           id="validationCustom02"
+                           class="form-control" (focusout)="trimInputField(employerRegisterFormControl.email)"
+                           [ngClass]="{ 'is-invalid': (submitted && employerRegisterFormControl.email.errors) || ((employerRegisterFormControl.email.dirty || employerRegisterFormControl.email.touched) && employerRegisterFormControl.email.errors) }"/>
+                    <div *ngIf="employerRegisterFormControl.email.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(employerRegisterFormControl.email.dirty || employerRegisterFormControl.email.touched) && employerRegisterFormControl.email.errors?.pattern">
+                        Please enter a
+                        valid email
+                        address
+                      </div>
+                      <div
+                        *ngIf="((employerRegisterFormControl.email.dirty || employerRegisterFormControl.email.touched) && employerRegisterFormControl.email.errors?.required && !employerRegisterFormControl.email.errors?.pattern && !submitted)">
+                        Email is required
+                      </div>
+                      <div
+                        *ngIf="((submitted) && employerRegisterFormControl.email.errors?.required && !employerRegisterFormControl.email.errors?.pattern)">
+                        Email
+                        is
+                        required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+
+                      <p-dropdown [options]="cities" formControlName="industry" placeholder="Select a City"
+                                  optionLabel="name" [showClear]="true"></p-dropdown>
+                      <div *ngIf="employerRegisterFormControl.industry.errors" class="invalid-feedback">
+                        <div
+                          *ngIf="((employerRegisterFormControl.industry.dirty || employerRegisterFormControl.industry.touched) && employerRegisterFormControl.industry.errors?.required && !employerRegisterFormControl.industry.errors?.pattern && !submitted)">
+                          Industry Name is required
+                        </div>
+                        <div
+                          *ngIf="((submitted) && employerRegisterFormControl.industry.errors?.required && !employerRegisterFormControl.industry.errors?.pattern)">
+                          Industry Name
+                          is required
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <input placeholder="* Password" [type]="hide ? 'password' : 'text'" formControlName="password"
+                           id="validationCustom10"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && employerRegisterFormControl.password.errors) || ((employerRegisterFormControl.password.dirty || employerRegisterFormControl.password.touched) && employerRegisterFormControl.password.errors) }"/>
+                    <button type="button" class="eye-button" (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                      <span *ngIf="hide=== true" class="material-icons">visibility</span>
+                      <span *ngIf="hide=== false" class="material-icons">visibility_off</span>
+                    </button>
+                    <div *ngIf=" employerRegisterFormControl.password.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="(employerRegisterFormControl.password.dirty || employerRegisterFormControl.password.touched) && employerRegisterFormControl.password.errors?.minlength">
+                        You
+                        must provide
+                        atleast <strong> 8 digit password</strong></div>
+                      <div *ngIf="((submitted) && employerRegisterFormControl.password.errors?.required)">Password is
+                        required
+                      </div>
+                      <div
+                        *ngIf="((employerRegisterFormControl.password.dirty || employerRegisterFormControl.password.touched) && (!submitted) && employerRegisterFormControl.password.errors?.required)">
+                        Password is required
+                      </div>
+
+                      <div
+                        *ngIf="(employerRegisterFormControl.password.dirty || employerRegisterFormControl.password.touched)&& registerForm.get('password')?.hasError('passwordStrength')">{{registerForm.get('password').errors['passwordStrength']}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <input placeholder="* Confirm Password" [type]="confirmhide ? 'password' : 'text'"
+                           formControlName="confirmPassword"
+                           id="validationCustom11" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && employerRegisterFormControl.confirmPassword.errors) || ((employerRegisterFormControl.confirmPassword.dirty || employerRegisterFormControl.confirmPassword.touched) && employerRegisterFormControl.confirmPassword.errors) }"/>
+                    <button type="button" class="eye-button" (click)="confirmhide = !confirmhide"
+                            [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                      <span *ngIf="confirmhide=== true" class="material-icons">visibility</span>
+                      <span *ngIf="confirmhide=== false" class="material-icons">visibility_off</span>
+                    </button>
+                    <div *ngIf=" employerRegisterFormControl.confirmPassword.errors" class="invalid-feedback">
+                      <div *ngIf="((submitted) && employerRegisterFormControl.confirmPassword.errors?.required)">
+                        Password is
+                        required
+                      </div>
+                      <div
+                        *ngIf="((!submitted) && (employerRegisterFormControl.confirmPassword.dirty || employerRegisterFormControl.confirmPassword.touched)&& employerRegisterFormControl.confirmPassword.errors?.required)">
+                        Password is required
+                      </div>
+
+                      <div
+                        *ngIf="(employerRegisterFormControl.confirmPassword.dirty || employerRegisterFormControl.confirmPassword.touched)&& registerForm.get('confirmPassword')?.hasError('NoPassswordMatch')">
+                        Password do not match
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="login-btn-row justify-content-left">
+                  <a (click)="confirm()" class="login-link">Cancel</a>
+                  <button class="login-but" type="submit">Register</button>
+
+
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Copyright -->
+    <div class="user-info-footer">Copyright © {{footerYear}}. All rights reserved</div>
+    <!-- Copyright -->
+  </div>
+</section>
+
+

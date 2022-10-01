@@ -4,12 +4,21 @@ import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 
-export class AddingItemUserServise {
+export class AddingItemUserService {
   constructor(private configApiService: ConfigApiService, private httpClient: HttpClient) {
   }
 
   getCityName(cityName) {
     console.log(cityName)
     return this.httpClient.get(this.configApiService.lookUPForPOS(cityName));
+  }
+  addItemCategory(body){
+    return this.httpClient.post(this.configApiService.addItemCategory(), body)
+  }
+  addNewItem(body){
+    return this.httpClient.post(this.configApiService.addNewItem(), body)
+  }
+  addNewSupplier(body){
+    return this.httpClient.post(this.configApiService.addNewSupplier(), body)
   }
 }

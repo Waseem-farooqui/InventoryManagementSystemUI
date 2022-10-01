@@ -6,10 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pages.component.css']
 })
 export class PagesComponent implements OnInit {
-
+  status = false;
+  footerYear: number;
+  name: string;
+  designation: string;
   constructor() { }
 
   ngOnInit(): void {
+    this.footerYear = new Date().getFullYear();
   }
-
+  clickEvent() {
+    this.status = !this.status;
+  }
+  profile() {
+    console.log('this')
+  }
+  logout(){
+    console.log('asda')
+  }
 }
