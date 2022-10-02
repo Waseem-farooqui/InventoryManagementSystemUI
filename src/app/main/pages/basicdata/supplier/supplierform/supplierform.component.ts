@@ -5,6 +5,8 @@ import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {GetAllDataService} from "../../../../../services/getAllData.Service";
 import {Table} from "primeng/table";
+import {ToastrService} from "ngx-toastr";
+import {HotkeysService} from "angular2-hotkeys";
 
 
 @Component({
@@ -16,6 +18,7 @@ export class SupplierformComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   active:any;
+  newSuppliersCreationResponce: any;
   result: any;
   jobList: any = [];
   selectedCustomers: any[];
@@ -25,8 +28,9 @@ export class SupplierformComponent implements OnInit {
   profileClassifications = [];
   profileClassificationsResult: any = [];
   @ViewChild('dataTableShortListCandidate') table: Table;
-  constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService,
-             private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService) { }
+  constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService, private toastr: ToastrService,
+              private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService,
+              private hotkeys: HotkeysService) { }
 
   ngOnInit(): void {
    this.formBuilderControlName();
@@ -41,7 +45,7 @@ export class SupplierformComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       code: [''],
       contactPerson: [''],
-      active: [''],
+      statusActive: [''],
       defaultGst: [''],
       address1: [''],
       address2: [''],
@@ -150,36 +154,58 @@ export class SupplierformComponent implements OnInit {
     }
     this.spinner.show('main-spinner');
     const result = {
-      code: value.code,
-      contactPerson: value.contactPerson,
-      active: value.active,
-      defaultGst: value.defaultGst,
-      address1: value.address1,
-      address2: value.address2,
+      // code: value.code,
+      name: value.contactPerson,
+      contactNo: value.mobile,
+      email: value.email,
+      address: value.address1,
+      alies: value.aliesName,
+      status: value.statusActive.name,
+      gst: value.defaultGst,
       city: value.city,
+      country: value.country,
+      cnic: value.cnic,
+      category: value.category,
+      bankAccount: value.bankAccount,
+      ntnNumber: value.ntn,
+      withHoldingPercentage: value.wH,
+      taxRegistrationNumber: value.taxReg,
+
+      address2: value.address2,
       manufactureCity: value.manufactureCity,
       postCode: value.postCode,
-      country: value.country,
       phone1: value.phone1,
       phone2: value.phone2,
       mobile: value.mobile,
       fax: value.fax,
-      email: value.email,
       email2: value.email2,
        email3: value.email3,
       supplierName: value.supplierName,
-      aliesName: value.aliesName,
       website: value.website,
-      cnic: value.cnic,
-      bankAccount: value.bankAccount,
-      category: value.category,
-      wH: value.wH,
-      ntn: value.ntn,
-      taxReg: value.taxReg,
       dayLimit: value.dayLimit,
       introduction: value.introduction,
     };
-    console.log(result);
+    this.addingService.addNewSupplier(result).subscribe(
+      res => {
+        this.spinner.hide('main-spinner');
+        this.newSuppliersCreationResponce = res;
+        if (this.newSuppliersCreationResponce.statusCode === 201 || this.newSuppliersCreationResponce.statusCode === 200){
+          this.toastr.success(this.newSuppliersCreationResponce.message);
+          this.getJobList(true)
+        }else if (this.newSuppliersCreationResponce.statusCode === 208){
+          this.toastr.warning(this.newSuppliersCreationResponce.message);
+        }else {
+          this.toastr.error(this.newSuppliersCreationResponce.message);
+        }
+      },
+      error => {
+        this.spinner.hide('main-spinner');
+        if (error.error.message) {
+          this.toastr.error(error.error.message);
+        } else {
+          this.toastr.error('Some problem occurred. Please try again.');
+        }
+      });
   }
 
 }

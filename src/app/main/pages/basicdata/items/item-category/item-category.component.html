@@ -30,12 +30,12 @@
       <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
         <div class="row">
           <div class="col-md-12">
-            <div class="job-form job-form-b">
+            <div class="job-form job-form-b" (click)="hotclick()">
               <form class="needs-validation" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                 <div class="form-row">
                   <div class="form-group col-md-2">
                     <label for="code">Code</label>
-                    <input type="text" formControlName="code" id="code" class="form-control"
+                    <input type="text" formControlName="code" id="code" class="form-control" readonly
                            [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.code.errors) || ((itemsAddsFormControl.code.dirty || itemsAddsFormControl.code.touched) && itemsAddsFormControl.code.errors) }"/>
                     <div *ngIf="itemsAddsFormControl.code.errors" class="invalid-feedback">
                       <div
@@ -53,62 +53,76 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="itemName"> Item Name</label>
-                    <input type="text" formControlName="itemName" id="itemName" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.itemName.errors) || ((itemsAddsFormControl.itemName.dirty || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors) }"/>
+
+                    <label for="itemName"> Name</label>
+                    <p-autoComplete id="itemName" formControlName="itemName"
+                                    [suggestions]="profileClassificationsResult"
+
+                                    [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.itemName.errors) || ((itemsAddsFormControl.itemName.dirty
+                                          || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors) }"
+                                    (completeMethod)="searchClassifications($event)" [dropdown]="true">
+                      <ng-template let-profileClassification pTemplate="item">
+                        {{profileClassification }}
+                      </ng-template>
+                    </p-autoComplete>
                     <div *ngIf="itemsAddsFormControl.itemName.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl.itemName.dirty || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors?.pattern">
-                        Please enter a valid Item Name
+                        *ngIf="((itemsAddsFormControl.itemName.dirty || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors?.required && !itemsAddsFormControl.itemName.errors?.pattern && !submitted)">
+                        Item Name is required
                       </div>
-                      <div *ngIf="((itemsAddsFormControl.itemName.dirty || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors?.required && !itemsAddsFormControl.itemName.errors?.pattern && !submitted)">
-                        Item Name No is required
-                      </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.itemName.errors?.required && !itemsAddsFormControl.itemName.errors?.pattern)">
-                        Item Name No is required
+                      <div
+                        *ngIf="((submitted) && itemsAddsFormControl.itemName.errors?.required && !itemsAddsFormControl.itemName.errors?.pattern)">
+                        Item Name is required
                       </div>
                     </div>
+
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-3">
-                    <label for="pieceOfPacking">Piece Of Packing</label>
-                    <input type="text" formControlName="pieceOfPacking" id="pieceOfPacking" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.pieceOfPacking.errors) || ((itemsAddsFormControl.pieceOfPacking.dirty || itemsAddsFormControl.pieceOfPacking.touched) && itemsAddsFormControl.pieceOfPacking.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.pieceOfPacking.errors" class="invalid-feedback">
+                    <label for="numericalFactor">Numerical Factor </label>
+                    <input type="number" formControlName="numericalFactor" id="numericalFactor" class="form-control" [min]="0"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.numericalFactor.errors) || ((itemsAddsFormControl.numericalFactor.dirty || itemsAddsFormControl.numericalFactor.touched) && itemsAddsFormControl.numericalFactor.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.numericalFactor.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl.pieceOfPacking.dirty || itemsAddsFormControl.pieceOfPacking.touched) && itemsAddsFormControl.pieceOfPacking.errors?.pattern">
-                        Please enter a valid  Piece Of Packing
+                        *ngIf="(itemsAddsFormControl.numericalFactor.dirty || itemsAddsFormControl.numericalFactor.touched) && itemsAddsFormControl.numericalFactor.errors?.pattern">
+                        Please enter a valid  Numerical Factor
                       </div>
-                      <div *ngIf="((itemsAddsFormControl.pieceOfPacking.dirty || itemsAddsFormControl.pieceOfPacking.touched) && itemsAddsFormControl.pieceOfPacking.errors?.required && !itemsAddsFormControl.pieceOfPacking.errors?.pattern && !submitted)">
-                        Piece Of Packing  is required
+                      <div *ngIf="((itemsAddsFormControl.numericalFactor.dirty || itemsAddsFormControl.numericalFactor.touched) && itemsAddsFormControl.numericalFactor.errors?.required && !itemsAddsFormControl.numericalFactor.errors?.pattern && !submitted)">
+                        Numerical Factor  is required
                       </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.pieceOfPacking.errors?.required && !itemsAddsFormControl.pieceOfPacking.errors?.pattern)">
-                        Piece Of Packing  is required
+                      <div *ngIf="((submitted) && itemsAddsFormControl.numericalFactor.errors?.required && !itemsAddsFormControl.numericalFactor.errors?.pattern)">
+                        Numerical Factor  is required
                       </div>
                     </div>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="purchasePrice">Purchase Price</label>
-                    <input type="text" formControlName="purchasePrice" id="purchasePrice" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.purchasePrice.errors) || ((itemsAddsFormControl.purchasePrice.dirty || itemsAddsFormControl.purchasePrice.touched) && itemsAddsFormControl.purchasePrice.errors) }"/>
-                    <div *ngIf="itemsAddsFormControl.purchasePrice.errors" class="invalid-feedback">
+                    <label for="expiryDayLimit">Expiry Day Limit</label>
+                    <input type="number" formControlName="expiryDayLimit" id="expiryDayLimit" class="form-control" [min]="0"
+                           [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.expiryDayLimit.errors) || ((itemsAddsFormControl.expiryDayLimit.dirty || itemsAddsFormControl.expiryDayLimit.touched) && itemsAddsFormControl.expiryDayLimit.errors) }"/>
+                    <div *ngIf="itemsAddsFormControl.expiryDayLimit.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(itemsAddsFormControl.purchasePrice.dirty || itemsAddsFormControl.purchasePrice.touched) && itemsAddsFormControl.purchasePrice.errors?.pattern">
-                        Please enter a valid purchasePrice
+                        *ngIf="(itemsAddsFormControl.expiryDayLimit.dirty || itemsAddsFormControl.expiryDayLimit.touched) && itemsAddsFormControl.expiryDayLimit.errors?.pattern">
+                        Please enter a valid Expiry Day Limit
                       </div>
-                      <div *ngIf="((itemsAddsFormControl.purchasePrice.dirty || itemsAddsFormControl.purchasePrice.touched) && itemsAddsFormControl.purchasePrice.errors?.required && !itemsAddsFormControl.purchasePrice.errors?.pattern && !submitted)">
-                        Purchase Price  is required
+                      <div *ngIf="((itemsAddsFormControl.expiryDayLimit.dirty || itemsAddsFormControl.expiryDayLimit.touched) && itemsAddsFormControl.expiryDayLimit.errors?.required && !itemsAddsFormControl.expiryDayLimit.errors?.pattern && !submitted)">
+                        Expiry Day Limit  is required
                       </div>
-                      <div *ngIf="((submitted) && itemsAddsFormControl.purchasePrice.errors?.required && !itemsAddsFormControl.purchasePrice.errors?.pattern)">
-                        Purchase Price is required
+                      <div *ngIf="((submitted) && itemsAddsFormControl.expiryDayLimit.errors?.required && !itemsAddsFormControl.expiryDayLimit.errors?.pattern)">
+                        Expiry Day Limit is required
                       </div>
                     </div>
                   </div>
 
                 </div>
+                <div class="form-row">
+                  <div class="col-lg-12">
+                    <button class="pages mr-2" type="submit">Save</button>
+                  </div>
+                </div>
 
               </form>
+
             </div>
 
           </div>

@@ -12,4 +12,13 @@ export class AddingItemUserService {
     console.log(cityName)
     return this.httpClient.get(this.configApiService.lookUPForPOS(cityName));
   }
+  addItemCategory(body){
+    return this.httpClient.post(this.configApiService.addItemCategory(), body)
+  }
+  addNewItem(body){
+    return this.httpClient.post(this.configApiService.addNewItem(), body)
+  }
+  addNewSupplier(body){
+    return this.httpClient.post(this.configApiService.addNewSupplier(), body)
+  }
 }

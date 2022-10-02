@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  apiURL: 'http://api.kamayi.com.pk/api/',
+  apiURL: 'http://66.85.92.21:443/',
   production: false
 };
 

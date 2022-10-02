@@ -1,10 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Table} from "primeng/table";
 import {AddingItemUserService} from "../../../../../services/addingItemUser.service";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {GetAllDataService} from "../../../../../services/getAllData.Service";
+import {ToastrService} from "ngx-toastr";
+import {Hotkey, HotkeysService} from "angular2-hotkeys";
 
 @Component({
   selector: 'app-item-category',
@@ -16,6 +18,7 @@ export class ItemCategoryComponent implements OnInit {
   submitted = false;
   active:any;
   result: any;
+  itemCategoryResponce:any;
   jobList: any = [];
   selectedCustomers: any[];
   selectedCustomerss: any[];
@@ -24,29 +27,26 @@ export class ItemCategoryComponent implements OnInit {
   profileClassifications = [];
   profileClassificationsResult: any = [];
   @ViewChild('dataTableShortListCandidate') table: Table;
-  constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService,
+  constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService,  private toastr: ToastrService,
+              private hotkeysService: HotkeysService,
               private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService) { }
 
 
   ngOnInit(): void {
     this.formBuilderControlName();
-    this.active =[
-      {name: 'Yes'},
-      {name: 'No'},
-    ]
     this.getAllServices();
     this.getJobList(true);
   }
   formBuilderControlName(){
     this.registerForm = this.formBuilder.group({
-      code: [''],
-      itemName: [''],
-      pieceOfPacking: [''],
-      purchasePrice: [''],
+      code: [null],
+      itemName: [null ,[Validators.required]],
+      numericalFactor: [null],
+      expiryDayLimit: [null ,[Validators.required]],
     });
   }
   home(){
-    console.log('das')
+    this.router.navigate(['/basicData']);
   }
 
   get itemsAddsFormControl() {
@@ -54,6 +54,12 @@ export class ItemCategoryComponent implements OnInit {
   }
   searchClassifications(event): void {
     this.profileClassificationsResult = this.profileClassifications.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
+  }
+  hotclick(){
+    this.hotkeysService.add(new Hotkey('shift+s' ,(event: KeyboardEvent): boolean => {
+      this.onSubmit()
+      return false;
+    } ));
   }
 
   // All Lookup service
@@ -83,15 +89,10 @@ export class ItemCategoryComponent implements OnInit {
 
   /*--------------Get Supplier All Data list------------------*/
   getJobList(bool) {
-    console.log('res')
     this.allDataTableService.getSupplierTable('KAM-ABM-1649801111106').subscribe(
       res => {
-        console.log(res)
         this.jobList = res;
         this.jobList = this.jobList.profiles;
-        console.log(this.jobList.profiles);
-
-
       },
       err => {
         // this.loading = false;
@@ -100,6 +101,14 @@ export class ItemCategoryComponent implements OnInit {
 
       }
     );
+  }
+ resetValidations(){
+   this.registerForm.get('itemName').reset();
+   this.registerForm.get('itemName').clearValidators();
+   this.registerForm.get('itemName').updateValueAndValidity();
+   this.registerForm.get('expiryDayLimit').reset();
+   this.registerForm.get('expiryDayLimit').clearValidators();
+   this.registerForm.get('expiryDayLimit').updateValueAndValidity();
   }
 
 
@@ -111,15 +120,36 @@ export class ItemCategoryComponent implements OnInit {
     const value = this.registerForm.value;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
+      this.toastr.error('Please Fill the Mendotory Fields');
       return;
     }
     this.spinner.show('main-spinner');
     const result = {
-      code: value.code,
-      itemName: value.itemName,
-      pieceOfPacking: value.pieceOfPacking,
-      purchasePrice: value.purchasePrice
+      name: value.itemName,
+      numericalFactor: value.numericalFactor,
+      expiry: value.expiryDayLimit,
+
     }
-    console.log(result)
+    this.addingService.addItemCategory(result).subscribe(
+      res => {
+        this.spinner.hide('main-spinner');
+        this.itemCategoryResponce = res;
+        if (this.itemCategoryResponce.statusCode === 201 || this.itemCategoryResponce.statusCode === 200){
+          this.toastr.success(this.itemCategoryResponce.message);
+          this.getJobList(true)
+        }else if (this.itemCategoryResponce.statusCode === 208){
+          this.toastr.warning(this.itemCategoryResponce.message);
+        }else {
+          this.toastr.error(this.itemCategoryResponce.message);
+        }
+      },
+    error => {
+      this.spinner.hide('main-spinner');
+      if (error.error.message) {
+        this.toastr.error(error.error.message);
+      } else {
+        this.toastr.error('Some problem occurred. Please try again.');
+      }
+    });
   }
 }

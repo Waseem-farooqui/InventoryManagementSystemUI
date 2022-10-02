@@ -9,11 +9,19 @@ export class ConfigApiService {
     this.baseUrl = environment.apiURL;
   }
   lookUPForPOS(lookupType) {
-    return this.baseUrl + 'business/lookup?type=' + lookupType;
+    return  'http://api.kamayi.com.pk/api/' + 'business/lookup?type=' + lookupType;
   }
   getSupplierTableData(id){
     return this.baseUrl + 'profile-service/profile/short-list?jobId=' + id;
   }
-
+  addItemCategory(){
+    return this.baseUrl + 'items/categories'
+ }
+  addNewItem(){
+    return this.baseUrl + 'items'
+ }
+ addNewSupplier(){
+    return this.baseUrl + 'suppliers'
+ }
 
 }

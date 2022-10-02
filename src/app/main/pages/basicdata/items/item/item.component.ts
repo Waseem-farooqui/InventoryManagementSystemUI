@@ -5,6 +5,8 @@ import {AddingItemUserService} from "../../../../../services/addingItemUser.serv
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {GetAllDataService} from "../../../../../services/getAllData.Service";
+import {ToastrService} from "ngx-toastr";
+import {HotkeysService} from "angular2-hotkeys";
 
 @Component({
   selector: 'app-item',
@@ -19,19 +21,20 @@ export class ItemComponent implements OnInit {
   jobList: any = [];
   selectedCustomers: any[];
   selectedCustomerss: any[];
-
+  newItemsCreationResponce:any;
   profileClassification: any;
   profileClassifications = [];
   profileClassificationsResult: any = [];
   @ViewChild('dataTableShortListCandidate') table: Table;
-  constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService,
-              private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService) { }
+  constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService, private toastr: ToastrService,
+              private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService,
+              private hotkeys: HotkeysService) { }
 
   ngOnInit(): void {
     this.formBuilderControlName();
     this.active =[
-      {name: 'Yes'},
-      {name: 'No'},
+      {name: true},
+      {name: false},
     ]
     this.getAllServices();
     this.getJobList(true);
@@ -39,12 +42,12 @@ export class ItemComponent implements OnInit {
   formBuilderControlName(){
     this.registerForm = this.formBuilder.group({
       code: [''],
-      itemName: [''],
-      pieceOfPacking: [''],
+      itemName: ['' ,[Validators.required]],
+      pieceOfPacking: ['',[Validators.required]],
+      salesPrice: ['',[Validators.required] ],
       purchasePrice: [''],
-      salesPrice: [''],
       active: [''],
-      allasName: [''],
+      allasName: ['',[Validators.required]],
       manufacture: [''],
       packing: [''],
       printable: [''],
@@ -65,10 +68,12 @@ export class ItemComponent implements OnInit {
       avgPrice: [''],
       itemAlert: [''],
       allowDue:[''],
+      description:[''],
+
     });
   }
   home(){
-    console.log('das')
+    this.router.navigate(['/basicData']);
   }
 
   get itemsAddsFormControl() {
@@ -83,7 +88,6 @@ export class ItemComponent implements OnInit {
     this.addingService.getCityName('job_classification').subscribe(
       res => {
         this.result = res;
-        console.log(res);
         if (this.result && this.result.lookupDto && this.result.lookupDto.length > 0) {
           this.result = this.result.lookupDto;
           for (const val of this.result) {
@@ -116,13 +120,10 @@ export class ItemComponent implements OnInit {
 
   /*--------------Get Supplier All Data list------------------*/
   getJobList(bool) {
-    console.log('res')
     this.allDataTableService.getSupplierTable('KAM-ABM-1649801111106').subscribe(
       res => {
-        console.log(res)
         this.jobList = res;
         this.jobList = this.jobList.profiles;
-        console.log(this.jobList.profiles);
 
 
       },
@@ -135,48 +136,91 @@ export class ItemComponent implements OnInit {
     );
   }
 
+  dropDownView(value){
+    console.log(value.value.name)
+
+  }
+ resetValidations(){
+   this.registerForm.get('itemName').reset();
+   this.registerForm.get('itemName').clearValidators();
+   this.registerForm.get('itemName').updateValueAndValidity();
+   this.registerForm.get('pieceOfPacking').reset();
+   this.registerForm.get('pieceOfPacking').clearValidators();
+   this.registerForm.get('pieceOfPacking').updateValueAndValidity();
+   this.registerForm.get('salesPrice').reset();
+   this.registerForm.get('salesPrice').clearValidators();
+   this.registerForm.get('salesPrice').updateValueAndValidity();
+   this.registerForm.get('allasName').reset();
+   this.registerForm.get('allasName').clearValidators();
+   this.registerForm.get('allasName').updateValueAndValidity();
+ }
 
 
-  /*--------------Submit advance search form------------------*/
+  /*--------------Submit form------------------*/
   onSubmit() {
     this.spinner.show('main-spinner');
     this.submitted = true;
     const value = this.registerForm.value;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
+      this.toastr.error('Please Fill the Mendotory Fields');
       return;
     }
     this.spinner.show('main-spinner');
     const result = {
-      code: value.code,
-      itemName: value.itemName,
-      pieceOfPacking: value.pieceOfPacking,
+
+      // code: value.code,
+      name: value.itemName,
+      barCode: value.allasName,
+      piecePerPackage: value.pieceOfPacking,
+      description: value.description,
+      sellingPrice: value.salesPrice,
       purchasePrice: value.purchasePrice,
-      salesPrice: value.salesPrice,
-      allasName: value.allasName,
-      manufacture: value.manufacture,
-      packing: value.packing,
-      printable: value.printable,
-      category: value.category,
-      active: value.active,
-      classDefault: value.class,
-      saleDisc: value.saleDisc,
-      location: value.location,
-      narcotics: value.narcotics,
-      lockSalesPrice: value.localSalesPrice,
-      lockDicountPerc: value.localDicountPerc,
-      salesDiscount2: value.salesDiscount2,
-      salesDiscount3: value.salesDiscount3,
-      salesDiscount4: value.salesDiscount4,
-      reOrderQTY: value.reOrderQTY,
-      optimumQTY: value.optimumQTY,
+      printable: value.printable.name,
       saleDiscount: value.saleDiscount,
-      minimumQty: value.minimumQty,
-      avgPrice: value.avgPrice,
-      itemAlert: value.itemAlert,
-      allowDue:value.allowDue,
+      location: value.location,
+      narcotics: value.narcotics.name,
+      lockSalePrice: value.lockSalesPrice.name,
+      lockDiscPerc: value.lockDicountPerc.name,
+      saleDiscount2: value.salesDiscount2,
+      saleDiscount3: value.salesDiscount3,
+      saleDiscount4: value.salesDiscount4,
+      reorderQuantity: value.reOrderQTY,
+      optimumQuantity: value.optimumQTY,
+      alert: value.itemAlert.name,
+      quantity: value.minimumQty,
+      manufacturer: value.manufacture,
+      // packing: value.packing,
+      // category: value.category,
+      // active: value.active.name,
+      // classDefault: value.class,
+      // saleDiscount: value.saleDisc,
+      // avgPrice: value.avgPrice,
+      // allowDue: value.allowDue,
+
     };
-    console.log(result);
+    this.addingService.addNewItem(result).subscribe(
+      res => {
+        this.spinner.hide('main-spinner');
+        this.newItemsCreationResponce = res;
+        if (this.newItemsCreationResponce.statusCode === 201 || this.newItemsCreationResponce.statusCode === 200){
+          this.toastr.success(this.newItemsCreationResponce.message);
+          this.getJobList(true)
+        }else if (this.newItemsCreationResponce.statusCode === 208){
+          this.toastr.warning(this.newItemsCreationResponce.message);
+        }else {
+          this.toastr.error(this.newItemsCreationResponce.message);
+        }
+      },
+      error => {
+        this.spinner.hide('main-spinner');
+        if (error.error.message) {
+          this.toastr.error(error.error.message);
+        } else {
+          this.toastr.error('Some problem occurred. Please try again.');
+        }
+      });
+
   }
 
 }
