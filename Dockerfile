@@ -1,9 +1,9 @@
-FROM 14.18.0-alpine3.14 as builder
+FROM node:14.18.0-alpine3.14 as builder
 COPY package.json package-lock.json ./
-RUN npm ci && mkdir /ng-app && mv ./node_modules ./ng-app
+RUN  npm install && mkdir /ng-app && mv ./node_modules ./ng-app
 WORKDIR /ng-app
 COPY . .
-RUN node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=staging --build-optimizer=false --aot --source-map=false
+RUN node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --build-optimizer=false --aot --source-map=false
 FROM nginx:stable-alpine
 RUN mkdir -p /usr/share/nginx/html/inventry-pos/dist \
 && mkdir -p /etc/nginx/certs/ \
