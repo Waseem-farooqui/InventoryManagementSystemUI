@@ -85,7 +85,7 @@ export class ItemComponent implements OnInit {
 
   // All Lookup service
   getAllServices() {
-    this.addingService.getCityName('job_classification').subscribe(
+    this.addingService.getLookupName('job_classification').subscribe(
       res => {
         this.result = res;
         if (this.result && this.result.lookupDto && this.result.lookupDto.length > 0) {
@@ -176,7 +176,7 @@ export class ItemComponent implements OnInit {
       description: value.description,
       sellingPrice: value.salesPrice,
       purchasePrice: value.purchasePrice,
-      printable: value.printable.name,
+      printable: true,
       saleDiscount: value.saleDiscount,
       location: value.location,
       narcotics: value.narcotics.name,

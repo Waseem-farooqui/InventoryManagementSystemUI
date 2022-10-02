@@ -230,7 +230,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="printable">Printable</label>
-                      <p-dropdown [options]="active" formControlName="printable" id="printable" placeholder="select the option"
+                      <p-dropdown [options]="active" formControlName="printable" id="printable"
                                   optionLabel="name" [showClear]="true" (focusout)="dropDownView(itemsAddsFormControl.printable)"></p-dropdown>
                       <div *ngIf="itemsAddsFormControl.printable.errors" class="invalid-feedback">
                         <div

@@ -9,7 +9,7 @@ export class ConfigApiService {
     this.baseUrl = environment.apiURL;
   }
   lookUPForPOS(lookupType) {
-    return  'http://api.kamayi.com.pk/api/' + 'business/lookup?type=' + lookupType;
+    return this.baseUrl + 'lookup?type=' + lookupType;
   }
   getSupplierTableData(id){
     return this.baseUrl + 'profile-service/profile/short-list?jobId=' + id;

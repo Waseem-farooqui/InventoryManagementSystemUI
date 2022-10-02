@@ -8,7 +8,7 @@ export class AddingItemUserService {
   constructor(private configApiService: ConfigApiService, private httpClient: HttpClient) {
   }
 
-  getCityName(cityName) {
+  getLookupName(cityName) {
     console.log(cityName)
     return this.httpClient.get(this.configApiService.lookUPForPOS(cityName));
   }
