@@ -86,7 +86,7 @@ export class SupplierformComponent implements OnInit {
 
                                                    // All Lookup service
   getAllServices() {
-    this.addingService.getCityName('job_classification').subscribe(
+    this.addingService.getLookupName('job_classification').subscribe(
       res => {
         this.result = res;
         console.log(res);

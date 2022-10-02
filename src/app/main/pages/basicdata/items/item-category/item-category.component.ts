@@ -64,7 +64,7 @@ export class ItemCategoryComponent implements OnInit {
 
   // All Lookup service
   getAllServices() {
-    this.addingService.getCityName('job_classification').subscribe(
+    this.addingService.getLookupName('ITEM_CATEGORY').subscribe(
       res => {
         this.result = res;
         console.log(res);
@@ -137,6 +137,7 @@ export class ItemCategoryComponent implements OnInit {
         if (this.itemCategoryResponce.statusCode === 201 || this.itemCategoryResponce.statusCode === 200){
           this.toastr.success(this.itemCategoryResponce.message);
           this.getJobList(true)
+          this.ngOnInit()
         }else if (this.itemCategoryResponce.statusCode === 208){
           this.toastr.warning(this.itemCategoryResponce.message);
         }else {

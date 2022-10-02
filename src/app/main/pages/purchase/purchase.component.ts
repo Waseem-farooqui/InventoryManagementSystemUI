@@ -23,9 +23,11 @@ export class PurchaseComponent implements OnInit {
   profileClassifications = [];
   profileClassificationsResult: any = [];
   quantityItem: any = [];
+  netTotalPrice: any = [];
   purchasePrice: any = [];
   discountPrcnt: any = [];
   retailPriceTable: any = [];
+  retailNetPriceTable: any = [];
   sum: any;
   barcode: any = [];
   @ViewChild('dataTableShortListCandidate') table: Table;
@@ -75,6 +77,7 @@ export class PurchaseComponent implements OnInit {
 
   quanitityFocusOut(value, i) {
     console.log(i)
+     console.log(value)
     this.quantityItem[i] = value.value;
     console.log(this.quantityItem[i]);
     let obj = this.getTotalSumOfColumn(this.quantityItem);
@@ -85,7 +88,9 @@ export class PurchaseComponent implements OnInit {
     this.purchasePrice[i] = value.value;
     console.log(this.purchasePrice[i]);
     console.log(this.getTotalSumOfColumn(this.purchasePrice));
+    this.sumInNetPrice(i);
   }
+
 
   getTotalSumOfColumn(column) {
     return column.reduce((accumulator, obj) => {
@@ -93,8 +98,12 @@ export class PurchaseComponent implements OnInit {
     }, 0);
 
   }
+  sumInNetPrice(i){
+    // this.netTotalPrice = this.registerForm.get('purchaseArray')['controls'][i].get('netPrice');
+    console.log(this.netTotalPrice);
+  }
 
-  discountPercentage(value, i) {
+  discountPercentages(value, i) {
     this.discountPrcnt[i] = value.value;
     console.log(value.value)
     console.log(i)
@@ -102,8 +111,14 @@ export class PurchaseComponent implements OnInit {
 
   retailPriceFocusOut(value, i) {
     this.retailPriceTable[i] = value.value;
-    console.log(this.retailPriceTable[i])
   }
+  onchangeValue(value, i){
+    this.retailNetPriceTable[i] = value.value
+    console.log(value.value)
+  }
+
+
+
 
   sum2() {
     this.sum = this.quantityItem + this.purchasePrice;
@@ -113,6 +128,7 @@ export class PurchaseComponent implements OnInit {
   onKey(event: any, index) {
     if (event.key === "Enter" && this.barcode[index] === undefined) {
       this.barcode[index] = event.target.value;
+      this.addPurchaseRow();
       console.log(this.barcode)
     }
 
@@ -138,7 +154,7 @@ export class PurchaseComponent implements OnInit {
   }
 
   getAllServices() {
-    this.addingService.getCityName('job_classification').subscribe(
+    this.addingService.getLookupName('SUPPLIER').subscribe(
       res => {
         this.result = res;
         console.log(res);
@@ -204,7 +220,8 @@ export class PurchaseComponent implements OnInit {
   addPurchaseRow() {
     const control = this.registerForm.controls.purchaseArray as FormArray;
     control.push(this.purchaseArray(null, null, null,
-      null, null, 1, null, null, null, null, null, null, null, null));
+      null, null, 1, null, null, null,
+      null, null, null, null, null));
   }
 
   removesPurchaseRow(i) {
@@ -223,9 +240,45 @@ export class PurchaseComponent implements OnInit {
     }
     this.spinner.show('main-spinner');
     const result = {
-      name: value.itemName,
-      numericalFactor: value.numericalFactor,
-      expiry: value.expiryDayLimit,
+      invoice: value.invoice,
+      purchaseDate: value.purchaseDate,
+      goDown: value.goDown,
+      aliasName: value.aliasName,
+      supplierName: value.supplierName,
+      supplierInvoiceNumber: value.supplierInvoiceNumber,
+      grnNumber: value.grnNumber,
+      remarks: value.remarks,
+      printBal: value.printBal,
+      invSize: value.invSize,
+      orderCode: value.orderCode,
+      orderDate: value.orderDate,
+      supplierOrderNumber: value.supplierOrderNumber,
+      purchaseArray:{
+        aliasNameTable: value.aliasNameTable,
+        itemName: value.itemName,
+        packing: value.packing,
+        batch: value.packing,
+        expiryDate: value.expiryDate,
+        qty: value.qty,
+        bonus: value.bonus,
+        purchasPrice: value.purchasPrice,
+        totalExcludingDiscount: value.totalExcludingDiscount,
+        descountPercentage: value.descountPercentage,
+        descountPrice: value.descountPrice,
+        retailPrice: value.retailPrice,
+        netPrice:value.netPrice,
+        marginPercentage: value.marginPercentage,
+      },
+      inventoryStock: value.inventoryStock,
+      totalDiscountPercentage: value.totalDiscountPercentage,
+      flatDisc: value.flatDisc,
+      miscValue: value.miscValue,
+      inventoryGst: value.inventoryGst,
+      totalStock: value.totalStock,
+      purchaseExpance: value.purchaseExpance,
+      lastPurchasePrice: value.lastPurchasePrice,
+      avgPrice: value.avgPrice,
+      grandTotal: value.grandTotal,
 
     }
     console.log(result);
