@@ -24,8 +24,10 @@ export class PurchaseComponent implements OnInit {
   profileClassificationsResult: any = [];
   quantityItem: any = [];
   purchasePrice: any = [];
+  discountPrcnt: any = [];
+  retailPriceTable: any = [];
   sum: any;
-  barcode: string[] = [];
+  barcode: any = [];
   @ViewChild('dataTableShortListCandidate') table: Table;
   today = new Date();
   jstoday = '';
@@ -55,8 +57,17 @@ export class PurchaseComponent implements OnInit {
       orderDate: [null],
       supplierOrderNumber: [null],
       purchaseArray: this.formBuilder.array([this.purchaseArray(null, null, null,
-        null, null, null, null, null, null, null, null, null, null)]),
-
+        null, null, 1, null, null, null, null, null, null, null, null)]),
+      inventoryStock: [null],
+      totalDiscountPercentage: [null],
+      flatDisc: [null],
+      miscValue: [null],
+      inventoryGst: [null],
+      totalStock: [null],
+      purchaseExpance: [null],
+      lastPurchasePrice: [null],
+      avgPrice: [null],
+      grandTotal: [null],
 
     });
     this.getAllServices();
@@ -65,12 +76,14 @@ export class PurchaseComponent implements OnInit {
   quanitityFocusOut(value, i) {
     console.log(i)
     this.quantityItem[i] = value.value;
+    console.log(this.quantityItem[i]);
     let obj = this.getTotalSumOfColumn(this.quantityItem);
     console.log(obj)
   }
 
   purchaseFocusOut(value, i) {
     this.purchasePrice[i] = value.value;
+    console.log(this.purchasePrice[i]);
     console.log(this.getTotalSumOfColumn(this.purchasePrice));
   }
 
@@ -82,8 +95,14 @@ export class PurchaseComponent implements OnInit {
   }
 
   discountPercentage(value, i) {
+    this.discountPrcnt[i] = value.value;
     console.log(value.value)
     console.log(i)
+  }
+
+  retailPriceFocusOut(value, i) {
+    this.retailPriceTable[i] = value.value;
+    console.log(this.retailPriceTable[i])
   }
 
   sum2() {
@@ -96,6 +115,11 @@ export class PurchaseComponent implements OnInit {
       this.barcode[index] = event.target.value;
       console.log(this.barcode)
     }
+
+  }
+  addDatalist(value , index){
+    const control1 = this.registerForm.get('purchaseArray')['controls'][index].get('aliasNameTable');
+    console.log(control1)
   }
 
   hotclick() {
@@ -157,7 +181,7 @@ export class PurchaseComponent implements OnInit {
     );
   }
 
-  purchaseArray(aliasNameTable, itemName, packing, batch, expiryDate, qty, bonus, purchasPrice, descountPercentage, descountPrice,
+  purchaseArray(aliasNameTable, itemName, packing, batch, expiryDate, qty, bonus, purchasPrice, totalExcludingDiscount, descountPercentage, descountPrice,
                 retailPrice, netPrice, marginPercentage): FormGroup {
     return this.formBuilder.group({
       aliasNameTable: [aliasNameTable],
@@ -168,6 +192,7 @@ export class PurchaseComponent implements OnInit {
       qty: [qty],
       bonus: [bonus],
       purchasPrice: [purchasPrice],
+      totalExcludingDiscount: [totalExcludingDiscount],
       descountPercentage: [descountPercentage],
       descountPrice: [descountPrice],
       retailPrice: [retailPrice],
@@ -179,7 +204,7 @@ export class PurchaseComponent implements OnInit {
   addPurchaseRow() {
     const control = this.registerForm.controls.purchaseArray as FormArray;
     control.push(this.purchaseArray(null, null, null,
-      null, null, null, null, null, null, null, null, null, null));
+      null, null, 1, null, null, null, null, null, null, null, null));
   }
 
   removesPurchaseRow(i) {

@@ -176,7 +176,7 @@ export class ItemComponent implements OnInit {
       description: value.description,
       sellingPrice: value.salesPrice,
       purchasePrice: value.purchasePrice,
-      printable: value.printable.name,
+      printable: true,
       saleDiscount: value.saleDiscount,
       location: value.location,
       narcotics: value.narcotics.name,
