@@ -142,8 +142,10 @@ export class PurchaseComponent implements OnInit {
 
   addDatalist(addDatavalue, addDataListIndex) {
     const formValue = this.registerForm.get('purchaseArray')['controls'][addDataListIndex];
-    const res=this.autoComlete.addNewElement(addDatavalue.value);
-    if (res === false){
+    const res = this.autoComlete.addNewElement(addDatavalue.value);
+    const selectItem = this.itemResponseResult.find(item => item.name === addDatavalue.name || item.alias === addDatavalue.value)
+    console.log("Here is item value", selectItem)
+    if (res === false) {
       this.toastr.error('Item already exist');
       formValue.controls.aliasNameTable.patchValue('')
     }
@@ -169,15 +171,10 @@ export class PurchaseComponent implements OnInit {
     this.addingService.getLookupName('SUPPLIER').subscribe(
       supplierResponse => {
         this.supplierResponseResult = supplierResponse;
-        this.SupplierLookUpArray = supplierResponse
-        console.log("Suppliers are ", supplierResponse)
         if (this.supplierResponseResult && this.supplierResponseResult.responseBody && this.supplierResponseResult.responseBody.length > 0) {
           this.supplierResponseResult = this.supplierResponseResult.responseBody;
-          this.supplierResult = this.supplierResponseResult.responseBody;
           for (const valueSupplier of this.supplierResponseResult) {
-            console.log(valueSupplier)
             this.supplierLookUpName.push(valueSupplier.name);
-
           }
         } else {
           this.supplierLookUpName = [];
@@ -186,19 +183,17 @@ export class PurchaseComponent implements OnInit {
 
       },
       err => {
-
-
+        console.log(err);
       }
     );
     this.addingService.getLookupName('ITEM').subscribe(
       itemResponce => {
         this.itemResponseResult = itemResponce;
-        this.ItemLookUpArray = itemResponce
+        console.log(this.itemResponseResult.responseBody);
         if (this.itemResponseResult && this.itemResponseResult.responseBody && this.itemResponseResult.responseBody.length > 0) {
           this.itemResponseResult = this.itemResponseResult.responseBody;
           for (const valueItem of this.itemResponseResult) {
             this.itemLookUpName.push(valueItem.name);
-
           }
           for (const valueofAlias of this.itemResponseResult) {
             this.aliasLookUpName.push(valueofAlias.alias);
@@ -278,8 +273,8 @@ export class PurchaseComponent implements OnInit {
   }
 
   supplierNameFocusout(supplierNamevalue) {
-    let supplierObj = this.supplierResponseResult.filter(t => t.name === supplierNamevalue.value);
-    console.log("Here is supplier object", supplierObj, supplierObj[0].id)
+    let supplierObj = this.supplierResponseResult.find(t => t.name === supplierNamevalue.value);
+    console.log("Here is supplier object", supplierObj, supplierObj.id)
   }
 
   onSubmit() {
