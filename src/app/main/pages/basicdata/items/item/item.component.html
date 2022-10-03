@@ -651,7 +651,7 @@
             <div class="job-form job-form-b">
 
               <div class="table-responsive">
-                <p-table #dataTableShortListCandidate [value]="jobList" [(selection)]="selectedCustomers" dataKey="id"
+                <p-table #dataTableShortListCandidate [value]="itemTableList" [(selection)]="selectedCustomers" dataKey="id"
                          styleClass="p-datatable-sm"
                          [rowHover]="true"
                          [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
@@ -679,7 +679,7 @@
 
                     <tr>
 
-                      <th pSortableColumn="supplierCode">Code
+                      <th pSortableColumn="supplierCode">Bar Code
                         <p-sortIcon field="supplierCode"></p-sortIcon>
                       </th>
                       <th pSortableColumn="allasName">Allas Name

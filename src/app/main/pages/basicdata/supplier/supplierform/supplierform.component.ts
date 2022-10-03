@@ -70,9 +70,10 @@ export class SupplierformComponent implements OnInit {
       dayLimit: [''],
       introduction: [''],
     });
+    this.getJobList(true)
   }
   home(){
-    console.log('das')
+    this.router.navigate(['/basicData']);
   }
 
   get supplierFormControl() {
@@ -97,7 +98,20 @@ export class SupplierformComponent implements OnInit {
 
   /*--------------Get Supplier All Data list------------------*/
 
+  getJobList(bool) {
+    this.allDataTableService.getSupplierTable().subscribe(
+      tableResponce => {
+        this.jobList = tableResponce;
+        this.jobList = this.jobList.profiles;
+      },
+      err => {
+        // this.loading = false;
+        this.spinner.hide('main-spinner');
+        // this.toastr.error(err);
 
+      }
+    );
+  }
 
   /*--------------Submit advance search form------------------*/
   onSubmit() {

@@ -137,14 +137,14 @@
             <div class="job-form job-form-b">
 
               <div class="table-responsive">
-                <p-table #dataTableShortListCandidate [value]="jobList" [(selection)]="selectedCustomers" dataKey="id"
+                <p-table #dataTableShortListCandidate [value]="itemCategoryList" [(selection)]="selectedCustomers" dataKey="id"
                          styleClass="p-datatable-sm"
                          [rowHover]="true"
                          [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
                          [paginator]="true"
                          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                          [filterDelay]="0"
-                         [globalFilterFields]="['supplierCode','allasName','itemName','supplierCategory','city', 'address', 'phoneNumber']">
+                         [globalFilterFields]="['id','name','expiry',]">
                   <ng-template pTemplate="caption">
 
                     <div class="table-header">
@@ -165,26 +165,14 @@
 
                     <tr>
 
-                      <th pSortableColumn="supplierCode">Code
-                        <p-sortIcon field="supplierCode"></p-sortIcon>
+                      <th pSortableColumn="id">Id
+                        <p-sortIcon field="id"></p-sortIcon>
                       </th>
-                      <th pSortableColumn="allasName">Allas Name
-                        <p-sortIcon field="allasName"></p-sortIcon>
+                      <th pSortableColumn="name"> Name
+                        <p-sortIcon field="name"></p-sortIcon>
                       </th>
-                      <th pSortableColumn="itemName">Item Name
-                        <p-sortIcon field="itemName"></p-sortIcon>
-                      </th>
-                      <th pSortableColumn="supplierCategory">Supplier Category
-                        <p-sortIcon field="supplierCategory"></p-sortIcon>
-                      </th>
-                      <th pSortableColumn="city">City
-                        <p-sortIcon field="city"></p-sortIcon>
-                      </th>
-                      <th pSortableColumn="address">Address
-                        <p-sortIcon field="address"></p-sortIcon>
-                      </th>
-                      <th pSortableColumn="phoneNumber">Phone Number
-                        <p-sortIcon field="phoneNumber"></p-sortIcon>
+                      <th pSortableColumn="expiry">Expiry
+                        <p-sortIcon field="expiry"></p-sortIcon>
                       </th>
                       <th></th>
                     </tr>
@@ -192,58 +180,30 @@
 
                       <td>
                         <input pInputText type="number"
-                               (input)="dataTableShortListCandidate.filter($event.target.value, 'supplierCode', 'startsWith')"
-                               placeholder="Search by Supplier Code" class="p-column-filter">
+                               (input)="dataTableShortListCandidate.filter($event.target.value, 'id', 'startsWith')"
+                               placeholder="Search by Id" class="p-column-filter">
                       </td>
                       <td>
                         <input pInputText type="text"
-                               (input)="dataTableShortListCandidate.filter($event.target.value, 'allasName', 'startsWith')"
-                               placeholder="Search by Allas Name" class="p-column-filter">
+                               (input)="dataTableShortListCandidate.filter($event.target.value, 'name', 'startsWith')"
+                               placeholder="Search by Name" class="p-column-filter">
                       </td>
                       <td>
                         <input pInputText type="text"
-                               (input)="dataTableShortListCandidate.filter($event.target.value, 'itemName', 'contains')"
-                               placeholder="Search by Supplier Name" class="p-column-filter">
-                      </td>
-                      <td>
-                        <input pInputText type="text"
-                               (input)="dataTableShortListCandidate.filter($event.target.value, 'supplierCategory', 'contains')"
-                               placeholder="Search by Supplier Category" class="p-column-filter">
-                      </td>
-                      <td>
-                        <input pInputText type="text"
-                               (input)="dataTableShortListCandidate.filter($event.target.value, 'city', 'contains')"
-                               placeholder="Search by City" class="p-column-filter">
-                      </td>
-                      <td>
-                        <input pInputText type="text"
-                               (input)="dataTableShortListCandidate.filter($event.target.value, 'address', 'contains')"
-                               placeholder="Search by Address" class="p-column-filter">
-                      </td>
-                      <td>
-                        <input pInputText type="text"
-                               (input)="dataTableShortListCandidate.filter($event.target.value, 'phoneNumber', 'contains')"
-                               placeholder="Search by Phone Number" class="p-column-filter">
+                               (input)="dataTableShortListCandidate.filter($event.target.value, 'expiry', 'contains')"
+                               placeholder="Search by Expiry" class="p-column-filter">
                       </td>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-customer>
                     <tr class="p-selectable-row">
-
-                      <td > {{'1'}}  </td>
                       <!--                      <td *ngIf="customer.supplierCode === null">&#45;&#45;</td>-->
-                      <td *ngIf="customer.candidateName !== null"> {{customer.candidateName}}  </td>
-                      <td *ngIf="customer.candidateName === null">--</td>
-                      <td *ngIf="customer.jobtitle !== null">{{customer.jobtitle}}</td>
-                      <td *ngIf="customer.jobtitle === null">--</td>
-                      <td *ngIf="customer.skills !== null">{{customer.skills}}</td>
-                      <td *ngIf="customer.skills === null">--</td>
-                      <td *ngIf="customer.city !== null">{{customer.city}}</td>
-                      <td *ngIf="customer.city === null">--</td>
-                      <td *ngIf="customer.totalExperience !== null">{{customer.totalExperience}}</td>
-                      <td *ngIf="customer.totalExperience === null">--</td>
-                      <td *ngIf="customer.phoneNumber !== null">{{customer.phoneNumber}}</td>
-                      <td *ngIf="customer.phoneNumber === null">--</td>
+                      <td *ngIf="customer.id !== null"> {{customer.id}}  </td>
+                      <td *ngIf="customer.id === null">--</td>
+                      <td *ngIf="customer.name !== null">{{customer.name}}</td>
+                      <td *ngIf="customer.name === null">--</td>
+                      <td *ngIf="customer.expiry !== null">{{customer.expiry}}</td>
+                      <td *ngIf="customer.expiry === null">--</td>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="emptymessage">

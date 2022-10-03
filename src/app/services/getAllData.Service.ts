@@ -9,8 +9,20 @@ export class GetAllDataService {
   constructor(private configApiService: ConfigApiService, private httpClient: HttpClient) {
   }
 
-  getSupplierTable(id){
-      return this.httpClient.get('../../assets/tableJson.json');
+  // getItemCategoryTable(){
+  //     return this.httpClient.get('../../assets/tableJson.json');
+  // }
+  getItemCategoryTable(){
+    return this.httpClient.get(this.configApiService.getItemCategoryTable())
+  }
+  getItemTable(){
+    return this.httpClient.get(this.configApiService.getItemTable())
+  }
+  getPurchaseTable(){
+    return this.httpClient.get(this.configApiService.getPurchaseTable())
+  }
+  getSupplierTable(){
+    return this.httpClient.get(this.configApiService.getSupplierTable())
   }
 
 }
