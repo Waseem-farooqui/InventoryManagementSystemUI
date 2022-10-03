@@ -56,13 +56,13 @@
 
                     <label for="itemName"> Name</label>
                     <p-autoComplete id="itemName" formControlName="itemName"
-                                    [suggestions]="profileClassificationsResult"
+                                    [suggestions]="itemCategoryLookupResult"
 
                                     [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.itemName.errors) || ((itemsAddsFormControl.itemName.dirty
                                           || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors) }"
                                     (completeMethod)="searchClassifications($event)" [dropdown]="true">
-                      <ng-template let-profileClassification pTemplate="item">
-                        {{profileClassification }}
+                      <ng-template let-itemCategoriess pTemplate="item">
+                        {{itemCategoriess }}
                       </ng-template>
                     </p-autoComplete>
                     <div *ngIf="itemsAddsFormControl.itemName.errors" class="invalid-feedback">

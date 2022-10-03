@@ -35,11 +35,9 @@ export class SupplierformComponent implements OnInit {
   ngOnInit(): void {
    this.formBuilderControlName();
     this.active =[
-      {name: 'Yes'},
-      {name: 'No'},
+      {name: 'true'},
+      {name: 'false'},
     ]
-    this.getAllServices();
-    this.getJobList(true);
   }
   formBuilderControlName(){
     this.registerForm = this.formBuilder.group({
@@ -57,7 +55,7 @@ export class SupplierformComponent implements OnInit {
       phone2: [''],
       mobile: [''],
       fax: [''],
-      email: [''],
+      email: ['adminmail@smartaid.shop'],
       email2: [''],
       email3: [''],
       supplierName: ['', [Validators.required,]],
@@ -85,29 +83,6 @@ export class SupplierformComponent implements OnInit {
   }
 
                                                    // All Lookup service
-  getAllServices() {
-    this.addingService.getLookupName('job_classification').subscribe(
-      res => {
-        this.result = res;
-        console.log(res);
-        if (this.result && this.result.lookupDto && this.result.lookupDto.length > 0) {
-          this.result = this.result.lookupDto;
-          for (const val of this.result) {
-            this.profileClassifications.push(val.value);
-
-          }
-        } else {
-          this.profileClassifications = [];
-        }
-
-
-      },
-      err => {
-
-
-      }
-    );
-  }
 
   // auto trim the input Name and email fields
 
@@ -121,25 +96,6 @@ export class SupplierformComponent implements OnInit {
   }
 
   /*--------------Get Supplier All Data list------------------*/
-  getJobList(bool) {
-    console.log('res')
-    this.allDataTableService.getSupplierTable('KAM-ABM-1649801111106').subscribe(
-      res => {
-        console.log(res)
-        this.jobList = res;
-        this.jobList = this.jobList.profiles;
-        console.log(this.jobList.profiles);
-
-
-      },
-      err => {
-        // this.loading = false;
-        this.spinner.hide('main-spinner');
-        // this.toastr.error(err);
-
-      }
-    );
-  }
 
 
 
@@ -157,7 +113,7 @@ export class SupplierformComponent implements OnInit {
       // code: value.code,
       name: value.contactPerson,
       contactNo: value.mobile,
-      email: value.email,
+      email: 'adminmail@smartaid.shop',
       address: value.address1,
       alies: value.aliesName,
       status: value.statusActive.name,
@@ -191,7 +147,7 @@ export class SupplierformComponent implements OnInit {
         this.newSuppliersCreationResponce = res;
         if (this.newSuppliersCreationResponce.statusCode === 201 || this.newSuppliersCreationResponce.statusCode === 200){
           this.toastr.success(this.newSuppliersCreationResponce.message);
-          this.getJobList(true)
+          this.ngOnInit()
         }else if (this.newSuppliersCreationResponce.statusCode === 208){
           this.toastr.warning(this.newSuppliersCreationResponce.message);
         }else {

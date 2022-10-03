@@ -70,8 +70,8 @@
                     </div>
                   </div>
                   <div class="form-group col-md-2">
-                    <input type="text" formControlName="goDown" placeholder="Go Down" class="form-control"
-                           value="Default G"
+                    <input type="text" formControlName="goDown" placeholder="Go Down" class="form-control" readonly
+
                            [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.goDown.errors) || ((itemsAddsFormControl.goDown.dirty || itemsAddsFormControl.goDown.touched) && itemsAddsFormControl.goDown.errors) }"/>
                     <div *ngIf="itemsAddsFormControl.goDown.errors" class="invalid-feedback">
                       <div
@@ -113,10 +113,12 @@
                   <div class="form-group col-md-6">
 
                     <p-autoComplete placeholder="Supplier Name:" formControlName="supplierName"
-                                    [suggestions]="profileClassificationsResult"
-                                    [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.supplierName.errors) || ((itemsAddsFormControl.supplierName.dirty
+                                    [suggestions]="supplierLookUpNameResult"
+                                    [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.supplierName.errors)
+                                    || ((itemsAddsFormControl.supplierName.dirty
                                           || itemsAddsFormControl.supplierName.touched) && itemsAddsFormControl.supplierName.errors) }"
-                                    (completeMethod)="searchClassifications($event)" [dropdown]="true">
+                                    (completeMethod)="searchSupplier($event)" [dropdown]="true"
+                                    (onSelect)="supplierNameFocusout(itemsAddsFormControl.supplierName)">
                       <ng-template let-profileClassification pTemplate="item">
                         {{profileClassification }}
                       </ng-template>
@@ -274,11 +276,12 @@
                       <td>{{purchaseFormIndex + 1}}</td>
                       <td>
                         <p-autoComplete placeholder="Alias Name:" formControlName="aliasNameTable"
-                                        [suggestions]="profileClassificationsResult" (click)="addDatalist(unit.controls.aliasNameTable,purchaseFormIndex)"
+                                        [suggestions]="aliasLookUpNameResult"
+                                        (onSelect)="addDatalist(unit.controls.aliasNameTable,purchaseFormIndex)"
                                         (window:keypress)="onKey($event, purchaseFormIndex)"
                                         [ngClass]="{ 'is-invalid': (submitted &&  unit.controls.aliasNameTable.errors) || (( unit.controls.aliasNameTable.dirty
                                           ||  unit.controls.aliasNameTable.touched) &&  unit.controls.aliasNameTable.errors) }"
-                                        (completeMethod)="searchClassifications($event)" [dropdown]="true" >
+                                        (completeMethod)="searchAlias($event)" [dropdown]="true">
                           <ng-template let-profileClassification pTemplate="item">
                             {{profileClassification }}
                           </ng-template>
@@ -286,14 +289,15 @@
                       </td>
                       <td>
                         <p-autoComplete placeholder="Item Name:" formControlName="itemName"
-                                        [suggestions]="profileClassificationsResult"
+                                        [suggestions]="itemLookUpNameResult"
                                         [ngClass]="{ 'is-invalid': (submitted &&  unit.controls.itemName.errors) || (( unit.controls.itemName.dirty
                                           ||  unit.controls.itemName.touched) &&  unit.controls.itemName.errors) }"
-                                        (completeMethod)="searchClassifications($event)" [dropdown]="true">
+                                        (completeMethod)="searchItem($event)" [dropdown]="true">
                           <ng-template let-profileClassification pTemplate="item">
                             {{profileClassification }}
                           </ng-template>
                         </p-autoComplete>
+
                       </td>
 
                       <td>
@@ -318,7 +322,7 @@
                       </td>
                       <td>
                         <input type="number" formControlName="totalExcludingDiscount"
-                              readonly value="{{quantityItem[purchaseFormIndex] * purchasePrice[purchaseFormIndex] }}">
+                               readonly value="{{quantityItem[purchaseFormIndex] * purchasePrice[purchaseFormIndex] }}">
                       </td>
                       <td>
                         <input type="number" formControlName="descountPercentage"
@@ -330,10 +334,11 @@
                                         *(discountPrcnt[purchaseFormIndex]) | number:'1.2-2'}}">
                       </td>
                       <td>
-                        <input type="number" formControlName="retailPrice" (focusout)="retailPriceFocusOut(unit.controls.retailPrice, purchaseFormIndex)">
+                        <input type="number" formControlName="retailPrice"
+                               (focusout)="retailPriceFocusOut(unit.controls.retailPrice, purchaseFormIndex)">
                       </td>
                       <td>
-                        <input type="number" formControlName="netPrice" readonly
+                        <input type="number" formControlName="netPrice"
                                value="{{quantityItem[purchaseFormIndex] * purchasePrice[purchaseFormIndex] | number:'1.2-2'}}">
                       </td>
                       <td>
@@ -376,17 +381,17 @@
                   </div>
                   <div class="form-group col-md-2">
                     <label>Flat Disc(-)</label>
-                    <input class="form-control" formControlName="flatDisc" >
+                    <input class="form-control" formControlName="flatDisc">
                   </div>
 
 
                   <div class="form-group col-md-2">
                     <label>Misc(+)</label>
-                    <input class="form-control" formControlName="miscValue" >
+                    <input class="form-control" formControlName="miscValue">
                   </div>
                   <div class="form-group col-md-1">
                     <label>Inv GST(%)</label>
-                    <input class="form-control" formControlName="inventoryGst" >
+                    <input class="form-control" formControlName="inventoryGst">
                   </div>
                 </div>
                 <div class="form-row mt-2">
@@ -400,7 +405,7 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label>Sale Price +S/Tax =Total</label>
-                    <input class="form-control" formControlName="flatDisc" >
+                    <input class="form-control" formControlName="flatDisc">
                   </div>
                 </div>
                 <div class="form-row">
