@@ -32,7 +32,8 @@ import {AutoCompleteModule} from "primeng/autocomplete";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import { ItemComponent } from './basicdata/items/item/item.component';
 import { ItemCategoryComponent } from './basicdata/items/item-category/item-category.component';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {autoCompleteServices} from "../../services/autoCompleteServices";
 @NgModule({
   declarations: [PagesComponent, NavbarComponent, DashboardComponent, PurchaseComponent, BasicdataComponent, SupplierformComponent, SuppliercategoryComponent, ItemComponent, ItemCategoryComponent],
 
@@ -64,9 +65,9 @@ import { ItemCategoryComponent } from './basicdata/items/item-category/item-cate
     ScrollPanelModule,
     CheckboxModule,
     AutoCompleteModule,
+    MatAutocompleteModule
   ],
-  providers: [
-  ],
+  providers: [autoCompleteServices],
   bootstrap: [PagesComponent]
 })
 export class PagesModule {

@@ -181,15 +181,7 @@
                   <div class="form-group col-md-6">
 
                     <label for="city">City</label>
-                    <p-autoComplete id="city" formControlName="city"
-                                    [suggestions]="profileClassificationsResult"
-                                    [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.city.errors) || ((supplierFormControl.city.dirty
-                                          || supplierFormControl.city.touched) && supplierFormControl.city.errors) }"
-                                    (completeMethod)="searchClassifications($event)" [dropdown]="true">
-                      <ng-template let-profileClassification pTemplate="item">
-                        {{profileClassification }}
-                      </ng-template>
-                    </p-autoComplete>
+                    <input type="text" formControlName="city" id="city">
                     <div *ngIf="supplierFormControl.city.errors" class="invalid-feedback">
                       <div
                         *ngIf="((supplierFormControl.city.dirty || supplierFormControl.city.touched) && supplierFormControl.city.errors?.required && !supplierFormControl.city.errors?.pattern && !submitted)">
@@ -204,14 +196,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="manufactureCity">Manufacture City</label>
-                    <p-autoComplete id="manufactureCity" formControlName="manufactureCity"
-                                    [suggestions]="profileClassificationsResult"
-                                    [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.city.errors) || ((supplierFormControl.city.dirty || supplierFormControl.city.touched) && supplierFormControl.city.errors) }"
-                                    (completeMethod)="searchClassifications($event)" [dropdown]="true">
-                      <ng-template let-profileClassification pTemplate="item">
-                        {{profileClassification }}
-                      </ng-template>
-                    </p-autoComplete>
+                   <input type="text" formControlName="manufactureCity" id="manufactureCity" >
                     <div *ngIf="supplierFormControl.manufactureCity.errors" class="invalid-feedback">
                       <div
                         *ngIf="(supplierFormControl.manufactureCity.dirty || supplierFormControl.manufactureCity.touched) && supplierFormControl.manufactureCity.errors?.pattern">

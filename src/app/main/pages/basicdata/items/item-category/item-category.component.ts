@@ -24,8 +24,8 @@ export class ItemCategoryComponent implements OnInit {
   selectedCustomerss: any[];
 
   profileClassification: any;
-  profileClassifications = [];
-  profileClassificationsResult: any = [];
+  itemCategoryLookup = [];
+  itemCategoryLookupResult: any = [];
   @ViewChild('dataTableShortListCandidate') table: Table;
   constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService,  private toastr: ToastrService,
               private hotkeysService: HotkeysService,
@@ -53,7 +53,7 @@ export class ItemCategoryComponent implements OnInit {
     return this.registerForm.controls;
   }
   searchClassifications(event): void {
-    this.profileClassificationsResult = this.profileClassifications.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
+    this.itemCategoryLookupResult = this.itemCategoryLookup.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
   }
   hotclick(){
     this.hotkeysService.add(new Hotkey('shift+s' ,(event: KeyboardEvent): boolean => {
@@ -68,14 +68,14 @@ export class ItemCategoryComponent implements OnInit {
       res => {
         this.result = res;
         console.log(res);
-        if (this.result && this.result.lookupDto && this.result.lookupDto.length > 0) {
-          this.result = this.result.lookupDto;
+        if (this.result && this.result.responseBody && this.result.responseBody.length > 0) {
+          this.result = this.result.responseBody;
           for (const val of this.result) {
-            this.profileClassifications.push(val.value);
+            this.itemCategoryLookup.push(val.name);
 
           }
         } else {
-          this.profileClassifications = [];
+          this.itemCategoryLookup = [];
         }
 
 

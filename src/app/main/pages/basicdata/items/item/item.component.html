@@ -183,10 +183,10 @@
 
                     <label for="category">Category</label>
                     <p-autoComplete id="category" formControlName="category"
-                                    [suggestions]="profileClassificationsResult"
+                                    [suggestions]="itemCategoryLookupResult"
                                     [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.category.errors) || ((itemsAddsFormControl.category.dirty
                                           || itemsAddsFormControl.category.touched) && itemsAddsFormControl.category.errors) }"
-                                    (completeMethod)="searchClassifications($event)" [dropdown]="true">
+                                    (completeMethod)="searchItemName($event)" [dropdown]="true">
                       <ng-template let-profileClassification pTemplate="item">
                         {{profileClassification }}
                       </ng-template>
@@ -205,14 +205,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="classDefault">Class</label>
-                    <p-autoComplete id="classDefault" formControlName="classDefault"
-                                    [suggestions]="profileClassificationsResult"
-                                    [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.classDefault.errors) || ((itemsAddsFormControl.classDefault.dirty || itemsAddsFormControl.classDefault.touched) && itemsAddsFormControl.classDefault.errors) }"
-                                    (completeMethod)="searchClassifications($event)" [dropdown]="true">
-                      <ng-template let-profileClassification pTemplate="item">
-                        {{profileClassification }}
-                      </ng-template>
-                    </p-autoComplete>
+                   <input formControlName="classDefault" id="classDefault" value="Default">
                     <div *ngIf="itemsAddsFormControl.classDefault.errors" class="invalid-feedback">
                       <div
                         *ngIf="(itemsAddsFormControl.classDefault.dirty || itemsAddsFormControl.classDefault.touched) && itemsAddsFormControl.classDefault.errors?.pattern">
@@ -231,7 +224,7 @@
                     <div class="form-group col-md-3">
                       <label for="printable">Printable</label>
                       <p-dropdown [options]="active" formControlName="printable" id="printable"
-                                  optionLabel="name" [showClear]="true" (focusout)="dropDownView(itemsAddsFormControl.printable)"></p-dropdown>
+                                  optionLabel="name" [showClear]="true" ></p-dropdown>
                       <div *ngIf="itemsAddsFormControl.printable.errors" class="invalid-feedback">
                         <div
                           *ngIf="(itemsAddsFormControl.printable.dirty || itemsAddsFormControl.printable.touched) && itemsAddsFormControl.printable.errors?.pattern">
@@ -247,8 +240,8 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label for="active">Active</label>
-                      <p-dropdown [options]="active" formControlName="active" id="active" placeholder="select the option"
-                                  optionLabel="name" [showClear]="true" (focusout)="dropDownView(itemsAddsFormControl.active)"></p-dropdown>
+                      <p-dropdown [options]="active" formControlName="active" id="active"
+                                  optionLabel="name" [showClear]="true" ></p-dropdown>
                       <div *ngIf="itemsAddsFormControl.active.errors" class="invalid-feedback">
                         <div
                           *ngIf="(itemsAddsFormControl.active.dirty || itemsAddsFormControl.active.touched) && itemsAddsFormControl.active.errors?.pattern">
@@ -373,7 +366,7 @@
                   <div class="form-group col-md-4">
                     <label for="narcotics">Narcotics</label>
                     <p-dropdown [options]="active" formControlName="narcotics" id="narcotics" placeholder="select the option"
-                                optionLabel="name" [showClear]="true" (focusout)="dropDownView(itemsAddsFormControl.narcotics)"></p-dropdown>
+                                optionLabel="name" [showClear]="true" ></p-dropdown>
                     <div *ngIf="itemsAddsFormControl.narcotics.errors" class="invalid-feedback">
                       <div
                         *ngIf="(itemsAddsFormControl.narcotics.dirty || itemsAddsFormControl.narcotics.touched) && itemsAddsFormControl.narcotics.errors?.pattern">
@@ -389,8 +382,8 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label for="lockSalesPrice">Lock Sales Price</label>
-                    <p-dropdown [options]="active" formControlName="lockSalesPrice" id="lockSalesPrice" placeholder="select the option"
-                                optionLabel="name" [showClear]="true" (focusout)="dropDownView(itemsAddsFormControl.lockSalesPrice)"></p-dropdown>
+                    <p-dropdown [options]="active" formControlName="lockSalesPrice" id="lockSalesPrice"
+                                optionLabel="name" [showClear]="true"></p-dropdown>
                     <div *ngIf="itemsAddsFormControl.lockSalesPrice.errors" class="invalid-feedback">
                       <div
                         *ngIf="(itemsAddsFormControl.lockSalesPrice.dirty || itemsAddsFormControl.lockSalesPrice.touched) && itemsAddsFormControl.lockSalesPrice.errors?.pattern">
@@ -407,7 +400,7 @@
                   <div class="form-group col-md-4">
                     <label for="lockDicountPerc">Lock Dicount Perc</label>
                     <p-dropdown [options]="active" formControlName="lockDicountPerc" id="lockDicountPerc" placeholder="select the option"
-                                optionLabel="name" [showClear]="true" (focusout)="dropDownView(itemsAddsFormControl.lockDicountPerc)"></p-dropdown>
+                                optionLabel="name" [showClear]="true" ></p-dropdown>
                     <div *ngIf="itemsAddsFormControl.lockDicountPerc.errors" class="invalid-feedback">
                       <div
                         *ngIf="(itemsAddsFormControl.lockDicountPerc.dirty || itemsAddsFormControl.lockDicountPerc.touched) && itemsAddsFormControl.lockDicountPerc.errors?.pattern">
@@ -591,7 +584,7 @@
                   <div class="form-group col-md-6">
                     <label for="itemAlert">Items Alert</label>
                     <p-dropdown [options]="active" formControlName="itemAlert" id="itemAlert" placeholder="select the option"
-                                optionLabel="name" [showClear]="true" (focusout)="dropDownView(itemsAddsFormControl.itemAlert)"></p-dropdown>
+                                optionLabel="name" [showClear]="true"></p-dropdown>
                     <div *ngIf="itemsAddsFormControl.itemAlert.errors" class="invalid-feedback">
                       <div
                         *ngIf="(itemsAddsFormControl.itemAlert.dirty || itemsAddsFormControl.itemAlert.touched) && itemsAddsFormControl.itemAlert.errors?.pattern">

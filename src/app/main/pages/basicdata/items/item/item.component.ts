@@ -25,6 +25,8 @@ export class ItemComponent implements OnInit {
   profileClassification: any;
   profileClassifications = [];
   profileClassificationsResult: any = [];
+  itemCategoryLookup = [];
+  itemCategoryLookupResult: any = [];
   @ViewChild('dataTableShortListCandidate') table: Table;
   constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService, private toastr: ToastrService,
               private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService,
@@ -52,7 +54,7 @@ export class ItemComponent implements OnInit {
       packing: [''],
       printable: [''],
       category: [''],
-      classDefault: [''],
+      classDefault: ['Default'],
       saleDisc: [''],
       location: [''],
       narcotics: [''],
@@ -82,20 +84,23 @@ export class ItemComponent implements OnInit {
   searchClassifications(event): void {
     this.profileClassificationsResult = this.profileClassifications.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
   }
-
+  searchItemName(event): void {
+    this.itemCategoryLookupResult = this.itemCategoryLookup.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
+  }
   // All Lookup service
   getAllServices() {
-    this.addingService.getLookupName('job_classification').subscribe(
+    this.addingService.getLookupName('ITEM_CATEGORY').subscribe(
       res => {
         this.result = res;
-        if (this.result && this.result.lookupDto && this.result.lookupDto.length > 0) {
-          this.result = this.result.lookupDto;
+        console.log(res);
+        if (this.result && this.result.responseBody && this.result.responseBody.length > 0) {
+          this.result = this.result.responseBody;
           for (const val of this.result) {
-            this.profileClassifications.push(val.value);
+            this.itemCategoryLookup.push(val.name);
 
           }
         } else {
-          this.profileClassifications = [];
+          this.itemCategoryLookup = [];
         }
 
 
@@ -136,10 +141,7 @@ export class ItemComponent implements OnInit {
     );
   }
 
-  dropDownView(value){
-    console.log(value.value.name)
 
-  }
  resetValidations(){
    this.registerForm.get('itemName').reset();
    this.registerForm.get('itemName').clearValidators();
@@ -206,6 +208,7 @@ export class ItemComponent implements OnInit {
         if (this.newItemsCreationResponce.statusCode === 201 || this.newItemsCreationResponce.statusCode === 200){
           this.toastr.success(this.newItemsCreationResponce.message);
           this.getJobList(true)
+          this.ngOnInit()
         }else if (this.newItemsCreationResponce.statusCode === 208){
           this.toastr.warning(this.newItemsCreationResponce.message);
         }else {
