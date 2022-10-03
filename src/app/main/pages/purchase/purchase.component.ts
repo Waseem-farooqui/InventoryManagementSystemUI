@@ -18,7 +18,8 @@ export class PurchaseComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   active: any;
-  supplierResponceResult: any;
+  supplierResponseResult: any;
+  itemResponseResult: any;
   itemCategoryResponce: any;
   jobList: any = [];
   supplierLookUpName = [];
@@ -166,13 +167,14 @@ export class PurchaseComponent implements OnInit {
 
   getAllServices() {
     this.addingService.getLookupName('SUPPLIER').subscribe(
-      supplierResponce => {
-        this.supplierResponceResult = supplierResponce;
-        this.SupplierLookUpArray = supplierResponce
-        if (this.supplierResponceResult && this.supplierResponceResult.responseBody && this.supplierResponceResult.responseBody.length > 0) {
-          this.supplierResponceResult = this.supplierResponceResult.responseBody;
-          this.supplierResult = this.supplierResponceResult.responseBody;
-          for (const valueSupplier of this.supplierResponceResult) {
+      supplierResponse => {
+        this.supplierResponseResult = supplierResponse;
+        this.SupplierLookUpArray = supplierResponse
+        console.log("Suppliers are ", supplierResponse)
+        if (this.supplierResponseResult && this.supplierResponseResult.responseBody && this.supplierResponseResult.responseBody.length > 0) {
+          this.supplierResponseResult = this.supplierResponseResult.responseBody;
+          this.supplierResult = this.supplierResponseResult.responseBody;
+          for (const valueSupplier of this.supplierResponseResult) {
             console.log(valueSupplier)
             this.supplierLookUpName.push(valueSupplier.name);
 
@@ -190,15 +192,15 @@ export class PurchaseComponent implements OnInit {
     );
     this.addingService.getLookupName('ITEM').subscribe(
       itemResponce => {
-        this.supplierResponceResult = itemResponce;
+        this.itemResponseResult = itemResponce;
         this.ItemLookUpArray = itemResponce
-        if (this.supplierResponceResult && this.supplierResponceResult.responseBody && this.supplierResponceResult.responseBody.length > 0) {
-          this.supplierResponceResult = this.supplierResponceResult.responseBody;
-          for (const valueItem of this.supplierResponceResult) {
+        if (this.itemResponseResult && this.itemResponseResult.responseBody && this.itemResponseResult.responseBody.length > 0) {
+          this.itemResponseResult = this.itemResponseResult.responseBody;
+          for (const valueItem of this.itemResponseResult) {
             this.itemLookUpName.push(valueItem.name);
 
           }
-          for (const valueofAlias of this.supplierResponceResult) {
+          for (const valueofAlias of this.itemResponseResult) {
             this.aliasLookUpName.push(valueofAlias.alias);
           }
         } else {
@@ -276,11 +278,8 @@ export class PurchaseComponent implements OnInit {
   }
 
   supplierNameFocusout(supplierNamevalue) {
-    console.log(this.supplierLookUpName)
-     let studentObj = this.supplierLookUpName.filter(t=>t.name === supplierNamevalue.name);
-    console.log(studentObj)
-
-    console.log(supplierNamevalue)
+    let supplierObj = this.supplierResponseResult.filter(t => t.name === supplierNamevalue.value);
+    console.log("Here is supplier object", supplierObj, supplierObj[0].id)
   }
 
   onSubmit() {

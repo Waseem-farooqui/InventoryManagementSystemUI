@@ -19,7 +19,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {AddingItemUserService} from "./services/addingItemUser.service";
 import {ConfigApiService} from "./services/configApi.service";
 import {GetAllDataService} from "./services/getAllData.Service";
-import { ToastrModule } from 'ngx-toastr';
+import {ToastrModule} from 'ngx-toastr';
 import {HotkeyModule} from 'angular2-hotkeys';
 
 
