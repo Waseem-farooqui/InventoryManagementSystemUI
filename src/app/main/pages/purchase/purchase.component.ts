@@ -20,7 +20,6 @@ export class PurchaseComponent implements OnInit {
   active: any;
   supplierResponseResult: any;
   itemResponseResult: any;
-  itemCategoryResponce: any;
   jobList: any = [];
   supplierLookUpName = [];
   supplierResult = [];
@@ -35,17 +34,16 @@ export class PurchaseComponent implements OnInit {
   discountPrcnt: any = [];
   retailPriceTable: any = [];
   retailNetPriceTable: any = [];
-
-  SupplierLookUpArray: any;
-  ItemLookUpArray: any;
+  supplierObj: any = [];
+  selectItemName: any = [];
   barcode: any = [];
+  purchaseArrayStore: any = [];
   @ViewChild('dataTableShortListCandidate') table: Table;
   today = new Date();
-  jstoday = '';
 
   constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService, private toastr: ToastrService,
               private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService,
-              private hotkeysService: HotkeysService, private autoComlete:autoCompleteServices) {
+              private hotkeysService: HotkeysService, private autoComlete: autoCompleteServices) {
     autoComlete.listOfAliasName = [];
   }
 
@@ -87,19 +85,17 @@ export class PurchaseComponent implements OnInit {
   }
 
   quanitityFocusOut(quantityValue, quantityIndex) {
-    console.log(quantityIndex)
-    console.log(quantityValue)
     this.quantityItem[quantityIndex] = quantityValue.value;
-    console.log(this.quantityItem[quantityIndex]);
     let quantityObject = this.getTotalSumOfColumn(this.quantityItem);
-    console.log(quantityObject)
+  }
+  netPriceFocusOut(valueNetPrice, indexNetPrice) {
+    this.retailNetPriceTable[indexNetPrice] = valueNetPrice.value
+    let netPriceObject = this.getTotalSumOfColumn(this.retailNetPriceTable)
+    console.log(netPriceObject)
   }
 
   purchaseFocusOut(purchaseValue, purchaseIndex) {
     this.purchasePrice[purchaseIndex] = purchaseValue.value;
-    console.log(this.purchasePrice[purchaseIndex]);
-    console.log(this.getTotalSumOfColumn(this.purchasePrice));
-    this.sumInNetPrice(purchaseIndex);
   }
 
 
@@ -109,33 +105,21 @@ export class PurchaseComponent implements OnInit {
     }, 0);
 
   }
-
-  sumInNetPrice(i) {
-    // this.netTotalPrice = this.registerForm.get('purchaseArray')['controls'][i].get('netPrice');
-    console.log(this.netTotalPrice);
-  }
-
   discountPercentages(value, i) {
     this.discountPrcnt[i] = value.value;
-    console.log(value.value)
-    console.log(i)
   }
 
   retailPriceFocusOut(valueRetailPrice, ValueRetailPriceIndex) {
     this.retailPriceTable[ValueRetailPriceIndex] = valueRetailPrice.value;
   }
 
-  onchangeValue(valueNetPrice, indexNetPrice) {
-    this.retailNetPriceTable[indexNetPrice] = valueNetPrice.value
-    console.log(valueNetPrice.value)
-  }
+
 
 
   onKey(event: any, index) {
     if (event.key === "Enter" && this.barcode[index] === undefined) {
       this.barcode[index] = event.target.value;
       this.addPurchaseRow();
-      console.log(this.barcode)
     }
 
   }
@@ -143,24 +127,39 @@ export class PurchaseComponent implements OnInit {
   addDatalist(addDatavalue, addDataListIndex) {
     const formValue = this.registerForm.get('purchaseArray')['controls'][addDataListIndex];
     const res = this.autoComlete.addNewElement(addDatavalue.value);
-    const selectItem = this.itemResponseResult.find(item => item.name === addDatavalue.name || item.alias === addDatavalue.value)
-    console.log("Here is item value", selectItem)
+
     if (res === false) {
       this.toastr.error('Item already exist');
       formValue.controls.aliasNameTable.patchValue('')
+    } else {
+      this.selectItemName = this.itemResponseResult.find(item => item.name === addDatavalue.name || item.alias === addDatavalue.value)
+      this.registerForm.get('purchaseArray')['controls'][addDataListIndex].controls.itemName.patchValue(this.selectItemName.name)
+      this.registerForm.get('purchaseArray')['controls'][addDataListIndex].controls.purchasPrice.patchValue(this.selectItemName.purchasePrice)
+      this.itemPatchValue()
     }
-    console.log(res);
+  }
+
+  itemPatchValue() {
+    this.registerForm.patchValue({
+      lastPurchasePrice: this.selectItemName.previousPurchasePrice,
+      totalStock: this.selectItemName.quantity,
+    })
+  }
+
+  patchSupplierID() {
+    this.registerForm.patchValue({
+      invoice: this.supplierObj.id,
+    });
   }
 
   hotclick() {
     this.hotkeysService.add(new Hotkey('shift+g', (event: KeyboardEvent): boolean => {
-      console.log('Typed hotkey');
       return true;
     }));
   }
 
   home() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/basicData']);
   }
 
   get itemsAddsFormControl() {
@@ -189,7 +188,6 @@ export class PurchaseComponent implements OnInit {
     this.addingService.getLookupName('ITEM').subscribe(
       itemResponce => {
         this.itemResponseResult = itemResponce;
-        console.log(this.itemResponseResult.responseBody);
         if (this.itemResponseResult && this.itemResponseResult.responseBody && this.itemResponseResult.responseBody.length > 0) {
           this.itemResponseResult = this.itemResponseResult.responseBody;
           for (const valueItem of this.itemResponseResult) {
@@ -201,7 +199,6 @@ export class PurchaseComponent implements OnInit {
         } else {
           this.itemLookUpName = [];
         }
-
 
 
       },
@@ -226,7 +223,7 @@ export class PurchaseComponent implements OnInit {
 
   /*--------------Get Supplier All Data list------------------*/
   getJobList(bool) {
-    this.allDataTableService.getSupplierTable('KAM-ABM-1649801111106').subscribe(
+    this.allDataTableService.getPurchaseTable().subscribe(
       tableResponce => {
         this.jobList = tableResponce;
         this.jobList = this.jobList.profiles;
@@ -272,10 +269,11 @@ export class PurchaseComponent implements OnInit {
     removePurchaseRowcontrol.removeAt(removePurchaseIndex);
   }
 
-  supplierNameFocusout(supplierNamevalue) {
-    let supplierObj = this.supplierResponseResult.find(t => t.name === supplierNamevalue.value);
-    console.log("Here is supplier object", supplierObj, supplierObj.id)
+  supplierNameOnSelect(supplierNamevalue) {
+    this.supplierObj = this.supplierResponseResult.find(t => t.name === supplierNamevalue.value);
+    this.patchSupplierID()
   }
+
 
   onSubmit() {
     this.spinner.show('main-spinner');
@@ -329,7 +327,6 @@ export class PurchaseComponent implements OnInit {
       grandTotal: value.grandTotal,
 
     }
-    console.log(result);
     // this.addingService.addItemCategory(result).subscribe(
     //   res => {
     //     this.spinner.hide('main-spinner');

@@ -18,7 +18,7 @@ export class ItemComponent implements OnInit {
   submitted = false;
   active:any;
   result: any;
-  jobList: any = [];
+  itemTableList: any = [];
   selectedCustomers: any[];
   selectedCustomerss: any[];
   newItemsCreationResponce:any;
@@ -125,11 +125,13 @@ export class ItemComponent implements OnInit {
 
   /*--------------Get Supplier All Data list------------------*/
   getJobList(bool) {
-    this.allDataTableService.getSupplierTable('KAM-ABM-1649801111106').subscribe(
-      res => {
-        this.jobList = res;
-        this.jobList = this.jobList.profiles;
-
+    this.allDataTableService.getItemTable().subscribe(
+      itemTableResponse => {
+        this.itemTableList = itemTableResponse;
+        console.log(itemTableResponse);
+        if (this.itemTableList.statusCode = 200){
+          this.itemTableList = this.itemTableList.item;
+        }
 
       },
       err => {

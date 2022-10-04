@@ -19,11 +19,8 @@ export class ItemCategoryComponent implements OnInit {
   active:any;
   result: any;
   itemCategoryResponce:any;
-  jobList: any = [];
+  itemCategoryList: any = [];
   selectedCustomers: any[];
-  selectedCustomerss: any[];
-
-  profileClassification: any;
   itemCategoryLookup = [];
   itemCategoryLookupResult: any = [];
   @ViewChild('dataTableShortListCandidate') table: Table;
@@ -65,9 +62,9 @@ export class ItemCategoryComponent implements OnInit {
   // All Lookup service
   getAllServices() {
     this.addingService.getLookupName('ITEM_CATEGORY').subscribe(
-      res => {
-        this.result = res;
-        console.log(res);
+      lookupResponce => {
+        this.result = lookupResponce;
+        console.log(lookupResponce);
         if (this.result && this.result.responseBody && this.result.responseBody.length > 0) {
           this.result = this.result.responseBody;
           for (const val of this.result) {
@@ -89,10 +86,12 @@ export class ItemCategoryComponent implements OnInit {
 
   /*--------------Get Supplier All Data list------------------*/
   getJobList(bool) {
-    this.allDataTableService.getSupplierTable('KAM-ABM-1649801111106').subscribe(
-      res => {
-        this.jobList = res;
-        this.jobList = this.jobList.profiles;
+    this.allDataTableService.getItemCategoryTable().subscribe(
+      responceItemCategoryTable => {
+        this.itemCategoryList = responceItemCategoryTable;
+        if (this.itemCategoryList.statusCode = 200){
+        this.itemCategoryList = this.itemCategoryList.categories;
+        }
       },
       err => {
         // this.loading = false;

@@ -24,4 +24,19 @@ export class ConfigApiService {
     return this.baseUrl + 'suppliers'
  }
 
+
+ // get All Tables Value
+  getItemCategoryTable(){
+    return this.baseUrl + 'items/categories'
+  }
+  getItemTable(){
+    return this.baseUrl + 'items'
+  }
+  getPurchaseTable(){
+    return this.baseUrl + 'purchases'
+  }
+  getSupplierTable(){
+    return this.baseUrl + 'suppliers'
+  }
+
 }
