@@ -339,7 +339,7 @@
                       <td>
                         <input type="number" formControlName="netPrice"
                                value="{{quantityItem[purchaseFormIndex] * purchasePrice[purchaseFormIndex] }}"
-                        (focusout)="netPriceFocusOut(unit.controls.retailPrice, purchaseFormIndex)">
+                               (focusout)="netPriceFocusOut(quantityItem[purchaseFormIndex] * purchasePrice[purchaseFormIndex], purchaseFormIndex)">
                       </td>
                       <td>
                         <input type="number" formControlName="marginPercentage" readonly
@@ -364,7 +364,7 @@
                       <th scope="col">Discount (%)</th>
                       <th scope="col">Discount price</th>
                       <th scope="col">Retail Price</th>
-                      <th scope="col">{{this.getTotalSumOfColumn(this.netTotalPrice)}}</th>
+                      <th scope="col">{{this.getTotalSumOfColumn(this.grandTotalArray)}}</th>
                       <th scope="col">Margin</th>
                     </tr>
                     </tfoot>

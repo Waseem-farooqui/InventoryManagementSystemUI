@@ -38,6 +38,7 @@ export class PurchaseComponent implements OnInit {
   selectItemName: any = [];
   barcode: any = [];
   purchaseArrayStore: any = [];
+  grandTotalArray: number[] = [];
   @ViewChild('dataTableShortListCandidate') table: Table;
   today = new Date();
 
@@ -89,12 +90,11 @@ export class PurchaseComponent implements OnInit {
     let quantityObject = this.getTotalSumOfColumn(this.quantityItem);
   }
   netPriceFocusOut(valueNetPrice, indexNetPrice) {
-    this.retailNetPriceTable[indexNetPrice] = valueNetPrice.value
-    let netPriceObject = this.getTotalSumOfColumn(this.retailNetPriceTable)
-    console.log(netPriceObject)
+    this.grandTotalArray[indexNetPrice] = valueNetPrice
   }
 
   purchaseFocusOut(purchaseValue, purchaseIndex) {
+    console.log(purchaseValue)
     this.purchasePrice[purchaseIndex] = purchaseValue.value;
   }
 
@@ -112,8 +112,6 @@ export class PurchaseComponent implements OnInit {
   retailPriceFocusOut(valueRetailPrice, ValueRetailPriceIndex) {
     this.retailPriceTable[ValueRetailPriceIndex] = valueRetailPrice.value;
   }
-
-
 
 
   onKey(event: any, index) {
