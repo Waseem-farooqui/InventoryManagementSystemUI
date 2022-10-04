@@ -26,7 +26,7 @@ import {CheckboxModule} from "primeng/checkbox";
 import {AppComponent} from "../../app.component";
 import {PurchaseComponent} from './purchase/purchase.component';
 import {BasicdataComponent} from './basicdata/basicdata.component';
-import {SupplierformComponent} from './basicdata/supplier/supplierform/supplierform.component';
+import {SupplierComponent} from './basicdata/supplier/supplierform/supplier.component';
 import {SuppliercategoryComponent} from './basicdata/supplier/suppliercategory/suppliercategory.component';
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
@@ -35,7 +35,7 @@ import { ItemCategoryComponent } from './basicdata/items/item-category/item-cate
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {autoCompleteServices} from "../../services/autoCompleteServices";
 @NgModule({
-  declarations: [PagesComponent, NavbarComponent, DashboardComponent, PurchaseComponent, BasicdataComponent, SupplierformComponent, SuppliercategoryComponent, ItemComponent, ItemCategoryComponent],
+  declarations: [PagesComponent, NavbarComponent, DashboardComponent, PurchaseComponent, BasicdataComponent, SupplierComponent, SuppliercategoryComponent, ItemComponent, ItemCategoryComponent],
 
   imports: [
     ChipsModule,

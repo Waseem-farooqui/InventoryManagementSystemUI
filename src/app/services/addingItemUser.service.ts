@@ -9,7 +9,6 @@ export class AddingItemUserService {
   }
 
   getLookupName(lookupType) {
-    console.log(lookupType)
     return this.httpClient.get(this.configApiService.lookUPForPOS(lookupType));
   }
   addItemCategory(body){

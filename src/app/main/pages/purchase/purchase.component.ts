@@ -15,35 +15,35 @@ import {autoCompleteServices} from "../../../services/autoCompleteServices";
   styleUrls: ['./purchase.component.css']
 })
 export class PurchaseComponent implements OnInit {
-  registerForm: FormGroup;
+  purchaseForm: FormGroup;
   submitted = false;
   active: any;
   supplierResponseResult: any;
   itemResponseResult: any;
   jobList: any = [];
   supplierLookUpName = [];
-  supplierResult = [];
   supplierLookUpNameResult: any = [];
   itemLookUpName: any = [];
   itemLookUpNameResult: any = [];
   aliasLookUpName: any = [];
   aliasLookUpNameResult: any = [];
-  quantityItem: any = [];
-  netTotalPrice: any = [];
+  itemQuantityArray: number[] = [];
+  stockArray: number[] = [];
   purchasePrice: any = [];
-  discountPrcnt: any = [];
-  retailPriceTable: any = [];
-  retailNetPriceTable: any = [];
-  supplierObj: any = [];
   selectItemName: any = [];
   barcode: any = [];
-  purchaseArrayStore: any = [];
-  grandTotalArray: number[] = [];
+  netTotalArray: number[] = [];
+  purchaseFormNameArray: string[] = [];
+  purchaseFormAliasArray: string[] = [];
+  purchaseFormPurchasePriceArray: number[] = [];
   @ViewChild('dataTableShortListCandidate') table: Table;
   today = new Date();
+  purchaseArrayName: string = 'purchaseArray'
 
-  constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService, private toastr: ToastrService,
-              private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService,
+  constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService,
+              private toastr: ToastrService,
+              private router: Router, private spinner: NgxSpinnerService,
+              private allDataTableService: GetAllDataService,
               private hotkeysService: HotkeysService, private autoComlete: autoCompleteServices) {
     autoComlete.listOfAliasName = [];
   }
@@ -53,9 +53,9 @@ export class PurchaseComponent implements OnInit {
       {name: true},
       {name: false},
     ]
-    this.registerForm = this.formBuilder.group({
+    this.purchaseForm = this.formBuilder.group({
       invoice: [null],
-      purchaseDate: [null],
+      purchaseDate: [new Date()],
       goDown: ['Default G'],
       aliasName: [null],
       supplierName: [null, [Validators.required]],
@@ -65,17 +65,17 @@ export class PurchaseComponent implements OnInit {
       printBal: [null],
       invSize: [null],
       orderCode: [null],
-      orderDate: [null],
+      orderDate: [new Date()],
       supplierOrderNumber: [null],
       purchaseArray: this.formBuilder.array([this.purchaseArray(null, null, null,
-        null, null, 1, null, null, null, null, null, null, null, null)]),
+        0, new Date(), 1, null, null, null, 0, null, 0, null, 0)]),
       inventoryStock: [null],
-      totalDiscountPercentage: [null],
-      flatDisc: [null],
-      miscValue: [null],
-      inventoryGst: [null],
+      totalDiscountPercentage: [0],
+      flatDisc: [0],
+      miscValue: [0],
+      inventoryGst: [0],
       totalStock: [null],
-      purchaseExpance: [null],
+      purchaseExpance: [0],
       lastPurchasePrice: [null],
       avgPrice: [null],
       grandTotal: [null],
@@ -85,34 +85,12 @@ export class PurchaseComponent implements OnInit {
     this.getAllServices();
   }
 
-  quanitityFocusOut(quantityValue, quantityIndex) {
-    this.quantityItem[quantityIndex] = quantityValue.value;
-    let quantityObject = this.getTotalSumOfColumn(this.quantityItem);
-  }
-  netPriceFocusOut(valueNetPrice, indexNetPrice) {
-    this.grandTotalArray[indexNetPrice] = valueNetPrice
-  }
-
-  purchaseFocusOut(purchaseValue, purchaseIndex) {
-    console.log(purchaseValue)
-    this.purchasePrice[purchaseIndex] = purchaseValue.value;
-  }
-
-
   getTotalSumOfColumn(column) {
     return column.reduce((accumulator, objectColumn) => {
       return accumulator + objectColumn;
     }, 0);
 
   }
-  discountPercentages(value, i) {
-    this.discountPrcnt[i] = value.value;
-  }
-
-  retailPriceFocusOut(valueRetailPrice, ValueRetailPriceIndex) {
-    this.retailPriceTable[ValueRetailPriceIndex] = valueRetailPrice.value;
-  }
-
 
   onKey(event: any, index) {
     if (event.key === "Enter" && this.barcode[index] === undefined) {
@@ -122,31 +100,63 @@ export class PurchaseComponent implements OnInit {
 
   }
 
-  addDatalist(addDatavalue, addDataListIndex) {
-    const formValue = this.registerForm.get('purchaseArray')['controls'][addDataListIndex];
-    const res = this.autoComlete.addNewElement(addDatavalue.value);
+  getPurchaseTableControlByIndex(tableIndex) {
+    return this.purchaseForm.get(this.purchaseArrayName)['controls'][tableIndex].controls
+  }
 
-    if (res === false) {
+  populatePurchaseTableFields(aliasFormControl, tableIndex, type) {
+    const tableControl = this.getPurchaseTableControlByIndex(tableIndex)
+    const columValue = this.autoComlete.addNewElement(aliasFormControl.value)
+
+    if (columValue === false) {
       this.toastr.error('Item already exist');
-      formValue.controls.aliasNameTable.patchValue('')
+      tableControl.aliasNameTable.patchValue('')
     } else {
-      this.selectItemName = this.itemResponseResult.find(item => item.name === addDatavalue.name || item.alias === addDatavalue.value)
-      this.registerForm.get('purchaseArray')['controls'][addDataListIndex].controls.itemName.patchValue(this.selectItemName.name)
-      this.registerForm.get('purchaseArray')['controls'][addDataListIndex].controls.purchasPrice.patchValue(this.selectItemName.purchasePrice)
+      this.selectItemName = this.itemResponseResult.find(item => item.name === aliasFormControl.value || item.alias === aliasFormControl.value)
+      if (type === 'alias')
+        this.purchaseFormNameArray[tableIndex] = tableControl.itemName.patchValue(this.selectItemName.name)
+      else
+        this.purchaseFormAliasArray[tableIndex] = tableControl.aliasNameTable.patchValue(this.selectItemName.alias)
+
+      this.purchaseFormPurchasePriceArray[tableIndex] = tableControl.purchasPrice.patchValue(this.selectItemName.purchasePrice)
+      this.stockArray[tableIndex] = this.selectItemName.quantity ? this.selectItemName.quantity : 0;
       this.itemPatchValue()
+      this.patchPurchaseTable(tableIndex);
     }
   }
 
   itemPatchValue() {
-    this.registerForm.patchValue({
+    this.purchaseForm.patchValue({
       lastPurchasePrice: this.selectItemName.previousPurchasePrice,
-      totalStock: this.selectItemName.quantity,
+      totalStock: this.getTotalSumOfColumn(this.stockArray),
     })
   }
 
-  patchSupplierID() {
-    this.registerForm.patchValue({
-      invoice: this.supplierObj.id,
+  patchPurchaseTable(tableIndex) {
+    const tableControl = this.getPurchaseTableControlByIndex(tableIndex);
+    this.itemQuantityArray[tableIndex] = tableControl.qty.value;
+    tableControl.netPrice.patchValue(tableControl.purchasPrice.value * tableControl.qty.value - tableControl.descountPrice.value);
+    tableControl.descountPrice.patchValue((tableControl.netPrice.value / 100) * tableControl.descountPercentage.value)
+    tableControl.descountPercentage.patchValue(tableControl.descountPrice.value / tableControl.netPrice.value * 100)
+    tableControl.totalExcludingDiscount.patchValue(tableControl.netPrice.value - tableControl.descountPrice.value)
+    tableControl.marginPercentage.patchValue(parseFloat(String((tableControl.retailPrice.value - tableControl.purchasPrice.value) / tableControl.purchasPrice.value * 100)).toFixed(1))
+    this.netTotalArray[tableIndex] = tableControl.netPrice.value;
+    this.purchaseForm.controls.grandTotal.patchValue(this.getTotalSumOfColumn(this.netTotalArray));
+  }
+
+  patchPurchaseForm(type) {
+    const purchaseFormControl = this.purchaseForm.controls;
+    const netTotal = this.getTotalSumOfColumn(this.netTotalArray)
+    if (type === 'flat')
+      purchaseFormControl.totalDiscountPercentage.patchValue(parseFloat(String((purchaseFormControl.flatDisc.value / netTotal) * 100)).toFixed(2));
+    else
+      purchaseFormControl.flatDisc.patchValue((netTotal / 100) * purchaseFormControl.totalDiscountPercentage.value);
+    purchaseFormControl.grandTotal.patchValue((netTotal - parseInt(purchaseFormControl.flatDisc.value)) + purchaseFormControl.miscValue.value + purchaseFormControl.purchaseExpance.value);
+  }
+
+  patchSupplierAlias(name) {
+    this.purchaseForm.patchValue({
+      aliasName: (name.substring(0, 1) + name.substring(name.length, name.length - 1)).toUpperCase(),
     });
   }
 
@@ -161,7 +171,7 @@ export class PurchaseComponent implements OnInit {
   }
 
   get itemsAddsFormControl() {
-    return this.registerForm.controls;
+    return this.purchaseForm.controls;
   }
 
   getAllServices() {
@@ -201,8 +211,7 @@ export class PurchaseComponent implements OnInit {
 
       },
       err => {
-
-
+        console.log(err)
       }
     );
   }
@@ -256,29 +265,29 @@ export class PurchaseComponent implements OnInit {
   }
 
   addPurchaseRow() {
-    const purchaseRowcontrol = this.registerForm.controls.purchaseArray as FormArray;
+    const purchaseRowcontrol = this.purchaseForm.controls.purchaseArray as FormArray;
     purchaseRowcontrol.push(this.purchaseArray(null, null, null,
       null, null, 1, null, null, null,
       null, null, null, null, null));
   }
 
   removesPurchaseRow(removePurchaseIndex) {
-    const removePurchaseRowcontrol = this.registerForm.controls.purchaseArray as FormArray;
+    const removePurchaseRowcontrol = this.purchaseForm.controls.purchaseArray as FormArray;
     removePurchaseRowcontrol.removeAt(removePurchaseIndex);
   }
 
   supplierNameOnSelect(supplierNamevalue) {
-    this.supplierObj = this.supplierResponseResult.find(t => t.name === supplierNamevalue.value);
-    this.patchSupplierID()
+    const supplierObj = this.supplierResponseResult.find(t => t.name === supplierNamevalue.value);
+    this.patchSupplierAlias(supplierObj.name)
   }
 
 
   onSubmit() {
     this.spinner.show('main-spinner');
     this.submitted = true;
-    const value = this.registerForm.value;
+    const value = this.purchaseForm.value;
     // stop here if form is invalid
-    if (this.registerForm.invalid) {
+    if (this.purchaseForm.invalid) {
       this.toastr.error('Please Fill the Mendotory Fields');
       return;
     }
