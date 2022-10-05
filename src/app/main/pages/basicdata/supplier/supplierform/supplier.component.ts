@@ -59,6 +59,13 @@ export class SupplierComponent implements OnInit {
 
   }
 
+  patchAlias() {
+    const name = this.supplierForm.controls.name.value
+    this.supplierForm.patchValue({
+      aliesName: (name.substring(0, 1) + name.substring(name.length, name.length - 1)).toUpperCase(),
+    });
+  }
+
   get supplierFormControl() {
     return this.supplierForm.controls;
   }
