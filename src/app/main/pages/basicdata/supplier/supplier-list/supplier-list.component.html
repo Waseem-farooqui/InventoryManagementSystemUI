@@ -1,0 +1,136 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="job-form job-form-b">
+
+      <div class="table-responsive">
+        <p-table #dataTableAddSupplier [value]="supplierList" [(selection)]="selectedSupplier" dataKey="id"
+                 styleClass="p-datatable-sm"
+                 [rowHover]="true"
+                 [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                 [paginator]="true"
+                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                 [filterDelay]="0"
+                 [globalFilterFields]="['name','contactNo','alias','supplierCategory','email','city', 'address', 'withHoldingPercentage']">
+          <ng-template pTemplate="caption">
+
+            <div class="table-header">
+              <div class="row">
+                <div class="col-6">
+                        <span class="p-input-icon-left">
+                      <i class="pi pi-search"></i>
+                          <input pInputText type="text"
+                                 (input)="dataTableAddSupplier.filterGlobal($event.target.value, 'contains')"
+                                 placeholder="Global Search"/>
+                        </span>
+                </div>
+              </div>
+            </div>
+
+          </ng-template>
+          <ng-template pTemplate="header">
+
+            <tr>
+<th></th>
+              <th pSortableColumn="name">Name
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="contactNo">Contact Number
+                <p-sortIcon field="contactNo"></p-sortIcon>
+              </th>
+              <th pSortableColumn="alias">Alias
+                <p-sortIcon field="alias"></p-sortIcon>
+              </th>
+              <th pSortableColumn="supplierCategory">Supplier Category
+                <p-sortIcon field="supplierCategory"></p-sortIcon>
+              </th>
+              <th pSortableColumn="email">Email
+                <p-sortIcon field="email"></p-sortIcon>
+              </th>
+              <th pSortableColumn="city">City
+                <p-sortIcon field="city"></p-sortIcon>
+              </th>
+              <th pSortableColumn="address">Address
+                <p-sortIcon field="address"></p-sortIcon>
+              </th>
+              <th pSortableColumn="withHoldingPercentage">With Holding Percentage
+                <p-sortIcon field="withHoldingPercentage"></p-sortIcon>
+              </th>
+              <th></th>
+            </tr>
+            <tr>
+<td></td>
+              <td>
+                <input pInputText type="text"
+                       (input)="dataTableAddSupplier.filter($event.target.value, 'name', 'startsWith')"
+                       placeholder="Search by Supplier Code" class="p-column-filter">
+              </td>
+              <td>
+                <input pInputText type="number"
+                       (input)="dataTableAddSupplier.filter($event.target.value, 'contactNo', 'startsWith')"
+                       placeholder="Search by number" class="p-column-filter">
+              </td>
+              <td>
+                <input pInputText type="text"
+                       (input)="dataTableAddSupplier.filter($event.target.value, 'alias', 'contains')"
+                       placeholder="Search by Alias" class="p-column-filter">
+              </td>
+              <td>
+                <input pInputText type="text"
+                       (input)="dataTableAddSupplier.filter($event.target.value, 'supplierCategory', 'contains')"
+                       placeholder="Search by Supplier Category" class="p-column-filter">
+              </td>
+              <td>
+                <input pInputText type="text"
+                       (input)="dataTableAddSupplier.filter($event.target.value, 'email', 'contains')"
+                       placeholder="Search by Supplier Email" class="p-column-filter">
+              </td>
+              <td>
+                <input pInputText type="text"
+                       (input)="dataTableAddSupplier.filter($event.target.value, 'city', 'contains')"
+                       placeholder="Search by City" class="p-column-filter">
+              </td>
+              <td>
+                <input pInputText type="text"
+                       (input)="dataTableAddSupplier.filter($event.target.value, 'address', 'contains')"
+                       placeholder="Search by Address" class="p-column-filter">
+              </td>
+              <td>
+                <input pInputText type="text"
+                       (input)="dataTableAddSupplier.filter($event.target.value, 'withHoldingPercentage', 'contains')"
+                       placeholder="Search by With Holding Percentage" class="p-column-filter">
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-customer let-i = "rowIndex">
+            <tr class="p-selectable-row">
+            <td>{{i + 1}}</td>
+              <td *ngIf="customer.name !== null"> {{customer.name}}  </td>
+              <td *ngIf="customer.name === null">--</td>
+              <td *ngIf="customer.contactNo !== null">{{customer.contactNo}}</td>
+              <td *ngIf="customer.contactNo === null">--</td>
+              <td *ngIf="customer.alias !== null">{{customer.alias}}</td>
+              <td *ngIf="customer.alias === null">--</td>
+              <td *ngIf="customer.supplierCategory !== null">{{customer.supplierCategory}}</td>
+              <td *ngIf="customer.supplierCategory === null">--</td>
+              <td *ngIf="customer.email !== null">{{customer.email}}</td>
+              <td *ngIf="customer.email === null">--</td>
+              <td *ngIf="customer.city !== null">{{customer.city}}</td>
+              <td *ngIf="customer.city === null">--</td>
+              <td *ngIf="customer.address !== null">{{customer.address}}</td>
+              <td *ngIf="customer.address === null">--</td>
+              <td *ngIf="customer.withHoldingPercentage !== null">{{customer.withHoldingPercentage}}</td>
+              <td *ngIf="customer.withHoldingPercentage === null">--</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="7">No candidates found.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+      </div>
+    </div>
+  </div>
+
+</div>

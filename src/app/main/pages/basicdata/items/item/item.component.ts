@@ -18,16 +18,12 @@ export class ItemComponent implements OnInit {
   submitted = false;
   active:any;
   result: any;
-  itemTableList: any = [];
-  selectedCustomers: any[];
-  selectedCustomerss: any[];
   newItemsCreationResponce:any;
-  profileClassification: any;
   profileClassifications = [];
   profileClassificationsResult: any = [];
   itemCategoryLookup = [];
   itemCategoryLookupResult: any = [];
-  @ViewChild('dataTableShortListCandidate') table: Table;
+
   constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService, private toastr: ToastrService,
               private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService,
               private hotkeys: HotkeysService) { }
@@ -39,7 +35,7 @@ export class ItemComponent implements OnInit {
       {name: false},
     ]
     this.getAllServices();
-    this.getJobList(true);
+
   }
   formBuilderControlName(){
     this.registerForm = this.formBuilder.group({
@@ -123,25 +119,6 @@ export class ItemComponent implements OnInit {
     this.registerForm.controls.email.patchValue(registerEmail);
   }
 
-  /*--------------Get Supplier All Data list------------------*/
-  getJobList(bool) {
-    this.allDataTableService.getItemTable().subscribe(
-      itemTableResponse => {
-        this.itemTableList = itemTableResponse;
-        console.log(itemTableResponse);
-        if (this.itemTableList.statusCode = 200){
-          this.itemTableList = this.itemTableList.item;
-        }
-
-      },
-      err => {
-        // this.loading = false;
-        this.spinner.hide('main-spinner');
-        // this.toastr.error(err);
-
-      }
-    );
-  }
 
 
  resetValidations(){
@@ -209,7 +186,6 @@ export class ItemComponent implements OnInit {
         this.newItemsCreationResponce = res;
         if (this.newItemsCreationResponce.statusCode === 201 || this.newItemsCreationResponce.statusCode === 200){
           this.toastr.success(this.newItemsCreationResponce.message);
-          this.getJobList(true)
           this.ngOnInit()
         }else if (this.newItemsCreationResponce.statusCode === 208){
           this.toastr.warning(this.newItemsCreationResponce.message);
