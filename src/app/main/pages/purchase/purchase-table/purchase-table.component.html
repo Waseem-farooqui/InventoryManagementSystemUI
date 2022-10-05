@@ -1,0 +1,84 @@
+<div class="table-responsive-lg">
+  <p-table #vulnerabilityTable [value]="purchaseValueItem" [showCurrentPageReport]="true"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
+           dataKey="cve"
+           [paginator]="true" [rows]="20"
+           [lazy]="true" [lazyLoadOnInit]="false"
+           styleClass="p-datatable-customers p-datatable-gridlines app-table">
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 3rem"></th>
+        <th> Id</th>
+        <th> Manufacturer</th>
+        <th> Price UpdateDate</th>
+        <th> Piece PerPackage </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+      <tr>
+        <td>
+          <button type="button" pButton pRipple [pRowToggler]="rowData"
+                  class="p-button-text p-button-rounded p-button-plain"
+                  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td>
+          &nbsp;
+          <td class="onRowClick" pTooltip="{{rowData.cve}}">{{rowData?.cve}}</td>
+        <td>{{rowData?.manufacturer || "--"}}</td>
+        <td>{{rowData?.priceUpdateDate  | date:'dd/MMM/yyyy' || "--"}}</td>
+        <td>{{rowData?.modifiedDate  | date:'dd/MMM/yyyy' || "--"}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="5">
+          <div class="row">
+            <div class="col-sm-12 col-xs-12 col-md-12">
+              <div class="panel panel-default">
+                <p class="msg-dashBoard"> No Record Found </p>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-product>
+      <tr>
+        <td colspan="5">
+          <div class="p-p-3">
+            <p-table [value]="product?.id"
+                     styleClass="p-datatable-customers p-datatable-gridlines app-table">
+              <ng-template pTemplate="header">
+      <tr>
+        <th> Name</th>
+        <th> Alias</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-asset let-columns="columns">
+      <tr>
+        <td>{{asset?.name || "--"}}</td>
+        <td>{{asset?.name || "--"}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="3">
+          <div class="row">
+            <div class="col-sm-12 col-xs-12 col-md-12">
+              <div class="panel panel-default">
+                <p class="msg-dashBoard"> No Assets Found </p>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+</div>
+</td>
+</tr>
+</ng-template>
+</p-table>
+
+</div>

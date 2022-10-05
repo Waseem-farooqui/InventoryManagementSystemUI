@@ -18,9 +18,8 @@ export class SupplierComponent implements OnInit {
   submitted = false;
   active: any;
   newSuppliersCreationResponce: any;
-  supplierList: any = [];
-  selectedSupplier: any[];
-  @ViewChild('dataTableShortListCandidate') table: Table;
+
+
 
   constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService, private toastr: ToastrService,
               private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService) {
@@ -57,7 +56,7 @@ export class SupplierComponent implements OnInit {
       status: [''],
       category: ['']
     });
-    this.getJobList(true)
+
   }
   home(){
     this.router.navigate(['/basicData']);
@@ -68,36 +67,20 @@ export class SupplierComponent implements OnInit {
   }
 
   trimInputField(val) {
-    const registerFirstName = this.supplierForm.controls.supplierName.value.trimEnd(val).trimStart(val);
-    this.supplierForm.controls.supplierName.patchValue(registerFirstName);
-    const registerLastName = this.supplierForm.controls.aliesName.value.trimEnd(val).trimStart(val);
-    this.supplierForm.controls.aliesName.patchValue(registerLastName);
     const registerEmail = this.supplierForm.controls.email.value.trimEnd(val).trimStart(val);
     this.supplierForm.controls.email.patchValue(registerEmail);
   }
 
-  /*--------------Get Supplier All Data list------------------*/
-
-  getJobList(bool) {
-    this.allDataTableService.getSupplierTable().subscribe(
-      tableResponce => {
-        this.supplierList = tableResponce;
-        this.supplierList = this.supplierList.profiles;
-      },
-      err => {
-        // this.loading = false;
-        this.spinner.hide('main-spinner');
-        // this.toastr.error(err);
-
-      }
-    );
-  }
 
   /*--------------Submit advance search form------------------*/
   onSubmit() {
     this.spinner.show('main-spinner');
     this.submitted = true;
     const supplierForm = this.supplierForm.value;
+    if (this.supplierForm.invalid) {
+      this.toastr.error('Please Fill the Mendotory Fields');
+      return;
+    }
 
     this.spinner.show('main-spinner');
     this.addingService.addNewSupplier(supplierForm).subscribe(

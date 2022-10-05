@@ -81,7 +81,6 @@ export class PurchaseComponent implements OnInit {
       grandTotal: [null],
 
     });
-    this.getJobList(true)
     this.getAllServices();
   }
 
@@ -228,21 +227,7 @@ export class PurchaseComponent implements OnInit {
     this.aliasLookUpNameResult = this.aliasLookUpName.filter(searchAlphbet => searchAlphbet.toLowerCase().startsWith(event.query.toLowerCase()));
   }
 
-  /*--------------Get Supplier All Data list------------------*/
-  getJobList(bool) {
-    this.allDataTableService.getPurchaseTable().subscribe(
-      tableResponce => {
-        this.jobList = tableResponce;
-        this.jobList = this.jobList.profiles;
-      },
-      err => {
-        // this.loading = false;
-        this.spinner.hide('main-spinner');
-        // this.toastr.error(err);
 
-      }
-    );
-  }
 
   purchaseArray(aliasNameTable, itemName, packing, batch, expiryDate, qty, bonus, purchasPrice, totalExcludingDiscount, descountPercentage, descountPrice,
                 retailPrice, netPrice, marginPercentage): FormGroup {

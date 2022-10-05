@@ -1,0 +1,115 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="job-form job-form-b">
+
+      <div class="table-responsive">
+        <p-table #dataTableShortListCandidate [value]="itemTableList" [(selection)]="selectedCustomers" dataKey="id"
+                 styleClass="p-datatable-sm"
+                 [rowHover]="true"
+                 [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                 [paginator]="true"
+                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                 [filterDelay]="0"
+                 [globalFilterFields]="['name','barCode','name','expiry','sellingPrice', 'purchasePrice', ]">
+          <ng-template pTemplate="caption">
+
+            <div class="table-header">
+              <div class="row">
+                <div class="col-6">
+                        <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                       (input)="dataTableShortListCandidate.filterGlobal($event.target.value, 'contains')"
+                                       placeholder="Global Search"/>
+                            </span>
+                </div>
+              </div>
+            </div>
+
+          </ng-template>
+          <ng-template pTemplate="header">
+
+            <tr>
+              <th></th>
+              <th pSortableColumn="name">Name
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="barCode">Alias
+                <p-sortIcon field="barCode"></p-sortIcon>
+              </th>
+              <th pSortableColumn="name">Category Name
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="expiry">Expiry
+                <p-sortIcon field="expiry"></p-sortIcon>
+              </th>
+              <th pSortableColumn="sellingPrice">Selling Price
+                <p-sortIcon field="sellingPrice"></p-sortIcon>
+              </th>
+              <th pSortableColumn="purchasePrice">Purchase Price
+                <p-sortIcon field="purchasePrice"></p-sortIcon>
+              </th>
+
+            </tr>
+            <tr>
+<td></td>
+              <td>
+                <input pInputText type="text"
+                       (input)="dataTableShortListCandidate.filter($event.target.value, 'name', 'startsWith')"
+                       placeholder="Search by name" class="p-column-filter">
+              </td>
+              <td>
+                <input pInputText type="text"
+                       (input)="dataTableShortListCandidate.filter($event.target.value, 'barCode', 'startsWith')"
+                       placeholder="Search by Bar Code" class="p-column-filter">
+              </td>
+              <td>
+                <input pInputText type="text"
+                       (input)="dataTableShortListCandidate.filter($event.target.value, 'name', 'contains')"
+                       placeholder="Search by  Name" class="p-column-filter">
+              </td>
+              <td>
+
+              </td>
+              <td>
+                <input pInputText type="text"
+                       (input)="dataTableShortListCandidate.filter($event.target.value, 'sellingPrice', 'contains')"
+                       placeholder="Search by City" class="p-column-filter">
+              </td>
+              <td>
+                <input pInputText type="text"
+                       (input)="dataTableShortListCandidate.filter($event.target.value, 'Purchase Price', 'contains')"
+                       placeholder="Search by Address" class="p-column-filter">
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-customer  let-i = "rowIndex">
+            <tr class="p-selectable-row">
+
+              <td>{{i + 1}}</td>
+              <td *ngIf="customer.id.name !== null"> {{customer.id.name}}  </td>
+              <td *ngIf="customer.id.name === null">--</td>
+              <td *ngIf="customer.id.barCode !== null">{{customer.id.barCode}}</td>
+              <td *ngIf="customer.id.barCode === null">--</td>
+              <td *ngIf="customer.category.name !== null">{{customer.category.name}}</td>
+              <td *ngIf="customer.category.name === null">--</td>
+              <td *ngIf="customer.expiry !== null">{{customer.expiry}}</td>
+              <td *ngIf="customer.expiry === null">--</td>
+              <td *ngIf="customer.sellingPrice !== null">{{customer.sellingPrice}}</td>
+              <td *ngIf="customer.sellingPrice === null">--</td>
+              <td *ngIf="customer.purchasePrice !== null">{{customer.purchasePrice}}</td>
+              <td *ngIf="customer.purchasePrice === null">--</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="7">No candidates found.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -34,8 +34,11 @@ import { ItemComponent } from './basicdata/items/item/item.component';
 import { ItemCategoryComponent } from './basicdata/items/item-category/item-category.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {autoCompleteServices} from "../../services/autoCompleteServices";
+import { SupplierListComponent } from './basicdata/supplier/supplier-list/supplier-list.component';
+import { ItemtableComponent } from './basicdata/items/itemtable/itemtable.component';
+import { PurchaseTableComponent } from './purchase/purchase-table/purchase-table.component';
 @NgModule({
-  declarations: [PagesComponent, NavbarComponent, DashboardComponent, PurchaseComponent, BasicdataComponent, SupplierComponent, SuppliercategoryComponent, ItemComponent, ItemCategoryComponent],
+  declarations: [PagesComponent, NavbarComponent, DashboardComponent, PurchaseComponent, BasicdataComponent, SupplierComponent, SuppliercategoryComponent, ItemComponent, ItemCategoryComponent, SupplierListComponent, ItemtableComponent, PurchaseTableComponent],
 
   imports: [
     ChipsModule,
