@@ -1,10 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AddingItemUserService} from "../../../../../services/addingItemUser.service";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {GetAllDataService} from "../../../../../services/getAllData.Service";
-import {Table} from "primeng/table";
 import {ToastrService} from "ngx-toastr";
 
 
@@ -58,8 +57,16 @@ export class SupplierComponent implements OnInit {
     });
 
   }
-  home(){
+
+  home() {
     this.router.navigate(['/basicData']);
+  }
+
+  patchAlias() {
+    const name = this.supplierForm.controls.name.value
+    this.supplierForm.patchValue({
+      aliesName: (name.substring(0, 1) + name.substring(name.length, name.length - 1)).toUpperCase(),
+    });
   }
 
   get supplierFormControl() {

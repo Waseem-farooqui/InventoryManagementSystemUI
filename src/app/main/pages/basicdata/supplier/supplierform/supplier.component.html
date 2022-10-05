@@ -52,7 +52,7 @@
                     </div>
                   </div>
                   <div class="form-group col-md-2">
-                    <label for="aliesName">Alies Name</label>
+                    <label for="aliesName">Alias Name</label>
                     <input type="text" formControlName="aliesName" id="aliesName" class="form-control" readonly
                            [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.aliesName.errors) || ((supplierFormControl.aliesName.dirty || supplierFormControl.aliesName.touched) && supplierFormControl.aliesName.errors) }"/>
                     <div *ngIf="supplierFormControl.aliesName.errors" class="invalid-feedback">
@@ -76,6 +76,7 @@
                   <div class="form-group col-md-3">
                     <label for="name">Supplier Name</label>
                     <input type="text" formControlName="name" id="name" class="form-control"
+                           (focusout)="patchAlias()"
                            [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.name.errors) || ((supplierFormControl.name.dirty || supplierFormControl.name.touched) && supplierFormControl.name.errors) }"/>
                     <div *ngIf="supplierFormControl.name.errors" class="invalid-feedback">
                       <div
