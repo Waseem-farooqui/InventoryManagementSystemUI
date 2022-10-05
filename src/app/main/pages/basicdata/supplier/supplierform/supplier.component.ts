@@ -58,9 +58,6 @@ export class SupplierComponent implements OnInit {
     });
 
   }
-  home(){
-    this.router.navigate(['/basicData']);
-  }
 
   get supplierFormControl() {
     return this.supplierForm.controls;
@@ -89,7 +86,7 @@ export class SupplierComponent implements OnInit {
         this.newSuppliersCreationResponce = res;
         if (this.newSuppliersCreationResponce.statusCode === 201 || this.newSuppliersCreationResponce.statusCode === 200){
           this.toastr.success(this.newSuppliersCreationResponce.message);
-          this.ngOnInit()
+          window.location.reload();
         }else if (this.newSuppliersCreationResponce.statusCode === 208){
           this.toastr.warning(this.newSuppliersCreationResponce.message);
         }else {

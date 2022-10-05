@@ -186,7 +186,7 @@ export class ItemComponent implements OnInit {
         this.newItemsCreationResponce = res;
         if (this.newItemsCreationResponce.statusCode === 201 || this.newItemsCreationResponce.statusCode === 200){
           this.toastr.success(this.newItemsCreationResponce.message);
-          this.ngOnInit()
+          window.location.reload()
         }else if (this.newItemsCreationResponce.statusCode === 208){
           this.toastr.warning(this.newItemsCreationResponce.message);
         }else {
