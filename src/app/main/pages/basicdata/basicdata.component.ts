@@ -13,7 +13,7 @@ export class BasicdataComponent implements OnInit {
   ngOnInit(): void {
   }
   suplier(){
-    this.router.navigate(['supplierForm']);
+    this.router.navigate(['supplier']);
   }
   addItme(){
     this.router.navigate(['addItems']);

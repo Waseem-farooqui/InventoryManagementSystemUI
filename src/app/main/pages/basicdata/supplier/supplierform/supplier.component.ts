@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AddingItemUserService} from "../../../../../services/addingItemUser.service";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {GetAllDataService} from "../../../../../services/getAllData.Service";
+import {Table} from "primeng/table";
 import {ToastrService} from "ngx-toastr";
 
 
@@ -58,10 +59,6 @@ export class SupplierComponent implements OnInit {
 
   }
 
-  home() {
-    this.router.navigate(['/basicData']);
-  }
-
   patchAlias() {
     const name = this.supplierForm.controls.name.value
     this.supplierForm.patchValue({
@@ -96,7 +93,7 @@ export class SupplierComponent implements OnInit {
         this.newSuppliersCreationResponce = res;
         if (this.newSuppliersCreationResponce.statusCode === 201 || this.newSuppliersCreationResponce.statusCode === 200){
           this.toastr.success(this.newSuppliersCreationResponce.message);
-          this.ngOnInit()
+          window.location.reload();
         }else if (this.newSuppliersCreationResponce.statusCode === 208){
           this.toastr.warning(this.newSuppliersCreationResponce.message);
         }else {

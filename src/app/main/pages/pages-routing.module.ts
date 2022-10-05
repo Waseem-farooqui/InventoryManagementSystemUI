@@ -4,7 +4,6 @@ import {PagesComponent} from "./pages.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {PurchaseComponent} from "./purchase/purchase.component";
 import {BasicdataComponent} from "./basicdata/basicdata.component";
-import {SupplierComponent} from "./basicdata/supplier/supplierform/supplier.component";
 import {ItemComponent} from "./basicdata/items/item/item.component";
 import {ItemCategoryComponent} from "./basicdata/items/item-category/item-category.component";
 
@@ -26,8 +25,7 @@ const routes: Routes = [
         path: 'basicData',
         component: BasicdataComponent
       },{
-        path: 'supplierForm',
-        component: SupplierComponent
+        path: 'supplier',  loadChildren: () => import('./basicdata/supplier/supplier.module').then(m =>m.SupplierModule)
       },{
         path: 'addItems',
         component: ItemComponent

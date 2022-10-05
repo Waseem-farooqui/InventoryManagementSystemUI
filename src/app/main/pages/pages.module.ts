@@ -37,8 +37,9 @@ import {autoCompleteServices} from "../../services/autoCompleteServices";
 import { SupplierListComponent } from './basicdata/supplier/supplier-list/supplier-list.component';
 import { ItemtableComponent } from './basicdata/items/itemtable/itemtable.component';
 import { PurchaseTableComponent } from './purchase/purchase-table/purchase-table.component';
+import { SupplierDashboardComponent } from './basicdata/supplier/supplier-dashboard/supplier-dashboard.component';
 @NgModule({
-  declarations: [PagesComponent, NavbarComponent, DashboardComponent, PurchaseComponent, BasicdataComponent, SupplierComponent, SuppliercategoryComponent, ItemComponent, ItemCategoryComponent, SupplierListComponent, ItemtableComponent, PurchaseTableComponent],
+  declarations: [PagesComponent, NavbarComponent, DashboardComponent, PurchaseComponent, BasicdataComponent, SupplierComponent, SuppliercategoryComponent, ItemComponent, ItemCategoryComponent, SupplierListComponent, ItemtableComponent, PurchaseTableComponent, SupplierDashboardComponent],
 
   imports: [
     ChipsModule,
