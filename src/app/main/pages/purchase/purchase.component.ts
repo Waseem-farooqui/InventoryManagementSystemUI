@@ -287,6 +287,7 @@ export class PurchaseComponent implements OnInit {
     this.submitted = true;
     const value = this.purchaseForm.value;
     // stop here if form is invalid
+    console.log(value)
     if (this.purchaseForm.invalid) {
       this.toastr.error('Please Fill the Mendotory Fields');
       return;
@@ -306,7 +307,7 @@ export class PurchaseComponent implements OnInit {
       orderCode: value.orderCode,
       orderDate: value.orderDate,
       supplierOrderNumber: value.supplierOrderNumber,
-      purchaseArray: {
+      purchaseArray: [{
         aliasNameTable: value.aliasNameTable,
         itemName: value.itemName,
         packing: value.packing,
@@ -321,7 +322,7 @@ export class PurchaseComponent implements OnInit {
         retailPrice: value.retailPrice,
         netPrice: value.netPrice,
         marginPercentage: value.marginPercentage,
-      },
+      }],
       inventoryStock: value.inventoryStock,
       totalDiscountPercentage: value.totalDiscountPercentage,
       flatDisc: value.flatDisc,

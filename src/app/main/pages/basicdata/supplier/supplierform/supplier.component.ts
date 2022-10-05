@@ -98,43 +98,8 @@ export class SupplierComponent implements OnInit {
     this.spinner.show('main-spinner');
     this.submitted = true;
     const supplierForm = this.supplierForm.value;
-    // stop here if form is invalid
-    // if (this.supplierForm.invalid) {
-    //   return;
-    // }
+
     this.spinner.show('main-spinner');
-    // const result = {
-    //   // code: value.code,
-    //   name: supplierForm.supplierName,
-    //   contactNo: supplierForm.mobile,
-    //   email: 'adminmail@smartaid.shop',
-    //   address: supplierForm.address1,
-    //   alies: supplierForm.aliesName,
-    //   status: supplierForm.statusActive.name,
-    //   gst: supplierForm.defaultGst,
-    //   city: supplierForm.city,
-    //   country: supplierForm.country,
-    //   cnic: supplierForm.cnic,
-    //   category: supplierForm.category,
-    //   bankAccount: supplierForm.bankAccount,
-    //   ntnNumber: supplierForm.ntn,
-    //   withHoldingPercentage: supplierForm.wH,
-    //   taxRegistrationNumber: supplierForm.taxReg,
-    //
-    //   address2: supplierForm.address2,
-    //   manufactureCity: supplierForm.manufactureCity,
-    //   postCode: supplierForm.postCode,
-    //   phone1: supplierForm.phone1,
-    //   phone2: supplierForm.phone2,
-    //   mobile: supplierForm.mobile,
-    //   fax: supplierForm.fax,
-    //   email2: supplierForm.email2,
-    //    email3: supplierForm.email3,
-    //   supplierName: supplierForm.supplierName,
-    //   website: supplierForm.website,
-    //   dayLimit: supplierForm.dayLimit,
-    //   introduction: supplierForm.introduction,
-    // };
     this.addingService.addNewSupplier(supplierForm).subscribe(
       res => {
         this.spinner.hide('main-spinner');

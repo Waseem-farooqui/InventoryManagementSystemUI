@@ -74,20 +74,20 @@
 
                 <div class="form-row">
                   <div class="form-group col-md-3">
-                    <label for="supplierName">Supplier Name</label>
-                    <input type="text" formControlName="name" id="supplierName" class="form-control"
-                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.supplierName.errors) || ((supplierFormControl.supplierName.dirty || supplierFormControl.supplierName.touched) && supplierFormControl.supplierName.errors) }"/>
-                    <div *ngIf="supplierFormControl.supplierName.errors" class="invalid-feedback">
+                    <label for="name">Supplier Name</label>
+                    <input type="text" formControlName="name" id="name" class="form-control"
+                           [ngClass]="{ 'is-invalid': (submitted && supplierFormControl.name.errors) || ((supplierFormControl.name.dirty || supplierFormControl.name.touched) && supplierFormControl.name.errors) }"/>
+                    <div *ngIf="supplierFormControl.name.errors" class="invalid-feedback">
                       <div
-                        *ngIf="(supplierFormControl.supplierName.dirty || supplierFormControl.supplierName.touched) && supplierFormControl.supplierName.errors?.pattern">
+                        *ngIf="(supplierFormControl.name.dirty || supplierFormControl.name.touched) && supplierFormControl.name.errors?.pattern">
                         Please enter a valid Supplier Name
                       </div>
                       <div
-                        *ngIf="((supplierFormControl.supplierName.dirty || supplierFormControl.supplierName.touched) && supplierFormControl.supplierName.errors?.required && !supplierFormControl.supplierName.errors?.pattern && !submitted)">
+                        *ngIf="((supplierFormControl.name.dirty || supplierFormControl.name.touched) && supplierFormControl.name.errors?.required && !supplierFormControl.name.errors?.pattern && !submitted)">
                         Supplier Name No is required
                       </div>
                       <div
-                        *ngIf="((submitted) && supplierFormControl.supplierName.errors?.required && !supplierFormControl.supplierName.errors?.pattern)">
+                        *ngIf="((submitted) && supplierFormControl.name.errors?.required && !supplierFormControl.name.errors?.pattern)">
                         Supplier Name No is required
                       </div>
                     </div>
@@ -293,8 +293,8 @@
                 </div>
 
                 <div class="form-row">
-                  <div class="col-lg-12">
-                    <button class="pages col-md-12" type="submit">Save</button>
+                  <div class="col-lg-12 text-center">
+                    <button class="pages col-md-9" type="submit">Save</button>
                   </div>
                 </div>
 
@@ -320,7 +320,7 @@
                          [paginator]="true"
                          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                          [filterDelay]="0"
-                         [globalFilterFields]="['supplierCode','allasName','supplierName','supplierCategory','city', 'address', 'phoneNumber']">
+                         [globalFilterFields]="['supplierCode','allasName','name','supplierCategory','city', 'address', 'phoneNumber']">
                   <ng-template pTemplate="caption">
 
                     <div class="table-header">
