@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row tab-content">
   <div class="col-md-12">
     <div class="job-form job-form-b">
 
@@ -37,11 +37,11 @@
               <th pSortableColumn="contactNo">Contact Number
                 <p-sortIcon field="contactNo"></p-sortIcon>
               </th>
-              <th pSortableColumn="alias">Alias
-                <p-sortIcon field="alias"></p-sortIcon>
+              <th pSortableColumn="cnic">CNIC
+                <p-sortIcon field="cnic"></p-sortIcon>
               </th>
-              <th pSortableColumn="supplierCategory">Supplier Category
-                <p-sortIcon field="supplierCategory"></p-sortIcon>
+              <th pSortableColumn="id">Id
+                <p-sortIcon field="id"></p-sortIcon>
               </th>
               <th pSortableColumn="email">Email
                 <p-sortIcon field="email"></p-sortIcon>
@@ -62,7 +62,7 @@
               <td>
                 <input pInputText type="text"
                        (input)="dataTableAddSupplier.filter($event.target.value, 'name', 'startsWith')"
-                       placeholder="Search by Supplier Code" class="p-column-filter">
+                       placeholder="Search by Name" class="p-column-filter">
               </td>
               <td>
                 <input pInputText type="number"
@@ -71,13 +71,13 @@
               </td>
               <td>
                 <input pInputText type="text"
-                       (input)="dataTableAddSupplier.filter($event.target.value, 'alias', 'contains')"
-                       placeholder="Search by Alias" class="p-column-filter">
+                       (input)="dataTableAddSupplier.filter($event.target.value, 'cnic', 'contains')"
+                       placeholder="Search by CNIC" class="p-column-filter">
               </td>
               <td>
                 <input pInputText type="text"
-                       (input)="dataTableAddSupplier.filter($event.target.value, 'supplierCategory', 'contains')"
-                       placeholder="Search by Supplier Category" class="p-column-filter">
+                       (input)="dataTableAddSupplier.filter($event.target.value, 'id', 'contains')"
+                       placeholder="Search by Supplier ID" class="p-column-filter">
               </td>
               <td>
                 <input pInputText type="text"
@@ -108,10 +108,10 @@
               <td *ngIf="customer.name === null">--</td>
               <td *ngIf="customer.contactNo !== null">{{customer.contactNo}}</td>
               <td *ngIf="customer.contactNo === null">--</td>
-              <td *ngIf="customer.alias !== null">{{customer.alias}}</td>
-              <td *ngIf="customer.alias === null">--</td>
-              <td *ngIf="customer.supplierCategory !== null">{{customer.supplierCategory}}</td>
-              <td *ngIf="customer.supplierCategory === null">--</td>
+              <td *ngIf="customer.cnic !== null">{{customer.cnic}}</td>
+              <td *ngIf="customer.cnic === null">--</td>
+              <td *ngIf="customer.id !== null">{{customer.id}}</td>
+              <td *ngIf="customer.id === null">--</td>
               <td *ngIf="customer.email !== null">{{customer.email}}</td>
               <td *ngIf="customer.email === null">--</td>
               <td *ngIf="customer.city !== null">{{customer.city}}</td>

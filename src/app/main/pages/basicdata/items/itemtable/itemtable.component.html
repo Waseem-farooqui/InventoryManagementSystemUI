@@ -40,9 +40,6 @@
               <th pSortableColumn="name">Category Name
                 <p-sortIcon field="name"></p-sortIcon>
               </th>
-              <th pSortableColumn="expiry">Expiry
-                <p-sortIcon field="expiry"></p-sortIcon>
-              </th>
               <th pSortableColumn="sellingPrice">Selling Price
                 <p-sortIcon field="sellingPrice"></p-sortIcon>
               </th>
@@ -68,9 +65,7 @@
                        (input)="dataTableShortListCandidate.filter($event.target.value, 'name', 'contains')"
                        placeholder="Search by  Name" class="p-column-filter">
               </td>
-              <td>
 
-              </td>
               <td>
                 <input pInputText type="text"
                        (input)="dataTableShortListCandidate.filter($event.target.value, 'sellingPrice', 'contains')"
@@ -93,8 +88,6 @@
               <td *ngIf="customer.id.barCode === null">--</td>
               <td *ngIf="customer.category.name !== null">{{customer.category.name}}</td>
               <td *ngIf="customer.category.name === null">--</td>
-              <td *ngIf="customer.expiry !== null">{{customer.expiry}}</td>
-              <td *ngIf="customer.expiry === null">--</td>
               <td *ngIf="customer.sellingPrice !== null">{{customer.sellingPrice}}</td>
               <td *ngIf="customer.sellingPrice === null">--</td>
               <td *ngIf="customer.purchasePrice !== null">{{customer.purchasePrice}}</td>

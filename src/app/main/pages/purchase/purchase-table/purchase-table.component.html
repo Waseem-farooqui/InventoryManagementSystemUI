@@ -1,5 +1,6 @@
+<div class="row tab-content">
 <div class="table-responsive-lg">
-  <p-table #vulnerabilityTable [value]="purchaseValueItem" [showCurrentPageReport]="true"
+  <p-table #vulnerabilityTable [value]="purchaseList" [showCurrentPageReport]="true"
            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
            dataKey="cve"
            [paginator]="true" [rows]="20"
@@ -9,10 +10,12 @@
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th style="width: 3rem"></th>
+        <th> Alias Name</th>
         <th> Id</th>
-        <th> Manufacturer</th>
-        <th> Price UpdateDate</th>
-        <th> Piece PerPackage </th>
+        <th> Purchase Date</th>
+        <th> Supplier Invoice Number </th>
+        <th> Grand Total </th>
+        <th> Purchased </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
@@ -22,11 +25,13 @@
                   class="p-button-text p-button-rounded p-button-plain"
                   [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
         </td>
-          &nbsp;
-          <td class="onRowClick" pTooltip="{{rowData.cve}}">{{rowData?.cve}}</td>
-        <td>{{rowData?.manufacturer || "--"}}</td>
-        <td>{{rowData?.priceUpdateDate  | date:'dd/MMM/yyyy' || "--"}}</td>
-        <td>{{rowData?.modifiedDate  | date:'dd/MMM/yyyy' || "--"}}</td>
+        <td><a (click)="updatePurchase(rowData.id)">{{rowData?.aliasName || "--"}}</a> </td>
+        <td>{{rowData?.id || "--"}}</td>
+
+        <td>{{rowData?.purchaseDate  | date:'dd/MMM/yyyy' || "--"}}</td>
+        <td>{{rowData?.supplierInvoiceNumber  }}</td>
+        <td>{{rowData?.grandTotal  }}</td>
+        <td>{{rowData?.purchased  }}</td>
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
@@ -46,18 +51,26 @@
       <tr>
         <td colspan="5">
           <div class="p-p-3">
-            <p-table [value]="product?.id"
+            <p-table [value]="product?.purchaseTables"
                      styleClass="p-datatable-customers p-datatable-gridlines app-table">
               <ng-template pTemplate="header">
       <tr>
-        <th> Name</th>
-        <th> Alias</th>
+        <th> Alias Name Table</th>
+        <th> Quantity</th>
+        <th> Net Price</th>
+        <th> Expiry Date</th>
+        <th> Total Excluding Discount</th>
+        <th> RetailPrice</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-asset let-columns="columns">
       <tr>
-        <td>{{asset?.name || "--"}}</td>
-        <td>{{asset?.name || "--"}}</td>
+        <td>{{asset?.aliasNameTable || "--"}}</td>
+        <td>{{asset?.quantity || "--"}}</td>
+        <td>{{asset?.netPrice || "--"}}</td>
+        <td>{{asset?.expiryDate | date:'dd/MMM/yyyy' || "--"}}</td>
+        <td>{{asset?.totalExcludingDiscount || "--"}}</td>
+        <td>{{asset?.retailPrice || "--"}}</td>
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
@@ -81,4 +94,5 @@
 </ng-template>
 </p-table>
 
+</div>
 </div>
