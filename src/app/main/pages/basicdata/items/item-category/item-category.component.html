@@ -54,24 +54,24 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
 
-                    <label for="itemName"> Name</label>
-                    <p-autoComplete id="itemName" formControlName="itemName"
+                    <label for="name"> Name</label>
+                    <p-autoComplete id="name" formControlName="name"
                                     [suggestions]="itemCategoryLookupResult"
 
-                                    [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.itemName.errors) || ((itemsAddsFormControl.itemName.dirty
-                                          || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors) }"
+                                    [ngClass]="{ 'is-invalid': (submitted && itemsAddsFormControl.name.errors) || ((itemsAddsFormControl.name.dirty
+                                          || itemsAddsFormControl.name.touched) && itemsAddsFormControl.name.errors) }"
                                     (completeMethod)="searchClassifications($event)" [dropdown]="true">
                       <ng-template let-itemCategoriess pTemplate="item">
                         {{itemCategoriess }}
                       </ng-template>
                     </p-autoComplete>
-                    <div *ngIf="itemsAddsFormControl.itemName.errors" class="invalid-feedback">
+                    <div *ngIf="itemsAddsFormControl.name.errors" class="invalid-feedback">
                       <div
-                        *ngIf="((itemsAddsFormControl.itemName.dirty || itemsAddsFormControl.itemName.touched) && itemsAddsFormControl.itemName.errors?.required && !itemsAddsFormControl.itemName.errors?.pattern && !submitted)">
+                        *ngIf="((itemsAddsFormControl.name.dirty || itemsAddsFormControl.name.touched) && itemsAddsFormControl.name.errors?.required && !itemsAddsFormControl.name.errors?.pattern && !submitted)">
                         Item Name is required
                       </div>
                       <div
-                        *ngIf="((submitted) && itemsAddsFormControl.itemName.errors?.required && !itemsAddsFormControl.itemName.errors?.pattern)">
+                        *ngIf="((submitted) && itemsAddsFormControl.name.errors?.required && !itemsAddsFormControl.name.errors?.pattern)">
                         Item Name is required
                       </div>
                     </div>

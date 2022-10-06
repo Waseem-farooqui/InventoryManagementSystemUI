@@ -37,9 +37,9 @@ export class ItemCategoryComponent implements OnInit {
   formBuilderControlName(){
     this.registerForm = this.formBuilder.group({
       code: [null],
-      itemName: [null ,[Validators.required]],
+      name: [null, [Validators.required]],
       numericalFactor: [null],
-      expiryDayLimit: [null ,[Validators.required]],
+      expiryDayLimit: [null, [Validators.required]],
     });
   }
   home(){
@@ -64,7 +64,7 @@ export class ItemCategoryComponent implements OnInit {
     this.addingService.getLookupName('ITEM_CATEGORY').subscribe(
       lookupResponce => {
         this.result = lookupResponce;
-        console.log(lookupResponce);
+
         if (this.result && this.result.responseBody && this.result.responseBody.length > 0) {
           this.result = this.result.responseBody;
           for (const val of this.result) {
@@ -116,30 +116,25 @@ export class ItemCategoryComponent implements OnInit {
   onSubmit() {
     this.spinner.show('main-spinner');
     this.submitted = true;
-    const value = this.registerForm.value;
+    const categorySubmissionForm = this.registerForm.value;
+    console.log(categorySubmissionForm);
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       this.toastr.error('Please Fill the Mendotory Fields');
       return;
     }
     this.spinner.show('main-spinner');
-    const result = {
-      name: value.itemName,
-      numericalFactor: value.numericalFactor,
-      expiry: value.expiryDayLimit,
-
-    }
-    this.addingService.addItemCategory(result).subscribe(
+    this.addingService.addItemCategory(categorySubmissionForm).subscribe(
       res => {
         this.spinner.hide('main-spinner');
         this.itemCategoryResponce = res;
-        if (this.itemCategoryResponce.statusCode === 201 || this.itemCategoryResponce.statusCode === 200){
+        if (this.itemCategoryResponce.statusCode === 201 || this.itemCategoryResponce.statusCode === 200) {
           this.toastr.success(this.itemCategoryResponce.message);
           this.getJobList(true)
           this.ngOnInit()
-        }else if (this.itemCategoryResponce.statusCode === 208){
+        } else if (this.itemCategoryResponce.statusCode === 208) {
           this.toastr.warning(this.itemCategoryResponce.message);
-        }else {
+        } else {
           this.toastr.error(this.itemCategoryResponce.message);
         }
       },

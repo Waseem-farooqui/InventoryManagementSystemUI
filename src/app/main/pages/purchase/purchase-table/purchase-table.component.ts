@@ -30,10 +30,10 @@ export class PurchaseTableComponent implements OnInit {
     this.allDataTableService.getPurchaseTable().subscribe(
       tableResponce => {
         this.purchaseList = tableResponce;
-        console.log(this.purchaseList);
+
         this.purchaseList = this.purchaseList.purchases;
         for (var val of this.purchaseList){
-          console.log(val.items);
+
           this.purchaseValueItem = val.items;
         }
 

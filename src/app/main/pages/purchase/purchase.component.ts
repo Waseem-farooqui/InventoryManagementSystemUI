@@ -20,7 +20,6 @@ export class PurchaseComponent implements OnInit {
   active: any;
   supplierResponseResult: any;
   itemResponseResult: any;
-  jobList: any = [];
   supplierLookUpName = [];
   supplierLookUpNameResult: any = [];
   itemLookUpName: any = [];
@@ -29,16 +28,18 @@ export class PurchaseComponent implements OnInit {
   aliasLookUpNameResult: any = [];
   itemQuantityArray: number[] = [];
   stockArray: number[] = [];
-  purchasePrice: any = [];
+  purchasePrice: number[] = [];
   selectItemName: any = [];
-  barcode: any = [];
+  barcode: string[] = [];
   netTotalArray: number[] = [];
   purchaseFormNameArray: string[] = [];
   purchaseFormAliasArray: string[] = [];
   purchaseFormPurchasePriceArray: number[] = [];
   @ViewChild('dataTableShortListCandidate') table: Table;
-  today = new Date();
-  purchaseArrayName: string = 'purchaseArray'
+  today = Date.now();
+  purchaseTableName: string = 'purchaseTable'
+  private supplierId: number;
+  private purchaseResponse: any;
 
   constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService,
               private toastr: ToastrService,
@@ -50,8 +51,8 @@ export class PurchaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.active = [
-      {name: true},
-      {name: false},
+      {name: "true"},
+      {name: "false"}
     ]
     this.purchaseForm = this.formBuilder.group({
       invoice: [null],
@@ -62,12 +63,9 @@ export class PurchaseComponent implements OnInit {
       supplierInvoiceNumber: [null, [Validators.required]],
       grnNumber: [null],
       remarks: [null],
-      printBal: [null],
-      invSize: [null],
+      printBill: [null],
       orderCode: [null],
-      orderDate: [new Date()],
-      supplierOrderNumber: [null],
-      purchaseArray: this.formBuilder.array([this.purchaseArray(null, null, null,
+      purchaseTable: this.formBuilder.array([this.purchaseTable(null, null, null,
         0, new Date(), 1, null, null, null, 0, null, 0, null, 0)]),
       inventoryStock: [null],
       totalDiscountPercentage: [0],
@@ -75,7 +73,7 @@ export class PurchaseComponent implements OnInit {
       miscValue: [0],
       inventoryGst: [0],
       totalStock: [null],
-      purchaseExpance: [0],
+      purchaseExpense: [0],
       lastPurchasePrice: [null],
       avgPrice: [null],
       grandTotal: [null],
@@ -100,7 +98,7 @@ export class PurchaseComponent implements OnInit {
   }
 
   getPurchaseTableControlByIndex(tableIndex) {
-    return this.purchaseForm.get(this.purchaseArrayName)['controls'][tableIndex].controls
+    return this.purchaseForm.get(this.purchaseTableName)['controls'][tableIndex].controls
   }
 
   populatePurchaseTableFields(aliasFormControl, tableIndex, type) {
@@ -113,11 +111,11 @@ export class PurchaseComponent implements OnInit {
     } else {
       this.selectItemName = this.itemResponseResult.find(item => item.name === aliasFormControl.value || item.alias === aliasFormControl.value)
       if (type === 'alias')
-        this.purchaseFormNameArray[tableIndex] = tableControl.itemName.patchValue(this.selectItemName.name)
+        this.purchaseFormNameArray[tableIndex] = tableControl.name.patchValue(this.selectItemName.name)
       else
         this.purchaseFormAliasArray[tableIndex] = tableControl.aliasNameTable.patchValue(this.selectItemName.alias)
 
-      this.purchaseFormPurchasePriceArray[tableIndex] = tableControl.purchasPrice.patchValue(this.selectItemName.purchasePrice)
+      this.purchaseFormPurchasePriceArray[tableIndex] = tableControl.purchasePrice.patchValue(this.selectItemName.purchasePrice)
       this.stockArray[tableIndex] = this.selectItemName.quantity ? this.selectItemName.quantity : 0;
       this.itemPatchValue()
       this.patchPurchaseTable(tableIndex);
@@ -133,12 +131,12 @@ export class PurchaseComponent implements OnInit {
 
   patchPurchaseTable(tableIndex) {
     const tableControl = this.getPurchaseTableControlByIndex(tableIndex);
-    this.itemQuantityArray[tableIndex] = tableControl.qty.value;
-    tableControl.netPrice.patchValue(tableControl.purchasPrice.value * tableControl.qty.value - tableControl.descountPrice.value);
-    tableControl.descountPrice.patchValue((tableControl.netPrice.value / 100) * tableControl.descountPercentage.value)
-    tableControl.descountPercentage.patchValue(tableControl.descountPrice.value / tableControl.netPrice.value * 100)
-    tableControl.totalExcludingDiscount.patchValue(tableControl.netPrice.value - tableControl.descountPrice.value)
-    tableControl.marginPercentage.patchValue(parseFloat(String((tableControl.retailPrice.value - tableControl.purchasPrice.value) / tableControl.purchasPrice.value * 100)).toFixed(1))
+    this.itemQuantityArray[tableIndex] = tableControl.quantity.value;
+    tableControl.netPrice.patchValue(tableControl.purchasePrice.value * tableControl.quantity.value - tableControl.discountPrice.value);
+    tableControl.discountPrice.patchValue((tableControl.netPrice.value / 100) * tableControl.discountPercentage.value)
+    tableControl.discountPercentage.patchValue(tableControl.discountPrice.value / tableControl.netPrice.value * 100)
+    tableControl.totalExcludingDiscount.patchValue(tableControl.netPrice.value - tableControl.discountPrice.value)
+    tableControl.marginPercentage.patchValue(parseFloat(String((tableControl.retailPrice.value - tableControl.purchasePrice.value) / tableControl.purchasePrice.value * 100)).toFixed(2))
     this.netTotalArray[tableIndex] = tableControl.netPrice.value;
     this.purchaseForm.controls.grandTotal.patchValue(this.getTotalSumOfColumn(this.netTotalArray));
   }
@@ -150,7 +148,7 @@ export class PurchaseComponent implements OnInit {
       purchaseFormControl.totalDiscountPercentage.patchValue(parseFloat(String((purchaseFormControl.flatDisc.value / netTotal) * 100)).toFixed(2));
     else
       purchaseFormControl.flatDisc.patchValue((netTotal / 100) * purchaseFormControl.totalDiscountPercentage.value);
-    purchaseFormControl.grandTotal.patchValue((netTotal - parseInt(purchaseFormControl.flatDisc.value)) + purchaseFormControl.miscValue.value + purchaseFormControl.purchaseExpance.value);
+    purchaseFormControl.grandTotal.patchValue((netTotal - parseInt(purchaseFormControl.flatDisc.value)) + purchaseFormControl.miscValue.value + purchaseFormControl.purchaseExpense.value);
   }
 
   patchSupplierAlias(name) {
@@ -189,7 +187,7 @@ export class PurchaseComponent implements OnInit {
 
       },
       err => {
-        console.log(err);
+        this.toastr.error(err);
       }
     );
     this.addingService.getLookupName('ITEM').subscribe(
@@ -210,7 +208,7 @@ export class PurchaseComponent implements OnInit {
 
       },
       err => {
-        console.log(err)
+        this.toastr.error(err);
       }
     );
   }
@@ -228,21 +226,21 @@ export class PurchaseComponent implements OnInit {
   }
 
 
-
-  purchaseArray(aliasNameTable, itemName, packing, batch, expiryDate, qty, bonus, purchasPrice, totalExcludingDiscount, descountPercentage, descountPrice,
+  purchaseTable(aliasNameTable, name, packing, batch, expiryDate, quantity, bonus, purchasePrice,
+                totalExcludingDiscount, discountPercentage, discountPrice,
                 retailPrice, netPrice, marginPercentage): FormGroup {
     return this.formBuilder.group({
       aliasNameTable: [aliasNameTable],
-      itemName: [itemName],
+      name: [name],
       packing: [packing],
       batch: [batch],
       expiryDate: [expiryDate],
-      qty: [qty],
+      quantity: [quantity],
       bonus: [bonus],
-      purchasPrice: [purchasPrice],
+      purchasePrice: [purchasePrice],
       totalExcludingDiscount: [totalExcludingDiscount],
-      descountPercentage: [descountPercentage],
-      descountPrice: [descountPrice],
+      discountPercentage: [discountPercentage],
+      discountPrice: [discountPrice],
       retailPrice: [retailPrice],
       netPrice: [netPrice],
       marginPercentage: [marginPercentage],
@@ -250,97 +248,57 @@ export class PurchaseComponent implements OnInit {
   }
 
   addPurchaseRow() {
-    const purchaseRowcontrol = this.purchaseForm.controls.purchaseArray as FormArray;
-    purchaseRowcontrol.push(this.purchaseArray(null, null, null,
+    const purchaseRowcontrol = this.purchaseForm.controls.purchaseTable as FormArray;
+    purchaseRowcontrol.push(this.purchaseTable(null, null, null,
       null, null, 1, null, null, null,
       null, null, null, null, null));
   }
 
   removesPurchaseRow(removePurchaseIndex) {
-    const removePurchaseRowcontrol = this.purchaseForm.controls.purchaseArray as FormArray;
+    const removePurchaseRowcontrol = this.purchaseForm.controls.purchaseTable as FormArray;
     removePurchaseRowcontrol.removeAt(removePurchaseIndex);
   }
 
   supplierNameOnSelect(supplierNamevalue) {
-    const supplierObj = this.supplierResponseResult.find(t => t.name === supplierNamevalue.value);
-    this.patchSupplierAlias(supplierObj.name)
+    const supplierObj = this.supplierResponseResult.find(supplier => supplier.name === supplierNamevalue.value);
+    this.patchSupplierAlias(supplierNamevalue.value)
+    this.supplierId = supplierObj.id;
   }
 
 
   onSubmit() {
     this.spinner.show('main-spinner');
     this.submitted = true;
-    const value = this.purchaseForm.value;
-    // stop here if form is invalid
-    console.log(value)
+
     if (this.purchaseForm.invalid) {
-      this.toastr.error('Please Fill the Mendotory Fields');
+      this.toastr.error('Please Fill the Mandatory Fields', 'Field Required', {
+        positionClass: 'toast-center-bottom'
+      });
       return;
     }
-    this.spinner.show('main-spinner');
-    const result = {
-      invoice: value.invoice,
-      purchaseDate: value.purchaseDate,
-      goDown: value.goDown,
-      aliasName: value.aliasName,
-      supplierName: value.supplierName,
-      supplierInvoiceNumber: value.supplierInvoiceNumber,
-      grnNumber: value.grnNumber,
-      remarks: value.remarks,
-      printBal: value.printBal,
-      invSize: value.invSize,
-      orderCode: value.orderCode,
-      orderDate: value.orderDate,
-      supplierOrderNumber: value.supplierOrderNumber,
-      purchaseArray: [{
-        aliasNameTable: value.aliasNameTable,
-        itemName: value.itemName,
-        packing: value.packing,
-        batch: value.packing,
-        expiryDate: value.expiryDate,
-        qty: value.qty,
-        bonus: value.bonus,
-        purchasPrice: value.purchasPrice,
-        totalExcludingDiscount: value.totalExcludingDiscount,
-        descountPercentage: value.descountPercentage,
-        descountPrice: value.descountPrice,
-        retailPrice: value.retailPrice,
-        netPrice: value.netPrice,
-        marginPercentage: value.marginPercentage,
-      }],
-      inventoryStock: value.inventoryStock,
-      totalDiscountPercentage: value.totalDiscountPercentage,
-      flatDisc: value.flatDisc,
-      miscValue: value.miscValue,
-      inventoryGst: value.inventoryGst,
-      totalStock: value.totalStock,
-      purchaseExpance: value.purchaseExpance,
-      lastPurchasePrice: value.lastPurchasePrice,
-      avgPrice: value.avgPrice,
-      grandTotal: value.grandTotal,
-
-    }
-    // this.addingService.addItemCategory(result).subscribe(
-    //   res => {
-    //     this.spinner.hide('main-spinner');
-    //     this.itemCategoryResponce = res;
-    //     if (this.itemCategoryResponce.statusCode === 201 || this.itemCategoryResponce.statusCode === 200){
-    //       this.toastr.success(this.itemCategoryResponce.message);
-    //       this.getJobList(true)
-    //     }else if (this.itemCategoryResponce.statusCode === 208){
-    //       this.toastr.warning(this.itemCategoryResponce.message);
-    //     }else {
-    //       this.toastr.error(this.itemCategoryResponce.message);
-    //     }
-    //   },
-    //   error => {
-    //     this.spinner.hide('main-spinner');
-    //     if (error.error.message) {
-    //       this.toastr.error(error.error.message);
-    //     } else {
-    //       this.toastr.error('Some problem occurred. Please try again.');
-    //     }
-    //   });
+    const purchaseFormSubmissionObject = this.purchaseForm.value
+    delete purchaseFormSubmissionObject.supplierName;
+    purchaseFormSubmissionObject.supplierId = this.supplierId
+    purchaseFormSubmissionObject.printBill = Boolean(JSON.parse(purchaseFormSubmissionObject.printBill.name))
+    this.addingService.addPurchase(purchaseFormSubmissionObject).subscribe(
+      res => {
+        this.spinner.hide('main-spinner');
+        this.purchaseResponse = res;
+        if (this.purchaseResponse.statusCode === 201 || this.purchaseResponse.statusCode === 200) {
+          this.toastr.success(this.purchaseResponse.message);
+        } else if (this.purchaseResponse.statusCode === 208) {
+          this.toastr.warning(this.purchaseResponse.message);
+        } else {
+          this.toastr.error(this.purchaseResponse.message);
+        }
+      },
+      error => {
+        this.spinner.hide('main-spinner');
+        if (error.error.message) {
+          this.toastr.error(error.error.message);
+        } else {
+          this.toastr.error('Some problem occurred. Please try again.');
+        }
+      });
   }
-
 }

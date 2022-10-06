@@ -27,7 +27,7 @@ export class SupplierListComponent implements OnInit {
   getJobList(bool) {
     this.allDataTableService.getSupplierTable().subscribe(
       tableResponce => {
-        console.log(tableResponce);
+
         this.supplierList = tableResponce;
         this.supplierList = this.supplierList.suppliers;
       },

@@ -13,8 +13,8 @@ export class autoCompleteServices {
     }
   }
   checkDuplicate(str: String) : boolean{
-    console.log(this.listOfAliasName)
-    console.log(str);
+
+
    const indexOfAliasNAme =  this.listOfAliasName.indexOf(str);
    if(indexOfAliasNAme>-1){
      return false;

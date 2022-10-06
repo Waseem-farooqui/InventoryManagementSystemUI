@@ -30,7 +30,6 @@ export class ItemtableComponent implements OnInit {
     this.allDataTableService.getItemTable().subscribe(
       itemTableResponse => {
         this.itemTableList = itemTableResponse;
-        console.log( this.itemTableList );
         if (this.itemTableList.statusCode = 200){
           this.itemTableList = this.itemTableList.items;
         }

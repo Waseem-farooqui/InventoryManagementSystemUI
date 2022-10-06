@@ -19,9 +19,9 @@ export class PagesComponent implements OnInit {
     this.status = !this.status;
   }
   profile() {
-    console.log('this')
+
   }
   logout(){
-    console.log('asda')
+
   }
 }

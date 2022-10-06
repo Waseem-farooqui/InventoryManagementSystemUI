@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['dashboard']);
   }
   trimInputField(value) {
-    console.log(value);
+
   }
   register() {
     this.router.navigate(['/register'], );

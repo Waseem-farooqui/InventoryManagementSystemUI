@@ -11,13 +11,20 @@ export class AddingItemUserService {
   getLookupName(lookupType) {
     return this.httpClient.get(this.configApiService.lookUPForPOS(lookupType));
   }
-  addItemCategory(body){
+
+  addItemCategory(body) {
     return this.httpClient.post(this.configApiService.addItemCategory(), body)
   }
-  addNewItem(body){
+
+  addNewItem(body) {
     return this.httpClient.post(this.configApiService.addNewItem(), body)
   }
-  addNewSupplier(body){
+
+  addPurchase(body) {
+    return this.httpClient.post(this.configApiService.addPurchase(), body)
+  }
+
+  addNewSupplier(body) {
     return this.httpClient.post(this.configApiService.addNewSupplier(), body)
   }
 }

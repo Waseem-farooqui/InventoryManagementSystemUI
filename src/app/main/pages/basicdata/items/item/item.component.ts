@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Table} from "primeng/table";
 import {AddingItemUserService} from "../../../../../services/addingItemUser.service";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -16,9 +15,9 @@ import {HotkeysService} from "angular2-hotkeys";
 export class ItemComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
-  active:any;
+  active: any;
   result: any;
-  newItemsCreationResponce:any;
+  newItemsCreationResponce: any;
   profileClassifications = [];
   profileClassificationsResult: any = [];
   itemCategoryLookup = [];
@@ -26,11 +25,12 @@ export class ItemComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService, private toastr: ToastrService,
               private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService,
-              private hotkeys: HotkeysService) { }
+              private hotkeys: HotkeysService) {
+  }
 
   ngOnInit(): void {
     this.formBuilderControlName();
-    this.active =[
+    this.active = [
       {name: true},
       {name: false},
     ]
@@ -40,33 +40,31 @@ export class ItemComponent implements OnInit {
   formBuilderControlName(){
     this.registerForm = this.formBuilder.group({
       code: [''],
-      itemName: ['' ,[Validators.required]],
-      pieceOfPacking: ['',[Validators.required]],
-      salesPrice: ['',[Validators.required] ],
-      purchasePrice: [''],
+      name: ['', [Validators.required]],
+      piecePerPackage: ['', [Validators.required]],
+      sellingPrice: ['', [Validators.required]],
+      purchasePrice: ['', [Validators.required]],
       active: [''],
-      allasName: ['',[Validators.required]],
-      manufacture: [''],
-      packing: [''],
+      barCode: [''],
+      manufacturer: [''],
       printable: [''],
-      category: [''],
+      category: ['', [Validators.required]],
       classDefault: ['Default'],
-      saleDisc: [''],
       location: [''],
       narcotics: [''],
-      lockSalesPrice: [''],
-      lockDicountPerc: [''],
-      salesDiscount2: [''],
-      salesDiscount3: [''],
-      salesDiscount4: [''],
-      reOrderQTY: [''],
-      optimumQTY: [''],
+      lockSalePrice: [''],
+      lockDiscPerc: [''],
+      saleDiscount2: [''],
+      saleDiscount3: [''],
+      saleDiscount4: [''],
+      reorderQuantity: ['3'],
+      optimumQuantity: ['10'],
       saleDiscount: [''],
-      minimumQty: [''],
+      quantity: ['0'],
       avgPrice: [''],
-      itemAlert: [''],
-      allowDue:[''],
-      description:[''],
+      alert: [''],
+      allowDue: [''],
+      description: [''],
 
     });
   }
@@ -77,20 +75,28 @@ export class ItemComponent implements OnInit {
   get itemsAddsFormControl() {
     return this.registerForm.controls;
   }
+
   searchClassifications(event): void {
     this.profileClassificationsResult = this.profileClassifications.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
   }
+
   searchItemName(event): void {
     this.itemCategoryLookupResult = this.itemCategoryLookup.filter(c => c.toLowerCase().startsWith(event.query.toLowerCase()));
   }
+
+  getIdFromCategoryName(name): number {
+    return this.result.find(item => item.name === name).id
+  }
+
   // All Lookup service
   getAllServices() {
     this.addingService.getLookupName('ITEM_CATEGORY').subscribe(
       res => {
         this.result = res;
-        console.log(res);
+
         if (this.result && this.result.responseBody && this.result.responseBody.length > 0) {
           this.result = this.result.responseBody;
+
           for (const val of this.result) {
             this.itemCategoryLookup.push(val.name);
 
@@ -98,12 +104,9 @@ export class ItemComponent implements OnInit {
         } else {
           this.itemCategoryLookup = [];
         }
-
-
       },
       err => {
-
-
+        this.toastr.error(err)
       }
     );
   }
@@ -111,10 +114,10 @@ export class ItemComponent implements OnInit {
   // auto trim the input Name and email fields
 
   trimInputField(val) {
-    const registerFirstName = this.registerForm.controls.supplierName.value.trimEnd(val).trimStart(val);
-    this.registerForm.controls.supplierName.patchValue(registerFirstName);
-    const registerLastName = this.registerForm.controls.aliesName.value.trimEnd(val).trimStart(val);
-    this.registerForm.controls.aliesName.patchValue(registerLastName);
+    const registerFirstName = this.registerForm.controls.name.value.trimEnd(val).trimStart(val);
+    this.registerForm.controls.name.patchValue(registerFirstName);
+    const registerLastName = this.registerForm.controls.barCode.value.trimEnd(val).trimStart(val);
+    this.registerForm.controls.barCode.patchValue(registerLastName);
     const registerEmail = this.registerForm.controls.email.value.trimEnd(val).trimStart(val);
     this.registerForm.controls.email.patchValue(registerEmail);
   }
@@ -141,55 +144,24 @@ export class ItemComponent implements OnInit {
   onSubmit() {
     this.spinner.show('main-spinner');
     this.submitted = true;
-    const value = this.registerForm.value;
+    const itemSubmissionForm = this.registerForm.value;
+    itemSubmissionForm.category = this.getIdFromCategoryName(itemSubmissionForm.category)
+    console.log(JSON.stringify(itemSubmissionForm))
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       this.toastr.error('Please Fill the Mendotory Fields');
       return;
     }
-    this.spinner.show('main-spinner');
-    const result = {
-
-      // code: value.code,
-      name: value.itemName,
-      barCode: value.allasName,
-      piecePerPackage: value.pieceOfPacking,
-      description: value.description,
-      sellingPrice: value.salesPrice,
-      purchasePrice: value.purchasePrice,
-      printable: true,
-      saleDiscount: value.saleDiscount,
-      location: value.location,
-      narcotics: value.narcotics.name,
-      lockSalePrice: value.lockSalesPrice.name,
-      lockDiscPerc: value.lockDicountPerc.name,
-      saleDiscount2: value.salesDiscount2,
-      saleDiscount3: value.salesDiscount3,
-      saleDiscount4: value.salesDiscount4,
-      reorderQuantity: value.reOrderQTY,
-      optimumQuantity: value.optimumQTY,
-      alert: value.itemAlert.name,
-      quantity: value.minimumQty,
-      manufacturer: value.manufacture,
-      // packing: value.packing,
-      // category: value.category,
-      // active: value.active.name,
-      // classDefault: value.class,
-      // saleDiscount: value.saleDisc,
-      // avgPrice: value.avgPrice,
-      // allowDue: value.allowDue,
-
-    };
-    this.addingService.addNewItem(result).subscribe(
+    this.addingService.addNewItem(itemSubmissionForm).subscribe(
       res => {
         this.spinner.hide('main-spinner');
         this.newItemsCreationResponce = res;
-        if (this.newItemsCreationResponce.statusCode === 201 || this.newItemsCreationResponce.statusCode === 200){
+        if (this.newItemsCreationResponce.statusCode === 201 || this.newItemsCreationResponce.statusCode === 200) {
           this.toastr.success(this.newItemsCreationResponce.message);
           window.location.reload()
-        }else if (this.newItemsCreationResponce.statusCode === 208){
+        } else if (this.newItemsCreationResponce.statusCode === 208) {
           this.toastr.warning(this.newItemsCreationResponce.message);
-        }else {
+        } else {
           this.toastr.error(this.newItemsCreationResponce.message);
         }
       },

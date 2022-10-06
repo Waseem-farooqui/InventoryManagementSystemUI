@@ -11,25 +11,34 @@ export class ConfigApiService {
   lookUPForPOS(lookupType) {
     return this.baseUrl + 'lookup?type=' + lookupType;
   }
-  getSupplierTableData(id){
+
+  getSupplierTableData(id) {
     return this.baseUrl + 'profile-service/profile/short-list?jobId=' + id;
   }
-  addItemCategory(){
-    return this.baseUrl + 'items/categories'
- }
-  addNewItem(){
-    return this.baseUrl + 'items'
- }
- addNewSupplier(){
-    return this.baseUrl + 'suppliers'
- }
 
-
- // get All Tables Value
-  getItemCategoryTable(){
+  addItemCategory() {
     return this.baseUrl + 'items/categories'
   }
-  getItemTable(){
+
+  addNewItem() {
+    return this.baseUrl + 'items'
+  }
+
+  addPurchase() {
+    return this.baseUrl + 'purchases'
+  }
+
+  addNewSupplier() {
+    return this.baseUrl + 'suppliers'
+  }
+
+
+  // get All Tables Value
+  getItemCategoryTable() {
+    return this.baseUrl + 'items/categories'
+  }
+
+  getItemTable() {
     return this.baseUrl + 'items'
   }
   getPurchaseTable(){
