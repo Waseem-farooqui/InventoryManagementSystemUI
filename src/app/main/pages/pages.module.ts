@@ -40,7 +40,11 @@ import { PurchaseTableComponent } from './purchase/purchase-table/purchase-table
 import { SupplierDashboardComponent } from './basicdata/supplier/supplier-dashboard/supplier-dashboard.component';
 import {InputTextareaModule} from "primeng/inputtextarea";
 @NgModule({
-  declarations: [PagesComponent, NavbarComponent, DashboardComponent, PurchaseComponent, BasicdataComponent, SupplierComponent, SuppliercategoryComponent, ItemComponent, ItemCategoryComponent, SupplierListComponent, ItemtableComponent, PurchaseTableComponent, SupplierDashboardComponent],
+  declarations: [PagesComponent, NavbarComponent,
+    DashboardComponent, PurchaseComponent, BasicdataComponent,
+    SupplierComponent, SuppliercategoryComponent, ItemComponent,
+    ItemCategoryComponent, SupplierListComponent, ItemtableComponent,
+    PurchaseTableComponent, SupplierDashboardComponent],
 
     imports: [
         ChipsModule,

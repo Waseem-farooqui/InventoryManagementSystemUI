@@ -19,8 +19,7 @@ const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent
       },{
-        path: 'purchase',
-        component: PurchaseComponent
+        path: 'purchase',  loadChildren: () => import('./purchase/purchase.module').then(m =>m.PurchaseModule)
       },{
         path: 'basicData',
         component: BasicdataComponent

@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {GetAllDataService} from "../../../../services/getAllData.Service";
 
+
 @Component({
   selector: 'app-purchase-table',
   templateUrl: './purchase-table.component.html',
@@ -32,10 +33,7 @@ export class PurchaseTableComponent implements OnInit {
         this.purchaseList = tableResponce;
 
         this.purchaseList = this.purchaseList.purchases;
-        for (var val of this.purchaseList){
-
-          this.purchaseValueItem = val.items;
-        }
+        console.log(this.purchaseList);
 
 
       },
@@ -46,6 +44,9 @@ export class PurchaseTableComponent implements OnInit {
 
       }
     );
+  }
+  updatePurchase(id){
+    this.router.navigate(['../new-purchase'])
   }
 
 }
