@@ -1,8 +1,8 @@
 <div class="row tab-content">
 <div class="table-responsive-lg">
-  <p-table #vulnerabilityTable [value]="purchaseList" [showCurrentPageReport]="true"
+  <p-table #dataTableShortListCandidate [value]="purchaseList" [showCurrentPageReport]="true"
            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
-           dataKey="cve"
+           dataKey="name"
            [paginator]="true" [rows]="20"
            [lazy]="true" [lazyLoadOnInit]="false"
            styleClass="p-datatable-customers p-datatable-gridlines app-table">
@@ -25,7 +25,8 @@
                   class="p-button-text p-button-rounded p-button-plain"
                   [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
         </td>
-        <td><a (click)="updatePurchase(rowData.id)">{{rowData?.aliasName || "--"}}</a> </td>
+        <td *ngIf="rowData.purchased === true"><a >{{rowData?.aliasName || "--"}}</a> </td>
+        <td *ngIf="rowData.purchased === false"><a  (click)="updatePurchase(rowData.id)">{{rowData?.aliasName || "--"}}</a> </td>
         <td>{{rowData?.id || "--"}}</td>
 
         <td>{{rowData?.purchaseDate  | date:'dd/MMM/yyyy' || "--"}}</td>
@@ -51,7 +52,7 @@
       <tr>
         <td colspan="5">
           <div class="p-p-3">
-            <p-table [value]="product?.purchaseTables"
+            <p-table [value]="product?.purchaseTables" dataKey="id"
                      styleClass="p-datatable-customers p-datatable-gridlines app-table">
               <ng-template pTemplate="header">
       <tr>

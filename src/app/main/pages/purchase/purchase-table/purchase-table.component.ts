@@ -14,26 +14,21 @@ import {GetAllDataService} from "../../../../services/getAllData.Service";
   styleUrls: ['./purchase-table.component.css']
 })
 export class PurchaseTableComponent implements OnInit {
-  selectedSupplier: any[];
   @ViewChild('dataTableShortListCandidate') table: Table;
   purchaseList: any = [];
-  purchaseValueItem: any = [];
   constructor(private formBuilder: FormBuilder, private addingService: AddingItemUserService, private toastr: ToastrService,
               private router: Router, private spinner: NgxSpinnerService, private allDataTableService: GetAllDataService) { }
 
   ngOnInit(): void {
     this.getJobList(true)
   }
-  /*--------------Get Supplier All Data list------------------*/
 
   /*--------------Get Supplier All Data list------------------*/
   getJobList(bool) {
     this.allDataTableService.getPurchaseTable().subscribe(
       tableResponce => {
         this.purchaseList = tableResponce;
-
         this.purchaseList = this.purchaseList.purchases;
-        console.log(this.purchaseList);
 
 
       },
@@ -46,7 +41,8 @@ export class PurchaseTableComponent implements OnInit {
     );
   }
   updatePurchase(id){
-    this.router.navigate(['../new-purchase'])
+    console.log(id)
+    // this.router.navigate(['../new-purchase'])
   }
 
 }
